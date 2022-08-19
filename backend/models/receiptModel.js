@@ -11,10 +11,12 @@ const receiptSchema = mongoose.Schema(
       type: Number,
       required: [true, "Please add receipt number"],
     },
+    //where receipt is issued
     place: {
       type: String,
       required: [true, "Please add a location"],
     },
+    //donor name
     firstName: {
       type: String,
       required: [true, "Please add a first name"],
@@ -23,41 +25,39 @@ const receiptSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a last name"],
     },
-    address: {
-      number: {
-        type: Number,
-        required: [true, "Please add a house number"],
-      },
-      street: {
-        type: String,
-        required: [true, "Please add a street"],
-      },
-      city: {
-        type: String,
-        required: [true, "Please add a city"],
-      },
-      province: {
-        type: String,
-        required: [true, "Please add a provine"],
-      },
-      country: {
-        type: String,
-        required: [true, "Please add a country"],
-      },
-      postalCode: {
-        type: String,
-        required: [true, "Please add a postal code"],
-      },
+    // donor address
+    houseNumber: {
+      type: Number,
+      required: [true, "Please add a house number"],
     },
-    amount: {
-      number: {
-        type: Number,
-        required: [true, "Please add a donation amount"],
-      },
-      words: {
-        type: String,
-        required: [true, "Please add a donation amount"],
-      },
+    street: {
+      type: String,
+      required: [true, "Please add a street"],
+    },
+    city: {
+      type: String,
+      required: [true, "Please add a city"],
+    },
+    province: {
+      type: String,
+      required: [true, "Please add a provine"],
+    },
+    country: {
+      type: String,
+      required: [true, "Please add a country"],
+    },
+    postalCode: {
+      type: String,
+      required: [true, "Please add a postal code"],
+    },
+    //donation amount
+    number: {
+      type: Number,
+      required: [true, "Please add a donation amount"],
+    },
+    words: {
+      type: String,
+      required: [true, "Please add a donation amount"],
     },
 
     signature: {

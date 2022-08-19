@@ -6,7 +6,7 @@ const Receipt = require("../models/receiptModel");
 //@route:   GET /api/receipts
 //@access   Private
 const getAllReceipts = asyncHandler(async (req, res) => {
-  const receipts = await Receipt.find();
+  const receipts = await Receipt.find({ user: req.user.id });
   res.status(200).json(receipts);
 });
 
@@ -27,13 +27,29 @@ const getOneReceipt = asyncHandler(async (req, res) => {
 //@route:   POST /api/receipts
 //@access   Private
 const createReceipt = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
+  if (!req.body.signature) {
     res.status(400);
     throw new Error("Please complete all text fields");
   }
 
   const receipt = await Receipt.create({
-    text: req.body.text,
+    user: req.user.id,
+    receiptNumber: req.body.receiptNumber,
+    place: req.body.place,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+
+    houseNumber: req.body.houseNumber,
+    street: req.body.street,
+    city: req.body.city,
+    province: req.body.province,
+    country: req.body.country,
+    postalCode: req.body.postalCode,
+
+    number: req.body.number,
+    words: req.body.words,
+
+    signature: req.body.signature,
   });
 
   res.status(200).json(receipt);
