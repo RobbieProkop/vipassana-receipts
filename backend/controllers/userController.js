@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 
 // @desc:   Register new user
 //@route:   POST /api/users
-//@access   Public
+//@access   PRIVATE (only trust and admin should exist, no new users can be created)
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 

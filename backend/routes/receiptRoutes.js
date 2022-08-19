@@ -8,14 +8,16 @@ const {
   deleteReceipt,
 } = require("../controllers/receiptController");
 
+const { protect } = require("../middleware/authMiddleware");
+
 //get all and create new receipt
-router.route("/").get(getAllReceipts).post(createReceipt);
+router.route("/").get(protect, getAllReceipts).post(protect, createReceipt);
 
 //get one, update, and delete receipt
 router
   .route("/:id")
-  .get(getOneReceipt)
-  .put(updateReceipt)
-  .delete(deleteReceipt);
+  .get(protect, getOneReceipt)
+  .put(protect, updateReceipt)
+  .delete(protect, deleteReceipt);
 
 module.exports = router;
