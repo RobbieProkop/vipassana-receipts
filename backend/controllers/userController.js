@@ -7,9 +7,9 @@ const User = require("../models/userModel");
 //@route:   POST /api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!name || !email || !password) {
+  if (!username || !email || !password) {
     res.status(400);
     throw new Error("Please add all fields");
   }
@@ -28,21 +28,22 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //Create user
   const user = await User.create({
-    name,
+    username,
     email,
-    passowrd: hashedPassword,
+    password: hashedPassword,
   });
 
   if (user) {
     res.status(201).json({
       _id: user.id,
-      name: user.name,
+      username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
     });
+  } else {
+    res.status(400);
+    throw new Error("Invalid User Data");
   }
-
-  res.json({ message: "RegisterUser" });
 });
 // @desc:   Authenticate user
 //@route:   POST /api/users/login
