@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
 const Receipt = require("../models/receiptModel");
+const User = require("../models/userModel");
 
 // @desc:   Get All Receipts
 //@route:   GET /api/receipts
@@ -66,6 +67,20 @@ const updateReceipt = asyncHandler(async (req, res) => {
     throw new Error("Receipt not found");
   }
 
+  const user = await User.findById(req.user.id);
+
+  //check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User Not Found");
+  }
+
+  //make sure logged in user matches receipt user
+  if (receipt.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User Not Authorized");
+  }
+
   const updatedReceipt = await Receipt.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -83,6 +98,20 @@ const deleteReceipt = asyncHandler(async (req, res) => {
   if (!receipt) {
     res.status(400);
     throw new Error("Receipt not found");
+  }
+
+  const user = await User.findById(req.user.id);
+
+  //check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User Not Found");
+  }
+
+  //make sure logged in user matches receipt user
+  if (receipt.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User Not Authorized");
   }
 
   await receipt.remove();
