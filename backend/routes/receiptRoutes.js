@@ -8,19 +8,14 @@ const {
   deleteReceipt,
 } = require("../controllers/receiptController");
 
-//Get All Receipts
-router.get("/", getAllReceipts);
+//get all and create new receipt
+router.route("/").get(getAllReceipts).post(createReceipt);
 
-//Get 1 receipt
-router.get("/:id", getOneReceipt);
-
-//Create a receipt
-router.post("/", createReceipt);
-
-//Update a receipt
-router.put("/:id", updateReceipt);
-
-//Delete a receipt
-router.delete("/:id", deleteReceipt);
+//get one, update, and delete receipt
+router
+  .route("/:id")
+  .get(getOneReceipt)
+  .put(updateReceipt)
+  .delete(deleteReceipt);
 
 module.exports = router;

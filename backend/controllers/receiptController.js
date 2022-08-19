@@ -16,6 +16,11 @@ const getOneReceipt = (req, res) => {
 //@route:   POST /api/receipts
 //@access   Private
 const createReceipt = (req, res) => {
+  if (!req.body.text) {
+    res.status(400);
+    throw new Error("Please complete all text fields");
+  }
+
   res.status(200).json({ message: `Create new receipt` });
 };
 
