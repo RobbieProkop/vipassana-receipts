@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/receipts", require("./routes/receiptRoutes"));
 
-app.unsubscribe(errorHandler);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
