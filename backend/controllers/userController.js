@@ -39,6 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
       username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
+      token: generateToken(User._id),
     });
   } else {
     res.status(400);
@@ -49,7 +50,22 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route:   POST /api/users/login
 //@access   Public
 const loginUser = asyncHandler(async (req, res) => {
-  res.json({ message: "Login User" });
+  const { username, password } = req.body;
+
+  //check for user usernanme
+  const user = await User.findOne({ username });
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    console.log(await bcrypt.compare(password, user.password));
+    res.status(400);
+    throw new Error("Invalid Credentials");
+  }
 });
 // @desc:   Get user data
 //@route:   GET /api/users/me
@@ -57,6 +73,13 @@ const loginUser = asyncHandler(async (req, res) => {
 const getMe = asyncHandler(async (req, res) => {
   res.json({ message: "Display user data" });
 });
+
+//Generate JWT
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.send.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
 module.exports = {
   registerUser,
