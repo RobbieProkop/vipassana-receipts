@@ -14,7 +14,13 @@ const getAllReceipts = asyncHandler(async (req, res) => {
 //@route:   GET /api/receipts/:id
 //@access   Private
 const getOneReceipt = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Get receipt #${req.params.id}` });
+  const receipt = await Receipt.findById(req.params.id);
+
+  if (!receipt) {
+    res.status(400);
+    throw new Error("Receipt not found");
+  }
+  res.status(200).json(receipt);
 });
 
 // @desc:   Create Receipt
@@ -37,14 +43,35 @@ const createReceipt = asyncHandler(async (req, res) => {
 //@route:   PUT /api/receipts/:id
 //@access   Private
 const updateReceipt = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update receipt #${req.params.id}` });
+  const receipt = await Receipt.findById(req.params.id);
+
+  if (!receipt) {
+    res.status(400);
+    throw new Error("Receipt not found");
+  }
+
+  const updatedReceipt = await Receipt.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  res.status(200).json(updatedReceipt);
 });
 
 // @desc:   Delete Receipt
 //@route:   DELETE /api/receipts/:id
 //@access   Private
 const deleteReceipt = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete receipt #${req.params.id}` });
+  const receipt = await Receipt.findById(req.params.id);
+
+  if (!receipt) {
+    res.status(400);
+    throw new Error("Receipt not found");
+  }
+
+  await receipt.remove();
+
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
