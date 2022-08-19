@@ -7,6 +7,10 @@ const receiptSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
+    receiptNumber: {
+      type: Number,
+      required: [true, "Please add receipt number"],
+    },
     place: {
       type: String,
       required: [true, "Please add a location"],
