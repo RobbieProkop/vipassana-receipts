@@ -60,6 +60,7 @@ const loginUser = asyncHandler(async (req, res) => {
       username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
+      token: generateToken(User._id),
     });
   } else {
     console.log(await bcrypt.compare(password, user.password));
@@ -69,14 +70,14 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 // @desc:   Get user data
 //@route:   GET /api/users/me
-//@access   Public
+//@access   Private
 const getMe = asyncHandler(async (req, res) => {
   res.json({ message: "Display user data" });
 });
 
 //Generate JWT
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.send.JWT_SECRET, {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };
