@@ -1,10 +1,13 @@
 const asyncHandler = require("express-async-handler");
 
+const Receipt = require("../models/receiptModel");
+
 // @desc:   Get All Receipts
 //@route:   GET /api/receipts
 //@access   Private
 const getAllReceipts = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Get all receipts" });
+  const receipts = await Receipt.find();
+  res.status(200).json(receipts);
 });
 
 // @desc:   Get One Receipt
@@ -23,7 +26,11 @@ const createReceipt = asyncHandler(async (req, res) => {
     throw new Error("Please complete all text fields");
   }
 
-  res.status(200).json({ message: `Create new receipt` });
+  const receipt = await Receipt.create({
+    text: req.body.text,
+  });
+
+  res.status(200).json(receipt);
 });
 
 // @desc:   Update Receipt
