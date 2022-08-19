@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+
 // @desc:   Get All Receipts
 //@route:   GET /api/receipts
 //@access   Private
