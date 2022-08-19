@@ -1,0 +1,29 @@
+{
+  "name": "vipassana-receipts",
+  "version": "1.0.0",
+  "description": "tax receipt generator for AVF",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobbieProkop/vipassana-receipts.git"
+  },
+  "author": "Robbie Prokop",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RobbieProkop/vipassana-receipts/issues"
+  },
+  "homepage": "https://github.com/RobbieProkop/vipassana-receipts#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
