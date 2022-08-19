@@ -1,20 +1,26 @@
 const express = require("express");
 const router = express.Router();
+const {
+  getAllReceipts,
+  getOneReceipt,
+  updateReceipt,
+  createReceipt,
+  deleteReceipt,
+} = require("../controllers/receiptController");
 
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "Get all receipts" });
-});
+//Get All Receipts
+router.get("/", getAllReceipts);
 
-router.post("/", (req, res) => {
-  res.status(200).json({ message: "Create new receipt" });
-});
+//Get 1 receipt
+router.get("/:id", getOneReceipt);
 
-router.put("/:id", (req, res) => {
-  res.status(200).json({ message: `update receipt ${req.params.id}` });
-});
+//Create a receipt
+router.post("/", createReceipt);
 
-router.delete("/:id", (req, res) => {
-  res.status(200).json({ message: `Delete receipt ${req.params.id}` });
-});
+//Update a receipt
+router.put("/:id", updateReceipt);
+
+//Delete a receipt
+router.delete("/:id", deleteReceipt);
 
 module.exports = router;
