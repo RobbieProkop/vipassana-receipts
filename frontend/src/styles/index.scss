@@ -1,0 +1,74 @@
+// @use "variables";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+$primaryColor: lightgoldenrodyellow;
+$btn: rgb(212, 194, 35);
+$btn-edit: green;
+$btn-delete: red;
+$black: #333;
+$white: #fff;
+$grey: rgb(175, 175, 175);
+$hover: rgb(123, 195, 123);
+
+//reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+#root {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  background-color: $black;
+  color: $white;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid $btn;
+  border-radius: 5px;
+  background: $btn;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  z-index: 10;
+  &:hover {
+    background: $black;
+    border: 1px solid $black;
+    color: $white;
+    transform: translate(0.2rem, -0.2rem);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  line-height: 2.2;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
