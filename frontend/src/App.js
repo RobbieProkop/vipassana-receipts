@@ -11,7 +11,7 @@ function App() {
     <>
       <Router>
         <Header />
-        <div className="container">
+        <div className="body-container">
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="/form" element={<Form />}></Route>
