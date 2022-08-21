@@ -17,8 +17,7 @@ $hover: rgb(123, 195, 123);
   box-sizing: border-box;
 }
 
-body,
-#root {
+body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
   background-color: $black;
@@ -65,10 +64,42 @@ h1 {
   font-weight: 600;
 }
 
-.container {
+//mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//header
+.header {
+  height: 70px;
+  padding: 2rem;
+  position: fixed;
+  top: 0;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  text-align: center;
+  z-index: 100;
+  background-color: $grey;
+  .container {
+    @include flex-between();
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+  }
+}
+
+//footer
+.footer {
+  @include flex-center();
+  background: $grey;
+  position: absolute;
+  width: 100%;
+  color: $black;
+  height: 70px;
+  margin-top: 2rem;
 }
