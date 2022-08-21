@@ -22,8 +22,6 @@ body {
   height: 100vh;
   background-color: $black;
   color: $white;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
 }
 
 .btn {
@@ -76,6 +74,13 @@ h1 {
   align-items: center;
 }
 
+.container {
+  @include flex-center();
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
 //header
 .header {
   height: 70px;
@@ -87,19 +92,14 @@ h1 {
   background-color: $grey;
   .container {
     @include flex-between();
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 100%;
   }
 }
 
 //footer
 .footer {
-  @include flex-center();
   background: $grey;
-  position: absolute;
   width: 100%;
   color: $black;
   height: 70px;
-  margin-top: 2rem;
+  margin-top: 5rem;
 }
