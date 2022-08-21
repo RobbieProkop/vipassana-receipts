@@ -1,7 +1,7 @@
 // @use "variables";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-$primaryColor: lightgoldenrodyellow;
+$primaryColor: #81bece;
 $btn: rgb(212, 194, 35);
 $btn-edit: green;
 $btn-delete: red;
@@ -20,7 +20,8 @@ $hover: rgb(123, 195, 123);
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  background-color: $black;
+  background-color: #4a4a4a;
+  background-image: url("../../public/dark-mosaic.png");
   color: $white;
 }
 
@@ -45,7 +46,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: $white;
 }
 
 ul {
@@ -85,21 +86,45 @@ h1 {
 .header {
   height: 70px;
   padding: 2rem;
-  position: fixed;
-  top: 0;
   width: 100%;
   z-index: 100;
-  background-color: $grey;
+  margin-bottom: 1rem;
   .container {
     @include flex-between();
+    padding: 0 1rem 2rem;
+    border-bottom: 1px solid $white;
+    .logo {
+      font-size: 1.3rem;
+      a {
+        &:hover {
+          color: $grey;
+        }
+      }
+    }
+
+    ul {
+      @include flex-center();
+      li {
+        margin-left: 1.5rem;
+        a {
+          &:hover {
+            color: $grey;
+          }
+          svg {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
   }
 }
 
 //footer
 .footer {
-  background: $grey;
+  // background: $grey;
   width: 100%;
-  color: $black;
+  position: absolute;
+  color: $white;
   height: 70px;
-  margin-top: 5rem;
+  bottom: 0;
 }
