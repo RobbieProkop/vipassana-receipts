@@ -13,8 +13,16 @@ const register = async (userData) => {
   return data;
 };
 
+// Logout
+
+//change this to http only cookie
+const logout = () => {
+  localStorage.removeItem("user");
+};
+
 const authService = {
   register,
+  logout,
 };
 
 export default authService;
