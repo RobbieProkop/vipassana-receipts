@@ -67,16 +67,14 @@ const updateReceipt = asyncHandler(async (req, res) => {
     throw new Error("Receipt not found");
   }
 
-  const user = await User.findById(req.user.id);
-
   //check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User Not Found");
   }
 
   //make sure logged in user matches receipt user
-  if (receipt.user.toString() !== user.id) {
+  if (receipt.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User Not Authorized");
   }
@@ -100,16 +98,14 @@ const deleteReceipt = asyncHandler(async (req, res) => {
     throw new Error("Receipt not found");
   }
 
-  const user = await User.findById(req.user.id);
-
   //check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User Not Found");
   }
 
   //make sure logged in user matches receipt user
-  if (receipt.user.toString() !== user.id) {
+  if (receipt.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User Not Authorized");
   }
