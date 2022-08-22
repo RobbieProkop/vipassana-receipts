@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     password2: "",
