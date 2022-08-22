@@ -12,3 +12,9 @@ const register = async (userData) => {
 
   return data;
 };
+
+const authService = {
+  register,
+};
+
+export default authService;
