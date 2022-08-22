@@ -13,6 +13,13 @@ const Dashboard = () => {
     }
   }, [user, navigate]);
 
-  return <div className="dashboard">Dashboard</div>;
+  return (
+    <>
+      <section className="heading">
+        <h1>Welcome {user && user.username}</h1>
+        <p>Receipts Dashboard</p>
+      </section>
+    </>
+  );
 };
 export default Dashboard;
