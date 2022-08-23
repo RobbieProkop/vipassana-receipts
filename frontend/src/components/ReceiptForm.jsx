@@ -55,132 +55,113 @@ const ReceiptForm = () => {
     <section className="form">
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="place">Current Location: (Youngstown)</label>
           <input
             type="text"
             name="place"
             id="place"
+            placeholder="Current Location (Youngstown)"
             value={place}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
             name="firstName"
             id="firstName"
+            placeholder="First Name"
             value={firstName}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
             name="lastName"
             id="lastName"
+            placeholder="Last Name"
             value={lastName}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="houseNumber">House Number</label>
           <input
             type="text"
             name="houseNumber"
             id="houseNumber"
+            placeholder="House Number"
             value={houseNumber}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="street">Street</label>
           <input
             type="text"
-            name=""
-            id="text"
-            value={place}
+            name="street"
+            id="stree"
+            placeholder="Street"
+            value={street}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
           <input
             type="text"
-            name="text"
-            id="text"
-            value={place}
+            name="city"
+            id="city"
+            placeholder="City"
+            value={city}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
           <input
             type="text"
-            name="text"
-            id="text"
-            value={place}
+            name="province"
+            id="province"
+            placeholder="Province"
+            value={province}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
           <input
             type="text"
-            name="text"
-            id="text"
-            value={place}
+            name="country"
+            id="country"
+            placeholder="Country"
+            value={country}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
           <input
             type="text"
-            name="text"
-            id="text"
-            value={place}
+            name="number"
+            id="number"
+            placeholder="Amount (Number)"
+            value={number}
             onChange={onChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
           <input
             type="text"
-            name="text"
-            id="text"
-            value={place}
+            name="words"
+            id="words"
+            placeholder="Amount (Words)"
+            value={words}
             onChange={onChange}
           />
         </div>
+        <p>Please return to trustee</p>
         <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
           <input
             type="text"
-            name="text"
-            id="text"
-            value={place}
-            onChange={onChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
-          <input
-            type="text"
-            name="text"
-            id="text"
-            value={place}
-            onChange={onChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="text">Current Location: (Youngstown)</label>
-          <input
-            type="text"
-            name="text"
-            id="text"
-            value={place}
+            name="signature"
+            id="signature"
+            placeholder="Name of Trustee"
+            value={signature}
             onChange={onChange}
           />
         </div>
