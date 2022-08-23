@@ -1,9 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  geocodeByPlaceId,
+} from "react-places-autocomplete";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
+
+  const [address, setAddress] = useState("");
 
   const [receiptData, setReceiptData] = useState({
     receiptNumber: "",
@@ -53,11 +59,13 @@ const ReceiptForm = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleSelect = async (value) => {};
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
         <div className="left">
-          <div className="place">
+          {/* <div className="place">
             <div className="form-group">
               <input
                 type="text"
@@ -90,11 +98,49 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Address */}
           <div className="address">
             <div className="form-group">
+              {/* <input
+                type="text"
+                name="address"
+                id="addressSearch"
+                placeholder="Search address..."
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              /> */}
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={handleSelect}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <div>
+                    <input
+                      {...getInputProps({
+                        placeholder: "Search address...",
+                        id: "addressSearch",
+                      })}
+                    />
+                    <div>
+                      {loading ? <p>Loading...</p> : null}
+
+                      {suggestions.map((suggestion) => {
+                        return <div>{suggestion.description}</div>;
+                      })}
+                    </div>
+                  </div>
+                )}
+              </PlacesAutocomplete>
+            </div>
+            {/* <div className="form-group">
               <input
                 type="text"
                 name="houseNumber"
@@ -153,14 +199,14 @@ const ReceiptForm = () => {
                 value={postalCode}
                 onChange={onChange}
               />
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Right Section */}
         <div className="right">
           {/* Donation Amount */}
-          <div className="donation">
+          {/* <div className="donation">
             <div className="form-group">
               <input
                 type="text"
@@ -191,9 +237,9 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          </div>
+          </div> */}
           {/* Signature */}
-          <div className="sig">
+          {/* <div className="sig">
             <p>Please return to trustee</p>
             <div className="form-group">
               <input
@@ -205,7 +251,7 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </form>
     </section>
