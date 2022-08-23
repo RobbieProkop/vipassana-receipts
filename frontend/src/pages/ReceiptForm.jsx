@@ -1,19 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  geocodeByPlaceId,
-} from "react-places-autocomplete";
+import PlacesAutocomplete from "react-places-autocomplete";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
 
   const [address, setAddress] = useState("");
-  let key = 0;
 
   const [receiptData, setReceiptData] = useState({
-    receiptNumber: "",
+    receiptNumber: 123456789,
     place: "",
     firtName: "",
     lastName: "",
@@ -51,7 +47,8 @@ const ReceiptForm = () => {
     }));
   };
 
-  const handleSelect = async (value, e) => {
+  //for google places address
+  const handleSelect = (value) => {
     setAddress(value);
   };
   return (
@@ -59,7 +56,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: Hardcoded number</p>
+            <p>ID: {receiptNumber}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
@@ -131,7 +128,7 @@ const ReceiptForm = () => {
                           : null;
                         return (
                           <div
-                            key={key++}
+                            key={receiptNumber}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}
@@ -208,7 +205,9 @@ const ReceiptForm = () => {
             </div>
           </div>
         </div>
-        <button className="btn">Submit Receipt</button>
+        <button className="btn" type="submit">
+          Submit Receipt
+        </button>
       </form>
     </section>
   );
