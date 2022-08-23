@@ -211,6 +211,10 @@ h1 {
         font-family: inherit;
         outline: none;
       }
+
+      .select-active {
+        background-color: $grey;
+      }
     }
   }
 }

@@ -130,10 +130,21 @@ const ReceiptForm = () => {
                       })}
                     />
                     <div>
-                      {loading ? <p>Loading...</p> : null}
+                      {loading && <p>Loading...</p>}
 
                       {suggestions.map((suggestion) => {
-                        return <div>{suggestion.description}</div>;
+                        const className = suggestion.active
+                          ? "select-active"
+                          : null;
+                        return (
+                          <div
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                            })}
+                          >
+                            {suggestion.description}
+                          </div>
+                        );
                       })}
                     </div>
                   </div>
