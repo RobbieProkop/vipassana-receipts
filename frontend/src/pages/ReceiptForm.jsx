@@ -29,11 +29,6 @@ const ReceiptForm = () => {
     place,
     firstName,
     lastName,
-    houseNumber,
-    street,
-    city,
-    province,
-    country,
     postalCode,
     type,
     number,
@@ -56,14 +51,22 @@ const ReceiptForm = () => {
     }));
   };
 
-  const handleSelect = async (value) => {
+  const handleSelect = async (value, e) => {
     setAddress(value);
   };
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
+        <div className="receiptID">
+          <div className="form-group">
+            <p>ID: Hardcoded number</p>
+          </div>
+          <div className="form-group">
+            <p>Alberta Vipassana Foundation</p>
+          </div>
+        </div>
         <div className="left">
-          {/* <div className="place">
+          <div className="place">
             <div className="form-group">
               <input
                 type="text"
@@ -96,7 +99,7 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          </div> */}
+          </div>
 
           {/* Address */}
           <div className="address">
@@ -115,7 +118,7 @@ const ReceiptForm = () => {
                   <div>
                     <input
                       {...getInputProps({
-                        placeholder: "Search address...",
+                        placeholder: "Enter address",
                         id: "addressSearch",
                       })}
                     />
@@ -159,20 +162,20 @@ const ReceiptForm = () => {
         {/* Right Section */}
         <div className="right">
           {/* Donation Amount */}
-          {/* <div className="donation">
+          <div className="donation">
             <div className="form-group">
               <input
                 type="text"
                 name="type"
                 id="type"
-                placeholder="Donation Type"
+                placeholder="Donation Type (Visa, MC, Cash)"
                 value={type}
                 onChange={onChange}
               />
             </div>
             <div className="form-group">
               <input
-                type="text"
+                type="number"
                 name="number"
                 id="number"
                 placeholder="Amount (Number)"
@@ -190,22 +193,22 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          </div> */}
+          </div>
           {/* Signature */}
-          {/* <div className="sig">
-            <p>Please return to trustee</p>
+          <div className="sig">
             <div className="form-group">
               <input
                 type="text"
                 name="signature"
                 id="signature"
-                placeholder="Name of Trustee"
+                placeholder="Digital Signature of Trustee"
                 value={signature}
                 onChange={onChange}
               />
             </div>
-          </div> */}
+          </div>
         </div>
+        <button className="btn">Submit Receipt</button>
       </form>
     </section>
   );
