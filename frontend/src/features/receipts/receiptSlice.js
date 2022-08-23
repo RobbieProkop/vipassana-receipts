@@ -23,6 +23,22 @@ export const getAll = createAsyncThunk(
   }
 );
 
+// Create new goal
+export const createReceipt = createAsyncThunk(
+  "receipts/create",
+  async (receiptData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await receiptService.createReceipt(receiptData, token);
+    } catch (error) {
+      const message =
+        error.response.data.message || error.message || error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const receiptSlice = createSlice({
   name: "receipts",
   initialState,

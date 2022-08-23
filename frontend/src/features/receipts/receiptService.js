@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/users/me";
+const API_URL = "/api/receipts/";
 
 //get all receipts
 const getAll = async () => {
@@ -9,8 +9,21 @@ const getAll = async () => {
   return data;
 };
 
+//Create new Receipt
+const createReceipt = async (receiptData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const { data } = await axios.post(API_URL, receiptData, config);
+  return data;
+};
+
 const receiptService = {
   getAll,
+  createReceipt,
 };
 
 export default receiptService;

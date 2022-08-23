@@ -1,18 +1,20 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import PlacesAutocomplete from "react-places-autocomplete";
+import { createReceipt } from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
 
-  const [address, setAddress] = useState("");
+  const [googleAdd, setGoogleAdd] = useState("");
 
   const [receiptData, setReceiptData] = useState({
     receiptNumber: 123456789,
     place: "",
     firtName: "",
     lastName: "",
+    address: googleAdd,
     postalCode: "",
     type: "",
     number: "",
@@ -25,6 +27,7 @@ const ReceiptForm = () => {
     place,
     firstName,
     lastName,
+    address,
     postalCode,
     type,
     number,
@@ -32,12 +35,13 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  // const {} = useSelector(() => {});
-
   // useEffect(() => {});
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    // dispatch(createReceipt({ receiptData }));
+    setGoogleAdd("");
   };
 
   const onChange = (e) => {
@@ -49,7 +53,7 @@ const ReceiptForm = () => {
 
   //for google places address
   const handleSelect = (value) => {
-    setAddress(value);
+    setGoogleAdd(value);
   };
   return (
     <section className="receipt-form">
@@ -102,8 +106,8 @@ const ReceiptForm = () => {
           <div className="address">
             <div className="form-group">
               <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
+                value={googleAdd}
+                onChange={setGoogleAdd}
                 onSelect={handleSelect}
               >
                 {({
