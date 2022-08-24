@@ -9,6 +9,9 @@ const ReceiptForm = () => {
 
   const [googleAdd, setGoogleAdd] = useState("");
 
+  //temporary key
+  let tempkey = 0;
+
   const [receiptData, setReceiptData] = useState({
     receiptNumber: 123456789,
     place: "",
@@ -21,6 +24,7 @@ const ReceiptForm = () => {
     words: "",
     signature: "",
   });
+  const initialReceipt = { ...receiptData };
 
   const {
     receiptNumber,
@@ -40,8 +44,9 @@ const ReceiptForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // dispatch(createReceipt({ receiptData }));
+    dispatch(createReceipt({ receiptData }));
     setGoogleAdd("");
+    setReceiptData(initialReceipt);
   };
 
   const onChange = (e) => {
@@ -132,7 +137,8 @@ const ReceiptForm = () => {
                           : null;
                         return (
                           <div
-                            key={receiptNumber}
+                            //change this key to receipt num
+                            key={tempkey++}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}

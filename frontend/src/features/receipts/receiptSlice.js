@@ -58,13 +58,26 @@ export const receiptSlice = createSlice({
       .addCase(getAll.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.receipts.push(action.payload);
+        state.receiptsArr.push(action.payload);
       })
       .addCase(getAll.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.receipts = [];
+        state.receiptsArr = [];
+      })
+      .addCase(createReceipt.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createReceipt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.receiptsArr.push(action.payload);
+      })
+      .addCase(createReceipt.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
