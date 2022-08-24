@@ -42,6 +42,17 @@ const Dashboard = () => {
         {" "}
         <button className="btn">Add A Receipt</button>
       </Link>
+      <section className="content">
+        {receiptsArr.length > 0 ? (
+          <div className="receipts">
+            {receiptsArr.map((receipt) => (
+              <ReceiptItem key={receipt._id} receipt={receipt} />
+            ))}
+          </div>
+        ) : (
+          <h3>No Receipts to sho</h3>
+        )}
+      </section>
     </>
   );
 };
