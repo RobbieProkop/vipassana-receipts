@@ -7,17 +7,16 @@ import { createReceipt } from "../features/receipts/receiptSlice";
 const ReceiptForm = () => {
   const dispatch = useDispatch();
 
-  const [googleAdd, setGoogleAdd] = useState("");
+  const [address, setAddress] = useState("");
+  const [receiptNumber, setReceiptNumber] = useState(123456789);
 
   //temporary key
   let tempkey = 0;
 
   const [receiptData, setReceiptData] = useState({
-    receiptNumber: 123456789,
     place: "",
     firstName: "",
     lastName: "",
-    address: googleAdd,
     // houseNumber: "",
     // street: "",
     // city: "",
@@ -25,19 +24,16 @@ const ReceiptForm = () => {
     // country: "",
     postalCode: "",
     type: "",
-    number: "",
+    number: 0,
     words: "",
     signature: "",
   });
   const initialReceipt = { ...receiptData };
-  console.log("receiptData", receiptData);
 
   const {
-    receiptNumber,
     place,
     firstName,
     lastName,
-    address,
     // houseNumber,
     // street,
     // city,
@@ -50,13 +46,12 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  console.log("address,", address);
-
   // useEffect(() => {});
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("receiptData Form", receiptData);
+    console.log("initial data", initialReceipt);
     dispatch(
       createReceipt({
         receiptNumber,
@@ -71,8 +66,19 @@ const ReceiptForm = () => {
         signature,
       })
     );
-    // setGoogleAdd("");
-    // setReceiptData(initialReceipt);
+    setAddress("");
+    setReceiptData({
+      place: "",
+      firstName: "",
+      lastName: "",
+
+      postalCode: "",
+      type: "",
+      number: 0,
+      words: "",
+      signature: "",
+    });
+    setReceiptNumber(receiptNumber + 1);
   };
 
   const onChange = (e) => {
@@ -84,7 +90,7 @@ const ReceiptForm = () => {
 
   //for google places address
   const handleSelect = (value) => {
-    setGoogleAdd(value);
+    setAddress(value);
     setReceiptData((prevState) => ({
       ...prevState,
       address: value,
@@ -141,8 +147,8 @@ const ReceiptForm = () => {
           <div className="address">
             <div className="form-group">
               <PlacesAutocomplete
-                value={googleAdd}
-                onChange={setGoogleAdd}
+                value={address}
+                onChange={setAddress}
                 onSelect={handleSelect}
               >
                 {({
@@ -268,7 +274,7 @@ const ReceiptForm = () => {
                 name="number"
                 id="number"
                 placeholder="Amount (Number)"
-                value={number}
+                value={number <= 0 ? "" : number}
                 onChange={onChange}
               />
             </div>
