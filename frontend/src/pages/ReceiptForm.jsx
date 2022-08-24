@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
 import { createReceipt } from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [address, setAddress] = useState("");
   const [receiptNumber, setReceiptNumber] = useState(123456789);
@@ -79,6 +81,7 @@ const ReceiptForm = () => {
       signature: "",
     });
     setReceiptNumber(receiptNumber + 1);
+    navigate("/");
   };
 
   const onChange = (e) => {
