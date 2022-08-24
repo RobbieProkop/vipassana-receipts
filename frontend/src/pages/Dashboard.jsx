@@ -1,19 +1,37 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
+import { getAll, reset } from "../features/receipts/receiptSlice";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
+  const { receiptsArr, isLoading, isError, message } = useSelector(
+    (state) => state.receipts
+  );
 
   useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
     if (!user) {
       navigate("/login");
     }
-  }, [user, navigate]);
 
+    dispatch(getAll());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <>
       <section className="heading">
