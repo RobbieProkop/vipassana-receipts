@@ -17,7 +17,7 @@ const ReceiptForm = () => {
     place: "",
     firstName: "",
     lastName: "",
-    address: "",
+    address: googleAdd,
     // houseNumber: "",
     // street: "",
     // city: "",
@@ -56,8 +56,21 @@ const ReceiptForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(createReceipt({ receiptData }));
+    console.log("receiptData Form", receiptData);
+    dispatch(
+      createReceipt({
+        receiptNumber,
+        place,
+        firstName,
+        lastName,
+        address,
+        postalCode,
+        type,
+        number,
+        words,
+        signature,
+      })
+    );
     // setGoogleAdd("");
     // setReceiptData(initialReceipt);
   };
@@ -72,6 +85,10 @@ const ReceiptForm = () => {
   //for google places address
   const handleSelect = (value) => {
     setGoogleAdd(value);
+    setReceiptData((prevState) => ({
+      ...prevState,
+      address: value,
+    }));
   };
   return (
     <section className="receipt-form">

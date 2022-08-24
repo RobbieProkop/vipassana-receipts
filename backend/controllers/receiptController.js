@@ -28,11 +28,10 @@ const getOneReceipt = asyncHandler(async (req, res) => {
 //@route:   POST /api/receipts
 //@access   Private
 const createReceipt = asyncHandler(async (req, res) => {
-  if (!req.body.signature) {
+  if (!req.user) {
     res.status(400);
     throw new Error("Please complete all text fields");
   }
-
   const receipt = await Receipt.create({
     user: req.user.id,
     receiptNumber: req.body.receiptNumber,
