@@ -15,9 +15,14 @@ const ReceiptForm = () => {
   const [receiptData, setReceiptData] = useState({
     receiptNumber: 123456789,
     place: "",
-    firtName: "",
+    firstName: "",
     lastName: "",
-    address: googleAdd,
+    address: "",
+    // houseNumber: "",
+    // street: "",
+    // city: "",
+    // province: "",
+    // country: "",
     postalCode: "",
     type: "",
     number: "",
@@ -25,6 +30,7 @@ const ReceiptForm = () => {
     signature: "",
   });
   const initialReceipt = { ...receiptData };
+  console.log("receiptData", receiptData);
 
   const {
     receiptNumber,
@@ -32,6 +38,11 @@ const ReceiptForm = () => {
     firstName,
     lastName,
     address,
+    // houseNumber,
+    // street,
+    // city,
+    // province,
+    // country,
     postalCode,
     type,
     number,
@@ -39,14 +50,16 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
+  console.log("address,", address);
+
   // useEffect(() => {});
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     dispatch(createReceipt({ receiptData }));
-    setGoogleAdd("");
-    setReceiptData(initialReceipt);
+    // setGoogleAdd("");
+    // setReceiptData(initialReceipt);
   };
 
   const onChange = (e) => {
@@ -152,6 +165,58 @@ const ReceiptForm = () => {
                 )}
               </PlacesAutocomplete>
             </div>
+
+            {/* <div className="form-group">
+              <input
+                type="text"
+                name="houseNumber"
+                id="houseNumber"
+                placeholder="House Number"
+                value={houseNumber}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="street"
+                id="stree"
+                placeholder="Street"
+                value={street}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="city"
+                id="city"
+                placeholder="City"
+                value={city}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="province"
+                id="province"
+                placeholder="Province"
+                value={province}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="country"
+                id="country"
+                placeholder="Country"
+                value={country}
+                onChange={onChange}
+              />
+            </div>
+                    */}
 
             <div className="form-group">
               <input

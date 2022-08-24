@@ -41,6 +41,11 @@ const createReceipt = asyncHandler(async (req, res) => {
     lastName: req.body.lastName,
 
     address: req.body.address,
+    // houseNumber: req.body.houseNumber,
+    // street: req.body.street,
+    // city: req.body.city,
+    // province: req.body.province,
+    // country: req.body.country,
     postalCode: req.body.postalCode,
 
     number: req.body.number,
