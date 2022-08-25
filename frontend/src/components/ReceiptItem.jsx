@@ -17,7 +17,7 @@ const ReceiptItem = ({ receipt }) => {
         </div>
         <div>
           <div>
-            <Link to={`/${receipt._id}`} className="btn btn-edit">
+            <Link to={`/edit/${receipt._id}`} className="btn btn-edit">
               Edit
             </Link>
             <button

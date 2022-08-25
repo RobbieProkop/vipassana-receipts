@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import ReceiptForm from "./pages/ReceiptForm";
+import EditReceiptForm from "./pages/EditReceiptForm";
 import ReceiptItem from "./components/ReceiptItem";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="/:id" element={<ReceiptItem />}></Route>
+            <Route path="/edit/:id" element={<EditReceiptForm />}></Route>
             <Route path="/form" element={<ReceiptForm />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
