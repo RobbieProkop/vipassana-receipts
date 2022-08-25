@@ -26,9 +26,22 @@ const createReceipt = async (receiptData, token) => {
   return data;
 };
 
+//Delete Receipt
+const deleteReceipt = async (receiptId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const { data } = await axios.delete(API_URL + receiptId, config);
+  return data;
+};
+
 const receiptService = {
   getAll,
   createReceipt,
+  deleteReceipt,
 };
 
 export default receiptService;
