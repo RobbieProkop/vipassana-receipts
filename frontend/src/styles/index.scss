@@ -33,6 +33,7 @@ body {
   color: #333;
   font-size: 16px;
   font-weight: 700;
+  margin-top: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in;
   z-index: 10;
@@ -40,6 +41,31 @@ body {
     background: $black;
     border: 1px solid $black;
     color: $white;
+    transform: translate(0.2rem, -0.2rem);
+  }
+}
+
+.btn-edit {
+  padding: 5px 20px;
+  background: $white;
+  margin-right: 10px;
+  border: 1px solid $white;
+  &:hover {
+    background: $black;
+    border: 1px solid $black;
+    color: $white;
+    transform: translate(0.2rem, -0.2rem);
+  }
+}
+
+.btn-delete {
+  background: $black;
+  color: $white;
+  border: 1px solid $black;
+  &:hover {
+    background: $white;
+    border: 1px solid $white;
+    color: $black;
     transform: translate(0.2rem, -0.2rem);
   }
 }
@@ -218,8 +244,35 @@ h1 {
     }
   }
 
+  // receipt item
   .content {
+    @include flex-center();
     margin-top: 2rem;
+    width: 80%;
+
+    .receipts {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+
+      .receipt-item {
+        border: 1px solid $white;
+        margin: 10px 0;
+        padding: 5px 10px;
+        * {
+          margin: 5px 0;
+        }
+
+        div {
+          @include flex-between();
+
+          button {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
   }
 }
 
