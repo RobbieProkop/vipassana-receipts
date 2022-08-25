@@ -25,6 +25,27 @@ export const getAll = createAsyncThunk(
   }
 );
 
+//Select a single post by id
+export const selectReceiptById = (state, receiptId) => {
+  return state.receipts.receiptsArr.find(
+    (receipt) => receipt._id === receiptId
+  );
+};
+
+//Get individual receipts
+export const getOneReceipt = createAsyncThunk(
+  "receipts/getOne",
+  async (receiptsId, thunkAPI) => {
+    try {
+      return await receiptService.getOneReceipt(receiptsId);
+    } catch (error) {
+      const message =
+        error.response.data.message || error.message || error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Create new receipt
 export const createReceipt = createAsyncThunk(
   "receipts/create",

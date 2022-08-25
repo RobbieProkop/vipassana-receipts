@@ -1,34 +1,31 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
-import { createReceipt } from "../features/receipts/receiptSlice";
+import { selectReceiptById } from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { receiptId } = useParams();
+  const { id } = useParams();
+  console.log("receiptID", id);
   const receipt = useSelector((state) => {
-    selectReceiptById(state, Number(receiptId));
+    selectReceiptById(state, id);
   });
+  console.log("receipt", receipt);
 
-  const [address, setAddress] = useState("");
-  const [receiptNumber, setReceiptNumber] = useState(123456789);
-
-  //temporary key
-  let tempkey = 0;
+  const [address, setAddress] = useState(receipt ? receipt.address : "");
 
   const [receiptData, setReceiptData] = useState({
-    place: receipt.place,
-    firstName: receipt.firstName,
-    lastName: receipt.lastName,
-    postalCode: receipt.postalCode,
-    type: receipt.type,
-    number: receipt.number,
-    words: receipt.words,
-    signature: receipt.signature,
+    place: receipt ? receipt.place : "",
+    firstName: receipt ? receipt.firstName : "",
+    lastName: receipt ? receipt.lastName : "",
+    postalCode: receipt ? receipt.postalCode : "",
+    type: receipt ? receipt.type : "",
+    number: receipt ? receipt.number : "",
+    words: receipt ? receipt.words : "",
+    signature: receipt ? receipt.signature : "",
   });
   const initialReceipt = { ...receiptData };
 
@@ -36,11 +33,6 @@ const ReceiptForm = () => {
     place,
     firstName,
     lastName,
-    // houseNumber,
-    // street,
-    // city,
-    // province,
-    // country,
     postalCode,
     type,
     number,
@@ -52,35 +44,17 @@ const ReceiptForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("receiptData Form", receiptData);
-    console.log("initial data", initialReceipt);
-    dispatch(
-      createReceipt({
-        receiptNumber,
-        place,
-        firstName,
-        lastName,
-        address,
-        postalCode,
-        type,
-        number,
-        words,
-        signature,
-      })
-    );
     setAddress("");
     setReceiptData({
       place: "",
       firstName: "",
       lastName: "",
-
       postalCode: "",
       type: "",
       number: 0,
       words: "",
       signature: "",
     });
-    setReceiptNumber(receiptNumber + 1);
     navigate("/");
   };
 
@@ -99,12 +73,20 @@ const ReceiptForm = () => {
       address: value,
     }));
   };
+
+  if (!receipt) {
+    return (
+      <section>
+        <h2>Receipt not found</h2>
+      </section>
+    );
+  }
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {receiptNumber}</p>
+            <p>ID: {id}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
@@ -177,7 +159,7 @@ const ReceiptForm = () => {
                         return (
                           <div
                             //change this key to receipt num
-                            key={tempkey++}
+                            key={id}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}

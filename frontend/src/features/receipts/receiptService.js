@@ -14,6 +14,12 @@ const getAll = async (token) => {
   return data;
 };
 
+//Get one receipt
+const getOneReceipt = async (receiptId) => {
+  const { data } = await axios.get(API_URL + receiptId);
+  return data;
+};
+
 //Create new Receipt
 const createReceipt = async (receiptData, token) => {
   const config = {
@@ -40,6 +46,7 @@ const deleteReceipt = async (receiptId, token) => {
 
 const receiptService = {
   getAll,
+  getOneReceipt,
   createReceipt,
   deleteReceipt,
 };
