@@ -25,14 +25,7 @@ export const getAll = createAsyncThunk(
   }
 );
 
-//Select a single post by id
-export const selectReceiptById = (state, receiptId) => {
-  return state.receipts.receiptsArr.find(
-    (receipt) => receipt._id === receiptId
-  );
-};
-
-//Get individual receipts
+//Get individual receipt
 export const getOneReceipt = createAsyncThunk(
   "receipts/getOne",
   async (receiptsId, thunkAPI) => {

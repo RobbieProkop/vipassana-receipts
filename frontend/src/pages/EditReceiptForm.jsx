@@ -2,18 +2,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
-import { selectReceiptById } from "../features/receipts/receiptSlice";
+import {} from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { id } = useParams();
-  console.log("receiptID", id);
-  const receipt = useSelector((state) => {
-    selectReceiptById(state, id);
-  });
-  console.log("receipt", receipt);
+
+  const receipt = useSelector((state) =>
+    state.receipts.receiptsArr.find((receipt) => receipt._id === id)
+  );
 
   const [address, setAddress] = useState(receipt ? receipt.address : "");
 
@@ -27,7 +25,6 @@ const ReceiptForm = () => {
     words: receipt ? receipt.words : "",
     signature: receipt ? receipt.signature : "",
   });
-  const initialReceipt = { ...receiptData };
 
   const {
     place,
@@ -86,7 +83,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {id}</p>
+            <p>ID: {receipt.receiptNumber}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
