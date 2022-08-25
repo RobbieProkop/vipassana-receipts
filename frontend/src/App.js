@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import ReceiptForm from "./pages/ReceiptForm";
+import ReceiptItem from "./components/ReceiptItem";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <div className="body-container">
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
+            <Route path="/:id" element={<ReceiptItem />}></Route>
             <Route path="/form" element={<ReceiptForm />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>

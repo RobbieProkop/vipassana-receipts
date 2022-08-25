@@ -47,11 +47,13 @@ const Dashboard = () => {
         {receiptsArr.length > 0 ? (
           <div className="receipts">
             {receiptsArr.map((receipt) => (
-              <ReceiptItem key={receipt._id} receipt={receipt} />
+              <Link to={`/${receipt._id}`} key={receipt._id}>
+                <ReceiptItem receipt={receipt} />
+              </Link>
             ))}
           </div>
         ) : (
-          <h3>No Receipts to sho</h3>
+          <h3>No Receipts to show</h3>
         )}
       </section>
     </>

@@ -30,11 +30,13 @@ const ReceiptItem = ({ receipt }) => {
           </div>
         </div>
       </div>
-      <h2>Receipt ID: {receipt.receiptNumber}</h2>
-
-      <h3>
-        Donor: {receipt.firstName} {receipt.lastName}
-      </h3>
+      <h2>ID: {receipt.receiptNumber}</h2>
+      <div>
+        <h3>
+          Donor: {receipt.firstName} {receipt.lastName}
+        </h3>
+        <h3>Amount: ${receipt.number}</h3>
+      </div>
     </div>
   );
 };
