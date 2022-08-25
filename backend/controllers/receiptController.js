@@ -28,11 +28,10 @@ const getOneReceipt = asyncHandler(async (req, res) => {
 //@route:   POST /api/receipts
 //@access   Private
 const createReceipt = asyncHandler(async (req, res) => {
-  if (!req.body.signature) {
+  if (!req.user) {
     res.status(400);
     throw new Error("Please complete all text fields");
   }
-
   const receipt = await Receipt.create({
     user: req.user.id,
     receiptNumber: req.body.receiptNumber,
@@ -40,11 +39,12 @@ const createReceipt = asyncHandler(async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
 
-    houseNumber: req.body.houseNumber,
-    street: req.body.street,
-    city: req.body.city,
-    province: req.body.province,
-    country: req.body.country,
+    address: req.body.address,
+    // houseNumber: req.body.houseNumber,
+    // street: req.body.street,
+    // city: req.body.city,
+    // province: req.body.province,
+    // country: req.body.country,
     postalCode: req.body.postalCode,
 
     number: req.body.number,

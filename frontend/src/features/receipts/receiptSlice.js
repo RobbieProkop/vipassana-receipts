@@ -9,11 +9,45 @@ const initialState = {
   message: "",
 };
 
+//Get all receipts
 export const getAll = createAsyncThunk(
   "receipts/getAll",
   async (_, thunkAPI) => {
     try {
-      return await receiptService.getAll();
+      const token = thunkAPI.getState().auth.user.token;
+      return await receiptService.getAll(token);
+    } catch (error) {
+      const message =
+        error.response.data.message || error.message || error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Create new receipt
+export const createReceipt = createAsyncThunk(
+  "receipts/create",
+  async (receiptData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await receiptService.createReceipt(receiptData, token);
+    } catch (error) {
+      const message =
+        error.response.data.message || error.message || error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// delete user Receipt
+export const deleteReceipt = createAsyncThunk(
+  "receipts/delete",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await receiptService.deleteReceipt(id, token);
     } catch (error) {
       const message =
         error.response.data.message || error.message || error.toString();
@@ -42,13 +76,41 @@ export const receiptSlice = createSlice({
       .addCase(getAll.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.receipts.push(action.payload);
+        state.receiptsArr = action.payload;
       })
       .addCase(getAll.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.receipts = [];
+        state.receiptsArr = [];
+      })
+      .addCase(createReceipt.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createReceipt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.receiptsArr.push(action.payload);
+      })
+      .addCase(createReceipt.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteReceipt.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteReceipt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.receiptsArr = state.receiptsArr.filter(
+          (receipt) => receipt._id !== action.payload.id
+        );
+      })
+      .addCase(deleteReceipt.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
