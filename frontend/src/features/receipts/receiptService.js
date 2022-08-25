@@ -15,8 +15,13 @@ const getAll = async (token) => {
 };
 
 //Get one receipt
-const getOneReceipt = async (receiptId) => {
-  const { data } = await axios.get(API_URL + receiptId);
+const getOneReceipt = async (receiptId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const { data } = await axios.get(API_URL + receiptId, config);
   return data;
 };
 

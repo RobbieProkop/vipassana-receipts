@@ -1,29 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
-import {} from "../features/receipts/receiptSlice";
+import { getOneReceipt } from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const receipt = useSelector((state) =>
-    state.receipts.receiptsArr.find((receipt) => receipt._id === id)
-  );
+  const receipt = useSelector((state) => state.receipts.receiptsArr);
+  console.log("receipt", receipt);
 
   const [address, setAddress] = useState(receipt ? receipt.address : "");
 
   const [receiptData, setReceiptData] = useState({
-    place: receipt ? receipt.place : "",
-    firstName: receipt ? receipt.firstName : "",
-    lastName: receipt ? receipt.lastName : "",
-    postalCode: receipt ? receipt.postalCode : "",
-    type: receipt ? receipt.type : "",
-    number: receipt ? receipt.number : "",
-    words: receipt ? receipt.words : "",
-    signature: receipt ? receipt.signature : "",
+    place: receipt.place,
+    firstName: receipt.firstName,
+    lastName: receipt.lastName,
+    postalCode: receipt.postalCode,
+    type: receipt.type,
+    number: receipt.number,
+    words: receipt.words,
+    signature: receipt.signature,
   });
 
   const {
@@ -37,7 +36,9 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  // useEffect(() => {});
+  useEffect(() => {
+    dispatch(getOneReceipt(id));
+  }, [dispatch]);
 
   const onSubmit = (e) => {
     e.preventDefault();

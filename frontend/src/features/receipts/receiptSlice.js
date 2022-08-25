@@ -30,7 +30,8 @@ export const getOneReceipt = createAsyncThunk(
   "receipts/getOne",
   async (receiptsId, thunkAPI) => {
     try {
-      return await receiptService.getOneReceipt(receiptsId);
+      const token = thunkAPI.getState().auth.user.token;
+      return await receiptService.getOneReceipt(receiptsId, token);
     } catch (error) {
       const message =
         error.response.data.message || error.message || error.toString();
@@ -93,6 +94,20 @@ export const receiptSlice = createSlice({
         state.receiptsArr = action.payload;
       })
       .addCase(getAll.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.receiptsArr = [];
+      })
+      .addCase(getOneReceipt.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOneReceipt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.receiptsArr = action.payload;
+      })
+      .addCase(getOneReceipt.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
