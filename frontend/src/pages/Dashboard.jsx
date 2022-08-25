@@ -47,9 +47,7 @@ const Dashboard = () => {
         {receiptsArr.length > 0 ? (
           <div className="receipts">
             {receiptsArr.map((receipt) => (
-              <Link to={`/${receipt._id}`} key={receipt._id}>
-                <ReceiptItem receipt={receipt} />
-              </Link>
+              <ReceiptItem receipt={receipt} key={receipt._id} />
             ))}
           </div>
         ) : (
