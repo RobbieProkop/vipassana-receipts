@@ -2,23 +2,41 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
-import { getOneReceipt } from "../features/receipts/receiptSlice";
+import Spinner from "../components/Spinner";
+import {
+  getAll,
+  getOneReceipt,
+  reset,
+} from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const receipt = useSelector((state) =>
-    state.receipts.receiptsArr.find((receipt) => receipt._id === id)
+  const { user } = useSelector((state) => state.auth);
+  const { receiptsArr, isLoading, isError, message } = useSelector(
+    (state) => state.receipts
   );
-  console.log("receipt", receipt);
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    // return () => {
+    //   dispatch(reset());
+    // };
+  }, [user, navigate, isError, message, dispatch]);
+
+  let receipt = receiptsArr.find((receipt) => receipt._id === id);
 
   const [address, setAddress] = useState(receipt ? receipt.address : "");
 
-  // useEffect(() => {
-  //   dispatch(getOneReceipt(id));
-  // }, [dispatch]);
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
     firstName: receipt.firstName,
@@ -73,7 +91,10 @@ const ReceiptForm = () => {
     }));
   };
 
-  console.log("place", place);
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   if (!receipt) {
     return (
       <section>
