@@ -14,6 +14,9 @@ const ReceiptForm = () => {
 
   const [address, setAddress] = useState(receipt ? receipt.address : "");
 
+  useEffect(() => {
+    dispatch(getOneReceipt(id));
+  }, [dispatch]);
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
     firstName: receipt.firstName,
@@ -35,10 +38,6 @@ const ReceiptForm = () => {
     words,
     signature,
   } = receiptData;
-
-  useEffect(() => {
-    dispatch(getOneReceipt(id));
-  }, [dispatch]);
 
   const onSubmit = (e) => {
     e.preventDefault();
