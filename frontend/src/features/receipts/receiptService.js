@@ -14,6 +14,17 @@ const getAll = async (token) => {
   return data;
 };
 
+//Get one receipt
+const getOneReceipt = async (receiptId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const { data } = await axios.get(API_URL + receiptId, config);
+  return data;
+};
+
 //Create new Receipt
 const createReceipt = async (receiptData, token) => {
   const config = {
@@ -23,6 +34,18 @@ const createReceipt = async (receiptData, token) => {
   };
 
   const { data } = await axios.post(API_URL, receiptData, config);
+  return data;
+};
+
+//Edit Receipt
+const editReceipt = async (receiptId, receiptData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const { data } = await axios.put(API_URL + receiptId, receiptData, config);
   return data;
 };
 
@@ -40,7 +63,9 @@ const deleteReceipt = async (receiptId, token) => {
 
 const receiptService = {
   getAll,
+  getOneReceipt,
   createReceipt,
+  editReceipt,
   deleteReceipt,
 };
 
