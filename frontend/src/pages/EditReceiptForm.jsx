@@ -9,14 +9,16 @@ const ReceiptForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const receipt = useSelector((state) => state.receipts.receiptsArr);
+  const receipt = useSelector((state) =>
+    state.receipts.receiptsArr.find((receipt) => receipt._id === id)
+  );
   console.log("receipt", receipt);
 
   const [address, setAddress] = useState(receipt ? receipt.address : "");
 
-  useEffect(() => {
-    dispatch(getOneReceipt(id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getOneReceipt(id));
+  // }, [dispatch]);
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
     firstName: receipt.firstName,
@@ -71,6 +73,7 @@ const ReceiptForm = () => {
     }));
   };
 
+  console.log("place", place);
   if (!receipt) {
     return (
       <section>
