@@ -2,12 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
-import Spinner from "../components/Spinner";
-import {
-  getAll,
-  getOneReceipt,
-  reset,
-} from "../features/receipts/receiptSlice";
+import { toast } from "react-toastify";
+import { editReceipt } from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
@@ -26,6 +22,10 @@ const ReceiptForm = () => {
 
     if (!user) {
       navigate("/login");
+    }
+
+    if (!receiptsArr) {
+      navigate("/");
     }
 
     // return () => {
@@ -61,18 +61,56 @@ const ReceiptForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setAddress("");
-    setReceiptData({
-      place: "",
-      firstName: "",
-      lastName: "",
-      postalCode: "",
-      type: "",
-      number: 0,
-      words: "",
-      signature: "",
-    });
-    navigate("/");
+    const canSave = [
+      place,
+      firstName,
+      lastName,
+      postalCode,
+      type,
+      number,
+      words,
+      signature,
+    ].every((el) => el.length >= 1);
+    if (canSave) {
+      try {
+        dispatch(
+          editReceipt({
+            id: id,
+            place,
+            firstName,
+            lastName,
+            postalCode,
+            type,
+            number,
+            words,
+            signature,
+          })
+        ).unwrap();
+        toast.success("Receipt edited Successfully");
+        setAddress("");
+        setReceiptData({
+          place: "",
+          firstName: "",
+          lastName: "",
+          postalCode: "",
+          type: "",
+          number: 0,
+          words: "",
+          signature: "",
+        });
+        navigate("/");
+      } catch (error) {
+        const message =
+          error.response.data.message || error.message || error.toString();
+        toast.error(message);
+        console.log(message);
+      }
+    } else {
+      console.log("Please fill in all fields!");
+      toast.error("Please Fill In All Fields", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    }
   };
 
   const onChange = (e) => {
@@ -90,10 +128,6 @@ const ReceiptForm = () => {
       address: value,
     }));
   };
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   if (!receipt) {
     return (

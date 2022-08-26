@@ -56,6 +56,22 @@ export const createReceipt = createAsyncThunk(
   }
 );
 
+// Edit a receipt
+export const editReceipt = createAsyncThunk(
+  "receipts/edit",
+  async (receiptData, thunkAPI) => {
+    const { id } = receiptData;
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await receiptService.editReceipt(id, receiptData, token);
+    } catch (error) {
+      const message =
+        error.response.data.message || error.message || error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // delete user Receipt
 export const deleteReceipt = createAsyncThunk(
   "receipts/delete",
@@ -85,6 +101,7 @@ export const receiptSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //Get All
       .addCase(getAll.pending, (state) => {
         state.isLoading = true;
       })
@@ -99,6 +116,7 @@ export const receiptSlice = createSlice({
         state.message = action.payload;
         state.receiptsArr = [];
       })
+      //Get One
       .addCase(getOneReceipt.pending, (state) => {
         state.isLoading = true;
       })
@@ -113,6 +131,7 @@ export const receiptSlice = createSlice({
         state.message = action.payload;
         state.receiptsArr = [];
       })
+      //Create
       .addCase(createReceipt.pending, (state) => {
         state.isLoading = true;
       })
@@ -126,6 +145,28 @@ export const receiptSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      .addCase(editReceipt.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editReceipt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        if (!action.payload?.id) {
+          console.log("action payload", action.payload);
+          return console.log("could not update post");
+        }
+        const { id } = action.payload;
+        const receipts = state.receiptsArr.filter(
+          (receipt) => receipt._id !== id
+        );
+        state.receiptsArr = [...receipts, action.payload];
+      })
+      .addCase(editReceipt.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      //Delete
       .addCase(deleteReceipt.pending, (state) => {
         state.isLoading = true;
       })
