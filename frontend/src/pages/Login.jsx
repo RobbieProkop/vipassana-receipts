@@ -71,7 +71,7 @@ const Login = () => {
               id="username"
               name="username"
               value={username}
-              placeholder="Enter name"
+              placeholder="Enter Username"
               onChange={onChange}
             />
           </div>

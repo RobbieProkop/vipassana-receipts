@@ -34,7 +34,7 @@ const Header = () => {
         ) : (
           <>
             <div className="logo">
-              <h4>AVF Donations</h4>
+              <p>AVF Donations</p>
             </div>
             <ul>
               <li>
