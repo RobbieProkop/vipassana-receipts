@@ -52,6 +52,11 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
 
+  if (!username || !password) {
+    res.status(400);
+    throw new Error("Please fill in all fields");
+  }
+
   //check for user usernanme
   const user = await User.findOne({ username });
   if (user && (await bcrypt.compare(password, user.password))) {

@@ -78,7 +78,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         if (action.payload.message) {
           state.isError = true;
-          state.message = "Failed to log in";
+          state.message = "Invalid Credentials";
           state.user = null;
         } else {
           state.isSuccess = true;
