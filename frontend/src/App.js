@@ -22,7 +22,6 @@ function App() {
             <Route path="/edit/:id" element={<EditReceiptForm />}></Route>
             <Route path="/form" element={<ReceiptForm />}></Route>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
           </Routes>
         </div>
         <Footer />
