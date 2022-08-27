@@ -18,18 +18,25 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <div className="logo">
-          <Link to="/">AVF Donations</Link>
-        </div>
-        <ul>
-          {user ? (
-            <li>
-              <button className="btn" onClick={onLogout}>
-                <FaSignOutAlt /> Logout
-              </button>
-            </li>
-          ) : (
-            <>
+        {user ? (
+          <>
+            <div className="logo">
+              <Link to="/">AVF Donations</Link>
+            </div>
+            <ul>
+              <li>
+                <button className="btn" onClick={onLogout}>
+                  <FaSignOutAlt /> Logout
+                </button>
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <div className="logo">
+              <h4>AVF Donations</h4>
+            </div>
+            <ul>
               <li>
                 <Link to="/login">
                   <FaSignInAlt /> Login
@@ -40,9 +47,9 @@ const Header = () => {
                   <FaUser /> Register
                 </Link>
               </li>
-            </>
-          )}
-        </ul>
+            </ul>
+          </>
+        )}
       </div>
     </header>
   );
