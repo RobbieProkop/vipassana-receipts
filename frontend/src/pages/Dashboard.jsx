@@ -15,9 +15,9 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
+    // if (isError) {
+    //   console.log(message);
+    // }
 
     if (!user) {
       navigate("/login");
@@ -25,9 +25,9 @@ const Dashboard = () => {
 
     dispatch(getAll());
 
-    return () => {
-      dispatch(reset());
-    };
+    // return () => {
+    //   dispatch(reset());
+    // };
   }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {

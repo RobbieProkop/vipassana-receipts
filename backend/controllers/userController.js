@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   //check if user exists
-  const userExists = await User.findOne({ email });
+  const userExists = await User.findOne({ username });
 
   if (userExists) {
     res.status(400);
@@ -51,6 +51,11 @@ const registerUser = asyncHandler(async (req, res) => {
 //@access   Public
 const loginUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
+
+  if (!username || !password) {
+    res.status(400);
+    throw new Error("Please fill in all fields");
+  }
 
   //check for user usernanme
   const user = await User.findOne({ username });

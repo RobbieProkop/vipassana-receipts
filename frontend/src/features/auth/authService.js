@@ -24,7 +24,7 @@ const logout = () => {
 const login = async (userData) => {
   const { data } = await axios.post(API_URL + "login", userData);
 
-  if (data) {
+  if (data.username) {
     localStorage.setItem("user", JSON.stringify(data));
   }
 
