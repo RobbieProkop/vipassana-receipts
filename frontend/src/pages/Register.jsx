@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUser } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
@@ -13,6 +13,8 @@ const Register = () => {
     password: "",
     password2: "",
   });
+
+  const [togglePassword, setTogglePassword] = useState(false);
 
   const { username, email, password, password2 } = formData;
 
@@ -94,9 +96,9 @@ const Register = () => {
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group password-input">
             <input
-              type="text"
+              type={!togglePassword ? "password" : "text"}
               className="form-control"
               id="password"
               name="password"
@@ -104,10 +106,17 @@ const Register = () => {
               placeholder="Enter Password"
               onChange={onChange}
             />
+            <div
+              className="password-icon"
+              onClick={() => setTogglePassword(!togglePassword)}
+            >
+              {!togglePassword && <FaEyeSlash />}
+              {togglePassword && <FaEye />}
+            </div>
           </div>
-          <div className="form-group">
+          <div className="form-group password-input">
             <input
-              type="text"
+              type={!togglePassword ? "password" : "text"}
               className="form-control"
               id="password2"
               name="password2"
@@ -115,6 +124,13 @@ const Register = () => {
               placeholder="Confirm Password"
               onChange={onChange}
             />
+            <div
+              className="password-icon"
+              onClick={() => setTogglePassword(!togglePassword)}
+            >
+              {!togglePassword && <FaEyeSlash />}
+              {togglePassword && <FaEye />}
+            </div>
           </div>
           <div className="form-group">
             <button className="btn btn-block" type="submit">

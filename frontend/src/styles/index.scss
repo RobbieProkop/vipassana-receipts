@@ -191,6 +191,31 @@ h1 {
         display: block;
         margin: 0 0 5px 3px;
       }
+      &.password-input {
+        display: flex;
+
+        input {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-right: none;
+        }
+        .password-icon {
+          height: 42px;
+          width: 42px;
+          cursor: pointer;
+          display: grid;
+          place-items: center;
+          background-color: $white;
+          border: 1px solid #e6e6e6;
+          border-left: none;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          svg {
+            font-size: 1.5rem;
+            color: $black;
+          }
+        }
+      }
     }
   }
   .receipt-form {
