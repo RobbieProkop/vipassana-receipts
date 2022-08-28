@@ -1,4 +1,4 @@
-import { FaSignInAlt } from "react-icons/fa";
+import { FaSignInAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,8 @@ const Login = () => {
     username: "",
     password: "",
   });
+
+  const [togglePassword, setTogglePassword] = useState(false);
 
   const { username, password } = formData;
 
@@ -75,9 +77,9 @@ const Login = () => {
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group password-input">
             <input
-              type="text"
+              type={!togglePassword ? "password" : "text"}
               className="form-control"
               id="password"
               name="password"
@@ -85,6 +87,13 @@ const Login = () => {
               placeholder="Enter Password"
               onChange={onChange}
             />
+            <div
+              className="password-icon"
+              onClick={() => setTogglePassword(!togglePassword)}
+            >
+              {!togglePassword && <FaEyeSlash />}
+              {togglePassword && <FaEye />}
+            </div>
           </div>
           <div className="form-group">
             <button className="btn btn-block" type="submit">
