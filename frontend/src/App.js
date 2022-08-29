@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import ReceiptForm from "./pages/ReceiptForm";
 import EditReceiptForm from "./pages/EditReceiptForm";
 import ErrorPage from "./pages/ErrorPage";
-import ReceiptItem from "./components/ReceiptItem";
+import ReceiptPage from "./pages/ReceiptPage";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <div className="body-container">
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
-            <Route path="/:id" element={<ReceiptItem />}></Route>
+            <Route path="/:id" element={<ReceiptPage />}></Route>
             <Route path="/edit/:id" element={<EditReceiptForm />}></Route>
             <Route path="/form" element={<ReceiptForm />}></Route>
             <Route path="/login" element={<Login />}></Route>
