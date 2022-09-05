@@ -17,19 +17,21 @@ const ReceiptPage = () => {
 
   return (
     <div className="receipt-page">
-      <div className="receipt-head">
+      <div>
         <div className="receipt-info">
-          <h1>Alberta Vipassana Foundation</h1>
-          <p>PO Box 8412 - Market Mall</p>
-          <p>Calgary, AB, T3A 5C4</p>
+          <h3>
+            N<sub>0</sub>: {receipt[0].receiptNumber}
+          </h3>
+          <div className="receipt-head">
+            <h1>Alberta Vipassana Foundation</h1>
+          </div>
+          <p>PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4</p>
+
           <p>Charitable Reg. #85502 1739 RR 0001</p>
           <p>
             Canadian Revenue Agency: <a>www.cra-arc.gc.ca</a>
           </p>
         </div>
-        <h3>
-          N<sub>0</sub>: {receipt[0].receiptNumber}
-        </h3>
       </div>
       <div>
         <h3>

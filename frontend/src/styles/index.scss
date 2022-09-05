@@ -311,10 +311,22 @@ h1 {
   .receipt-page {
     width: 80%;
     border: 1px solid #fff;
-    padding-bottom: 1rem;
-
-    .receipt-head {
+    padding: 1.5rem;
+    .receipt-info {
       @include flex-center();
+      flex-direction: column;
+      h3 {
+        align-self: end;
+      }
+      .receipt-head {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin-top: -2rem;
+        h1 {
+          padding: 0;
+        }
+      }
     }
   }
 }
