@@ -17,51 +17,58 @@ const ReceiptPage = () => {
 
   return (
     <div className="receipt-page">
-      <div>
-        <div className="receipt-info">
-          <h3>
-            N<sub>0</sub>: {receipt[0].receiptNumber}
-          </h3>
-          <div className="receipt-head">
-            <h1>Alberta Vipassana Foundation</h1>
-          </div>
-          <p>PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4</p>
-
-          <p>Charitable Reg. #85502 1739 RR 0001</p>
-          <p>
-            Canadian Revenue Agency: <a>www.cra-arc.gc.ca</a>
-          </p>
+      <div className="receipt-info">
+        <h3>
+          N<sub>0</sub>: {receipt[0].receiptNumber}
+        </h3>
+        <div className="receipt-head">
+          <h1>Alberta Vipassana Foundation</h1>
         </div>
+        <p>PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4</p>
+
+        <p>Charitable Reg. #85502 1739 RR 0001</p>
+        <p>
+          Canadian Revenue Agency: <a>www.cra-arc.gc.ca</a>
+        </p>
       </div>
-      <div>
-        <h3>
-          Date:{" "}
-          {new Date(receipt[0].createdAt).toLocaleString("en-GB", {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-          })}
-        </h3>
-        <h3>Place: {receipt[0].place}</h3>
-      </div>
-      <div>
-        <h3>
-          Donor: {receipt[0].firstName} {receipt[0].lastName}
-        </h3>
-        <h3>
-          Address: {receipt[0].address}, {receipt[0].postalCode}
-        </h3>
-      </div>
-      <div>
-        <h3>
-          Donation: ${receipt[0].number} {receipt[0].type}{" "}
-        </h3>
-        <h3>Total Amount Received: {receipt[0].words} </h3>
-        <h3>DIgital Signature: {receipt[0].signature}</h3>
+      <div className="donor">
+        <div>
+          <h3>
+            Date:{" "}
+            {new Date(receipt[0].createdAt).toLocaleString("en-GB", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+            })}
+          </h3>
+          <h3>Donation Location: {receipt[0].place}</h3>
+          <h3>
+            Donor: {receipt[0].firstName} {receipt[0].lastName}
+          </h3>
+          <h3>Address: {receipt[0].address},</h3>
+          <h3>Postal Code: {receipt[0].postalCode}</h3>
+        </div>
+        <div>
+          <h3>
+            Donation: ${receipt[0].number} {receipt[0].type}{" "}
+          </h3>
+          <h3>Total Amount Received: {receipt[0].words} </h3>
+          <h3>Digital Signature: {receipt[0].signature}</h3>
+        </div>
+        <p>OFFICIAL RECEIPT FOR INCOME TAX PURPOSES</p>
+        <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
+          Edit
+        </Link>
+        <button
+          onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
+          className="btn btn-delete"
+        >
+          Delete
+        </button>
       </div>
 
       {/* edit and delete */}
-      <div>
+      {/* <div>
         <div>
           <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit">
             Edit
@@ -73,7 +80,7 @@ const ReceiptPage = () => {
             Delete
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
