@@ -269,7 +269,7 @@ h1 {
     }
   }
 
-  // receipt item
+  // receipt item on dashboard
   .content {
     @include flex-center();
     margin-top: 2rem;
@@ -305,6 +305,16 @@ h1 {
           transform: translate(0.2rem, -0.2rem);
         }
       }
+    }
+  }
+
+  .receipt-page {
+    width: 80%;
+    border: 1px solid #fff;
+    padding-bottom: 1rem;
+
+    .receipt-head {
+      @include flex-center();
     }
   }
 }
