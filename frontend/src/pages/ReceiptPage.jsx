@@ -18,11 +18,17 @@ const ReceiptPage = () => {
   return (
     <div className="receipt-page">
       <div className="receipt-info">
-        <h3>
-          N<sub>0</sub>: {receipt[0].receiptNumber}
-        </h3>
         <div className="receipt-head">
+          <button
+            className="btn btn-delete"
+            onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
+          >
+            X
+          </button>
           <h1>Alberta Vipassana Foundation</h1>
+          <h3>
+            N<sub>0</sub>. {receipt[0].receiptNumber}
+          </h3>
         </div>
         <p>PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4</p>
 
@@ -56,31 +62,17 @@ const ReceiptPage = () => {
           <h3>Digital Signature: {receipt[0].signature}</h3>
         </div>
         <p>OFFICIAL RECEIPT FOR INCOME TAX PURPOSES</p>
-        <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
-          Edit
-        </Link>
-        <button
-          onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
-          className="btn btn-delete"
-        >
-          Delete
-        </button>
       </div>
 
       {/* edit and delete */}
-      {/* <div>
-        <div>
-          <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit">
-            Edit
-          </Link>
-          <button
-            onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
-            className="btn btn-delete"
-          >
-            Delete
-          </button>
-        </div>
-      </div> */}
+      <div className="edit">
+        <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
+          Edit
+        </Link>
+        <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
+          Email PDF
+        </Link>
+      </div>
     </div>
   );
 };
