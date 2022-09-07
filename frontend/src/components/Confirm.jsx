@@ -7,9 +7,9 @@ const Confirm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const receipt = useSelector((state) => {
-    return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
-  });
+  // const receipt = useSelector((state) => {
+  //   return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
+  // });
 
   const onCancel = () => {
     navigate(`/${id}`);
@@ -23,11 +23,11 @@ const Confirm = () => {
     <main className="confirm">
       <h1>Are you sure you want to delete?</h1>
       <section className="actions">
-        <button className="onCancel" onClick={onCancel}>
-          Cancel
-        </button>
-        <button className="onDelete" onClick={onDelete}>
+        <button className="btn btn-block btn-danger" onClick={onDelete}>
           Delete
+        </button>
+        <button className="btn btn-block btn-cancel" onClick={onCancel}>
+          Cancel
         </button>
       </section>
     </main>
