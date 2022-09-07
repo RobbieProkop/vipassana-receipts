@@ -46,7 +46,6 @@ body {
 }
 
 .btn-edit {
-  padding: 5px 20px;
   background: $white;
   margin-right: 10px;
   border: 1px solid $white;
@@ -323,7 +322,7 @@ h1 {
         width: 100%;
         @include flex-between();
         .btn {
-          margin-right: 5rem;
+          margin-left: 3.5rem;
         }
         h1 {
           padding: 0;
@@ -344,6 +343,10 @@ h1 {
     }
     .edit {
       @include flex-center();
+      flex-direction: column;
+      .btn-edit {
+        margin-right: 0;
+      }
       a {
         @include flex-center();
         width: 50%;

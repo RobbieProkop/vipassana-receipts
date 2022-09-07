@@ -19,16 +19,17 @@ const ReceiptPage = () => {
     <div className="receipt-page">
       <div className="receipt-info">
         <div className="receipt-head">
+          <h3>
+            N<sub>0</sub>. {receipt[0].receiptNumber}
+          </h3>
+          <h1>Alberta Vipassana Foundation</h1>
+
           <button
             className="btn btn-delete"
             onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
           >
             X
           </button>
-          <h1>Alberta Vipassana Foundation</h1>
-          <h3>
-            N<sub>0</sub>. {receipt[0].receiptNumber}
-          </h3>
         </div>
         <p>PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4</p>
 
@@ -69,7 +70,10 @@ const ReceiptPage = () => {
         <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
           Edit
         </Link>
-        <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
+        <Link
+          to={`/edit/${receipt[0]._id}`}
+          className="btn btn-delete btn-block"
+        >
           Email PDF
         </Link>
       </div>
