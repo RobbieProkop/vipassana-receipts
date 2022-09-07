@@ -27,7 +27,7 @@ const ReceiptPage = () => {
           {/* delete receipt */}
           <button
             className="btn btn-delete"
-            onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
+            onClick={() => navigate("/:id/confirm")}
           >
             X
           </button>

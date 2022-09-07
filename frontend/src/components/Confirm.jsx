@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-const Confirm = () => {
+const Confirm = ({ id }) => {
   const navigate = useNavigate();
   const onCancel = () => {
-    navigate("/");
+    navigate("/:id");
   };
 
   const onDelete = () => {
