@@ -346,6 +346,9 @@ const ReceiptForm = () => {
         <button className="btn" type="submit">
           Submit Receipt
         </button>
+        <button className="btn btn-cancel" onClick={() => navigate("/")}>
+          Cancel
+        </button>
       </form>
     </section>
   );
