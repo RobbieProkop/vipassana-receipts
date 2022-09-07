@@ -1,13 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { deleteReceipt } from "../features/receipts/receiptSlice";
 
-const Confirm = ({ id }) => {
+const Confirm = () => {
   const navigate = useNavigate();
-  const onCancel = () => {
-    navigate("/:id");
-  };
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
+  const receipt = useSelector((state) => {
+    return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
+  });
+
+  const onCancel = () => {
+    navigate(`/${id}`);
+  };
   const onDelete = () => {
-    dispatch(deleteReceipt(receipt[0]._id));
+    dispatch(deleteReceipt(id));
     navigate("/");
   };
 

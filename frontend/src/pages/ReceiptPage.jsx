@@ -27,7 +27,7 @@ const ReceiptPage = () => {
           {/* delete receipt */}
           <button
             className="btn btn-delete"
-            onClick={() => navigate("/:id/confirm")}
+            onClick={() => navigate(`/${id}/confirm`)}
           >
             X
           </button>
