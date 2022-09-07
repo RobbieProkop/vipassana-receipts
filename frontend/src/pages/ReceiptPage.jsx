@@ -24,6 +24,7 @@ const ReceiptPage = () => {
           </h3>
           <h1>Alberta Vipassana Foundation</h1>
 
+          {/* delete receipt */}
           <button
             className="btn btn-delete"
             onClick={() => dispatch(deleteReceipt(receipt[0]._id))}
@@ -65,7 +66,7 @@ const ReceiptPage = () => {
         <p>OFFICIAL RECEIPT FOR INCOME TAX PURPOSES</p>
       </div>
 
-      {/* edit and delete */}
+      {/* edit and Download receipt */}
       <div className="edit">
         <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
           Edit
