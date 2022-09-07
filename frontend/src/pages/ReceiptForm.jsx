@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
+import { toast } from "react-toastify";
 import { createReceipt } from "../features/receipts/receiptSlice";
 
 const ReceiptForm = () => {
@@ -54,34 +55,58 @@ const ReceiptForm = () => {
     e.preventDefault();
     console.log("receiptData Form", receiptData);
     console.log("initial data", initialReceipt);
-    dispatch(
-      createReceipt({
-        receiptNumber,
-        place,
-        firstName,
-        lastName,
-        address,
-        postalCode,
-        type,
-        number,
-        words,
-        signature,
-      })
-    );
-    setAddress("");
-    setReceiptData({
-      place: "",
-      firstName: "",
-      lastName: "",
-
-      postalCode: "",
-      type: "",
-      number: 0,
-      words: "",
-      signature: "",
-    });
-    setReceiptNumber(receiptNumber + 1);
-    navigate("/");
+    const canSave = [
+      place,
+      firstName,
+      lastName,
+      postalCode,
+      type,
+      number,
+      words,
+      signature,
+    ].every((el) => el.length >= 1);
+    if (canSave) {
+      try {
+        dispatch(
+          createReceipt({
+            receiptNumber,
+            place,
+            firstName,
+            lastName,
+            address,
+            postalCode,
+            type,
+            number,
+            words,
+            signature,
+          })
+        ).unwrap();
+        toast.success("Receipt Added Successfully");
+        setAddress("");
+        setReceiptData({
+          place: "",
+          firstName: "",
+          lastName: "",
+          postalCode: "",
+          type: "",
+          number: 0,
+          words: "",
+          signature: "",
+        });
+        setReceiptNumber(receiptNumber + 1);
+        navigate("/");
+      } catch (error) {
+        const message =
+          error.response.data.message || error.message || error.toString();
+        toast.error(message);
+        console.log(message);
+      }
+    } else {
+      console.log("Please fill in all fields!");
+      toast.error("Please Fill In All Fields", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    }
   };
 
   const onChange = (e) => {
@@ -308,6 +333,9 @@ const ReceiptForm = () => {
         </div>
         <button className="btn" type="submit">
           Submit Receipt
+        </button>
+        <button className="btn btn-cancel" onClick={() => navigate("/")}>
+          Cancel
         </button>
       </form>
     </section>

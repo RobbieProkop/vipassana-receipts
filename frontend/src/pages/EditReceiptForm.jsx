@@ -86,7 +86,7 @@ const ReceiptForm = () => {
             signature,
           })
         ).unwrap();
-        toast.success("Receipt edited Successfully");
+        toast.success("Receipt Edited Successfully");
         setAddress("");
         setReceiptData({
           place: "",
