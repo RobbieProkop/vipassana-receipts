@@ -288,13 +288,16 @@ h1 {
         * {
           margin: 5px 0;
         }
-
-        div {
+        .delete {
+          display: flex;
+          justify-content: flex-end;
+        }
+        .receipt-body {
+          margin-top: -2rem;
+        }
+        .receipt-snippet {
           @include flex-between();
-
-          button {
-            margin-left: 5px;
-          }
+          align-items: end;
         }
         &:hover {
           background: $black;
