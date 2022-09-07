@@ -1,11 +1,21 @@
+import { useNavigate } from "react-router-dom";
+
 const Confirm = () => {
-  const onCancel = () => {};
-  const onDelete = () => {};
+  const navigate = useNavigate();
+  const onCancel = () => {
+    navigate("/");
+  };
+
+  const onDelete = () => {
+    dispatch(deleteReceipt(receipt[0]._id));
+    navigate("/");
+  };
+
   return (
-    <main className="card confirm">
+    <main className="confirm">
       <h1>Are you sure you want to delete?</h1>
       <section className="actions">
-        <button className="cancel" onClick={onCancel}>
+        <button className="onCancel" onClick={onCancel}>
           Cancel
         </button>
         <button className="onDelete" onClick={onDelete}>
