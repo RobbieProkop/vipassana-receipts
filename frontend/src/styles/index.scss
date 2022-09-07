@@ -293,11 +293,12 @@ h1 {
           justify-content: flex-end;
         }
         .receipt-body {
-          margin-top: -2rem;
+          margin-top: -2.5rem;
         }
         .receipt-snippet {
-          @include flex-between();
-          align-items: end;
+          div {
+            @include flex-between();
+          }
         }
         &:hover {
           background: $black;
