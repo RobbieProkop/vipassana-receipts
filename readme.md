@@ -9,21 +9,21 @@ This repository is built using React, SCSS, Axios, Redux, React-Dom, React-Route
 
 ![](https://github.com/RobbieProkop/robbie-prokop_launchpad-react-code-challenge/blob/master/frontend/public/demo-gif.gif) -->
 
-## Home Page
+## Dashboard
 
 <img src="https://github.com/RobbieProkop/vipassana-receipts/blob/master/frontend/public/dashboard.png" />
 
-## Add Post Form
+## Add Receipt Form
 
 <img src="https://github.com/RobbieProkop/vipassana-receipts/blob/master/frontend/public/form.png" />
 
-## Universities Page
+## Receipt Item
 
 <img src="https://github.com/RobbieProkop/vipassana-receipts/blob/master/frontend/public/receipt-item.png" />
 
-## Postal Lookup Page
+## Delete Confirmation
 
-<img src="https://github.com/RobbieProkop/vipassana-receipts/blob/master/frontend/public/delete-confirm.png" />
+<img src="https://github.com/RobbieProkop/vipassana-receipts/blob/master/frontend/public/delete-confirmation.png" />
 
 ## Setup
 
