@@ -135,7 +135,6 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            {/* Increases the receipt number based on the last known number + 1 */}
             <p>ID: {receiptNumber}</p>
           </div>
           <div className="form-group">
@@ -294,14 +293,14 @@ const ReceiptForm = () => {
           {/* Donation Amount */}
           <div className="donation">
             <div className="form-group">
-              <input
-                type="text"
-                name="type"
-                id="type"
-                placeholder="Donation Type (Visa, MC, Cash)"
-                value={type}
-                onChange={onChange}
-              />
+              <select name="type" id="type">
+                <option value="">--Please Select A Donation Type--</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Amex">Amex</option>
+                <option value="Cash">Cash</option>
+                <option value="Cheque">Cheque</option>
+              </select>
             </div>
             <div className="form-group">
               <input
