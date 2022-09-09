@@ -15,8 +15,9 @@ const ReceiptForm = () => {
 
   const [address, setAddress] = useState("");
   // used to increament the receipts number
+
   const [receiptNumber, setReceiptNumber] = useState(
-    receipt[0].receiptNumber + 1
+    receipt.length ? receipt[0].receiptNumber + 1 : 1
   );
 
   //temporary key
@@ -293,7 +294,6 @@ const ReceiptForm = () => {
           {/* Donation Amount */}
           <div className="donation">
             <div className="form-group">
-
               <select name="type" id="type" onChange={onChange}>
                 <option value="">--Please Select Donation Type--</option>
                 <option value="Visa">Visa</option>
@@ -302,7 +302,6 @@ const ReceiptForm = () => {
                 <option value="Cash">Cash</option>
                 <option value="Cheque">Cheque</option>
               </select>
-          
             </div>
             <div className="form-group">
               <input
