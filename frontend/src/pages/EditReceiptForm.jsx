@@ -299,14 +299,14 @@ const ReceiptForm = () => {
           {/* Donation Amount */}
           <div className="donation">
             <div className="form-group">
-              <input
-                type="text"
-                name="type"
-                id="type"
-                placeholder="Donation Type (Visa, MC, Cash)"
-                value={type}
-                onChange={onChange}
-              />
+              <select name="type" id="type">
+                <option value="">--Please Select A Donation Type--</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Amex">Amex</option>
+                <option value="Cash">Cash</option>
+                <option value="Cheque">Cheque</option>
+              </select>
             </div>
             <div className="form-group">
               <input
