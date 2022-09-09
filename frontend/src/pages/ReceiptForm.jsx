@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
 import { toast } from "react-toastify";
@@ -10,8 +10,14 @@ const ReceiptForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // get the last known receipt in the receiptsArr
+  const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
+
   const [address, setAddress] = useState("");
-  const [receiptNumber, setReceiptNumber] = useState(123456789);
+  // used to increament the receipts number
+  const [receiptNumber, setReceiptNumber] = useState(
+    receipt[0].receiptNumber + 1
+  );
 
   //temporary key
   let tempkey = 0;
@@ -93,7 +99,7 @@ const ReceiptForm = () => {
           words: "",
           signature: "",
         });
-        setReceiptNumber(receiptNumber + 1);
+        setReceiptNumber(receipt[0].receiptNumber + 1);
         navigate("/");
       } catch (error) {
         const message =
@@ -129,6 +135,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
+            {/* Increases the receipt number based on the last known number + 1 */}
             <p>ID: {receiptNumber}</p>
           </div>
           <div className="form-group">
