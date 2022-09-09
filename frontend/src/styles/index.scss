@@ -2,13 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 $primaryColor: #81bece;
-$btn: rgb(40, 159, 250);
+$btn: #aec670;
 $btn-edit: green;
 $btn-delete: red;
 $black: #333;
 $white: #fff;
 $grey: rgb(175, 175, 175);
 $hover: rgb(123, 195, 123);
+$red: rgb(190, 14, 14);
 
 //reset
 * {
@@ -43,35 +44,45 @@ body {
     color: $white;
     transform: translate(0.2rem, -0.2rem);
   }
-}
-
-.btn-edit {
-  background: $white;
-  margin-right: 10px;
-  border: 1px solid $white;
-  &:hover {
-    background: $black;
-    border: 1px solid $black;
-    color: $white;
-    transform: translate(0.2rem, -0.2rem);
-  }
-}
-
-.btn-delete {
-  background: $black;
-  color: $white;
-  border: 1px solid $black;
-  &:hover {
+  &-edit {
     background: $white;
+    margin-right: 10px;
     border: 1px solid $white;
-    color: $black;
-    transform: translate(0.2rem, -0.2rem);
+    &:hover {
+      background: $black;
+      border: 1px solid $black;
+      color: $white;
+      transform: translate(0.2rem, -0.2rem);
+    }
   }
-}
 
-.btn-block {
-  width: 100%;
-  margin-bottom: 20px;
+  &-delete {
+    background: $black;
+    color: $white;
+    border: 1px solid $black;
+    &:hover {
+      background: $white;
+      border: 1px solid $white;
+      color: $black;
+      transform: translate(0.2rem, -0.2rem);
+    }
+  }
+
+  &-block {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  &-cancel {
+    background: $grey;
+    border: 1px solid $grey;
+  }
+
+  &-danger {
+    background: $red;
+    color: $white;
+    border: 1px solid $red;
+  }
 }
 
 a {
@@ -288,12 +299,16 @@ h1 {
         * {
           margin: 5px 0;
         }
-
-        div {
-          @include flex-between();
-
-          button {
-            margin-left: 5px;
+        .delete {
+          display: flex;
+          justify-content: flex-end;
+        }
+        .receipt-body {
+          margin-top: -2.5rem;
+        }
+        .receipt-snippet {
+          div {
+            @include flex-between();
           }
         }
         &:hover {
@@ -353,6 +368,20 @@ h1 {
       }
     }
   }
+
+  .confirm {
+    @include flex-center();
+    flex-direction: column;
+    border: 1px solid $white;
+    padding: 1rem 1rem 2rem;
+
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
 }
 
 //Spinner
@@ -380,9 +409,7 @@ h1 {
 
 //footer
 .footer {
-  // background: $grey;
   width: 100%;
-  position: absolute;
   color: $white;
   height: 70px;
   bottom: 0;

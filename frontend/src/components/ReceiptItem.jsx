@@ -1,18 +1,26 @@
-import { useDispatch } from "react-redux";
-import { deleteReceipt } from "../features/receipts/receiptSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ReceiptItem = ({ receipt }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClick = () => {
     navigate(`/${receipt._id}`);
   };
+  const onDelete = () => {
+    navigate(`/${receipt._id}/confirm`);
+  };
 
   return (
-    <div className="receipt-item" onClick={onClick}>
-      <div>
+    <div className="receipt-item">
+      <div className="delete">
+        <div>
+          <button onClick={onDelete} className="btn btn-delete">
+            X
+          </button>
+        </div>
+      </div>
+
+      <div className="receipt-body" onClick={onClick}>
         <div>
           {new Date(receipt.createdAt).toLocaleString("en-GB", {
             year: "numeric",
@@ -20,27 +28,15 @@ const ReceiptItem = ({ receipt }) => {
             day: "numeric",
           })}
         </div>
-        <div>
+        <div className="receipt-snippet">
+          <h2>ID: {receipt.receiptNumber}</h2>
           <div>
-            {/* <Link to={`/edit/${receipt._id}`} className="btn btn-edit">
-              Edit
-            </Link> */}
-            <button
-              //This would work if I had access to the backend. Need the deletePost to return the post.id in order to filter it out.
-              onClick={() => dispatch(deleteReceipt(receipt._id))}
-              className="btn btn-delete"
-            >
-              Delete
-            </button>
+            <h3>
+              Donor: {receipt.firstName} {receipt.lastName}
+            </h3>
+            <h3>Amount: ${receipt.number}</h3>
           </div>
         </div>
-      </div>
-      <h2>ID: {receipt.receiptNumber}</h2>
-      <div>
-        <h3>
-          Donor: {receipt.firstName} {receipt.lastName}
-        </h3>
-        <h3>Amount: ${receipt.number}</h3>
       </div>
     </div>
   );

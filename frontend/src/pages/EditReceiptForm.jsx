@@ -86,7 +86,7 @@ const ReceiptForm = () => {
             signature,
           })
         ).unwrap();
-        toast.success("Receipt edited Successfully");
+        toast.success("Receipt Edited Successfully");
         setAddress("");
         setReceiptData({
           place: "",
@@ -345,6 +345,9 @@ const ReceiptForm = () => {
         </div>
         <button className="btn" type="submit">
           Submit Receipt
+        </button>
+        <button className="btn btn-cancel" onClick={() => navigate("/")}>
+          Cancel
         </button>
       </form>
     </section>
