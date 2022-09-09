@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 $primaryColor: #81bece;
-$btn: rgb(40, 159, 250);
+$btn: #aec670;
 $btn-edit: green;
 $btn-delete: red;
 $black: #333;
@@ -409,9 +409,7 @@ h1 {
 
 //footer
 .footer {
-  // background: $grey;
   width: 100%;
-  position: absolute;
   color: $white;
   height: 70px;
   bottom: 0;
