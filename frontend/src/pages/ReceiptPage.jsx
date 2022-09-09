@@ -57,9 +57,8 @@ const ReceiptPage = () => {
           <h3>Postal Code: {receipt[0].postalCode}</h3>
         </div>
         <div>
-          <h3>
-            Donation: ${receipt[0].number} {receipt[0].type}{" "}
-          </h3>
+          <h3>Donation Type: {receipt[0].type}</h3>
+          <h3>Amount: ${receipt[0].number}</h3>
           <h3>Total Amount Received: {receipt[0].words} </h3>
           <h3>Digital Signature: {receipt[0].signature}</h3>
         </div>

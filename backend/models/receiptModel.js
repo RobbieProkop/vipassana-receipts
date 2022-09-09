@@ -56,6 +56,10 @@ const receiptSchema = mongoose.Schema(
       required: [true, "Please add a postal code"],
     },
     //donation amount
+    type: {
+      type: String,
+      required: [true, "Please add a donation type"],
+    },
     number: {
       type: Number,
       required: [true, "Please add a donation amount"],
