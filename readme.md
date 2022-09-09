@@ -2,7 +2,7 @@
 
 This is a single-page react app created for the Alberta Vipassana Foundatoin. This project was created 100% by Robbie Prokop.
 
-This repository is built using React, SCSS, Axios, Redux, React-Dom, React-Router-Dom, and React-Toastify. I tried to make the code fairly modularized and use current industry "best practices" as I understand them. A big stretch goal of mine is to eventually get 80% + test coverage.
+This repository is built using React, SCSS, Axios, Redux, React-Dom, React-Router-Dom, and React-Toastify in the front end. For the backend I used NodeJS, ExpressJS, MOngoDB, and mongoose. I tried to make the code fairly modularized and use current industry "best practices" as I understand them. A big stretch goal of mine is to eventually get 80% + test coverage.
 
 <!-- add demo gif here  -->
 <!-- ## Demo
