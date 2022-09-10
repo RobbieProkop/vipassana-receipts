@@ -14,8 +14,8 @@ const ReceiptForm = () => {
   const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
 
   const [address, setAddress] = useState("");
-  // used to increament the receipts number
 
+  // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
     receipt.length ? receipt[0].receiptNumber + 1 : 1
   );
@@ -60,8 +60,6 @@ const ReceiptForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("receiptData Form", receiptData);
-    console.log("initial data", initialReceipt);
     const canSave = [
       place,
       firstName,
@@ -208,8 +206,8 @@ const ReceiptForm = () => {
                           : null;
                         return (
                           <div
-                            //change this key to receipt num
-                            key={tempkey++}
+                            //For some reason teh google places api is causing an error with this
+                            key={receiptNumber}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}
