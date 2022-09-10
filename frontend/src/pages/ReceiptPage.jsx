@@ -70,12 +70,10 @@ const ReceiptPage = () => {
         <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
           Edit
         </Link>
-        <Link
-          to={`/edit/${receipt[0]._id}`}
-          className="btn btn-delete btn-block"
-        >
-          Email PDF
-        </Link>
+        {/*  need to figure out where this will go. should be downloadable and emailable */}
+        <a href="" className="btn btn-delete btn-block" target="_blank">
+          Download PDF
+        </a>
       </div>
     </div>
   );
