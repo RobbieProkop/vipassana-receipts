@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteReceipt } from "../features/receipts/receiptSlice";
+import jsPDF from "jspdf";
 
 const ReceiptPage = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,23 @@ const ReceiptPage = () => {
     return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
   });
   console.log("receipt", receipt[0]);
+
+  const receiptDate = new Date(receipt[0].createdAt).toLocaleString("en-GB", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+
+  const generatePDF = () => {
+    var doc = new jsPDF("p", "pt");
+
+    doc.text(20, 20, "This is the first title.");
+    doc.addFont("helvetica", "normal");
+    doc.text(20, 60, "This is the second title.");
+    doc.text(20, 100, "This is the thrid title.");
+
+    doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
+  };
 
   useEffect(() => {}, [dispatch, receipt]);
 
@@ -42,12 +59,12 @@ const ReceiptPage = () => {
       <div className="donor">
         <div>
           <h3>
-            Date:{" "}
-            {new Date(receipt[0].createdAt).toLocaleString("en-GB", {
+            Date: {receiptDate}
+            {/* {new Date(receipt[0].createdAt).toLocaleString("en-GB", {
               year: "numeric",
               month: "numeric",
               day: "numeric",
-            })}
+            })} */}
           </h3>
           <h3>Donation Location: {receipt[0].place}</h3>
           <h3>
@@ -71,7 +88,11 @@ const ReceiptPage = () => {
           Edit
         </Link>
         {/*  need to figure out where this will go. should be downloadable and emailable */}
-        <a href="" className="btn btn-delete btn-block" target="_blank">
+        <a
+          className="btn btn-delete btn-block"
+          target="_blank"
+          onClick={generatePDF}
+        >
           Download PDF
         </a>
       </div>
