@@ -32,9 +32,15 @@ const ReceiptPage = () => {
 
     var doc = new jsPDF("l", "px", "a4");
 
-    doc.text(270, 20, `Date: ${receiptDate}`);
-    doc.text(20, 60, "This is the second title.");
-    doc.text(20, 100, "This is the thrid title.");
+    doc.text(235, 20, "Alberta Vipassana Foundation");
+
+    doc.text(200, 35, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
+
+    doc.text(200, 50, "Charitable Reg. #85502 1739 RR 0001");
+    doc.text(200, 65, "Canadian Revenue Agency: www.cra-arc.gc.ca");
+    doc.text(20, 85, `Date: ${receiptDate}`);
+    // doc.text(20, 60, "This is the second title.");
+    // doc.text(20, 100, "This is the thrid title.");
 
     // doc.fromHTML(document.getElementById("receipt"), {
     //   callback: function (doc) {
