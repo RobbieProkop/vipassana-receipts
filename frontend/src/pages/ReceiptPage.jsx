@@ -32,23 +32,33 @@ const ReceiptPage = () => {
 
     var doc = new jsPDF("l", "px", "a4");
 
-    doc.text(20, 30, `N0. ${receipt[0].receiptNumber}`);
-    doc.text(235, 30, "Alberta Vipassana Foundation");
+    // rectangle border
+    doc.rect(24, 24, 585, 350);
+    doc.setFontSize(18);
+    doc.text(40, 30, `N0. ${receipt[0].receiptNumber}`);
 
+    doc.setFontSize(28);
+    doc.text(190, 30, "Alberta Vipassana Foundation");
+
+    doc.setFontSize(16);
     doc.text(200, 50, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
 
     doc.text(200, 65, "Charitable Reg. #85502 1739 RR 0001");
     doc.text(200, 80, "Canadian Revenue Agency: www.cra-arc.gc.ca");
-    doc.text(20, 120, `Date: ${receiptDate}`);
-    doc.text(20, 140, `Donation Location: ${receipt[0].place}`);
-    doc.text(20, 160, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
-    doc.text(20, 180, `Address: ${receipt[0].address},`);
-    doc.text(20, 200, `Postal Code: ${receipt[0].postalCode}`);
-    doc.text(20, 220, `Donation Type: ${receipt[0].type}`);
-    doc.text(20, 240, `Amount: $${receipt[0].number}`);
-    doc.text(20, 260, `Total Amount Received: ${receipt[0].words} `);
-    doc.text(20, 280, `Digital Signature: ${receipt[0].signature}`);
-    doc.text(20, 300, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
+
+    doc.setFontSize(18);
+    doc.text(100, 120, `Date: ${receiptDate}`);
+    doc.text(100, 140, `Donation Location: ${receipt[0].place}`);
+    doc.text(100, 160, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
+    doc.text(100, 180, `Address: ${receipt[0].address},`);
+    doc.text(100, 200, `Postal Code: ${receipt[0].postalCode}`);
+    doc.text(340, 120, `Donation Type: ${receipt[0].type}`);
+    doc.text(340, 140, `Amount: $${receipt[0].number}`);
+    doc.text(340, 160, `Total Amount Received: ${receipt[0].words} `);
+    doc.text(340, 200, `Digital Signature: ${receipt[0].signature}`);
+
+    doc.setFontSize(16);
+    doc.text(180, 250, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
 
     // doc.fromHTML(document.getElementById("receipt"), {
     //   callback: function (doc) {
@@ -96,7 +106,7 @@ const ReceiptPage = () => {
               day: "numeric",
             })} */}
             </h3>
-            <h3>Donation Location: {receipt[0].place}</h3>
+            <h3>Location: {receipt[0].place}</h3>
             <h3>
               Donor: {receipt[0].firstName} {receipt[0].lastName}
             </h3>
