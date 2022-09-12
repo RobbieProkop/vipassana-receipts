@@ -30,19 +30,19 @@ const ReceiptPage = () => {
     // });
     // Bring the page zoom level back to 100%
 
-    var doc = new jsPDF("l", "px");
+    var doc = new jsPDF("l", "px", "a4");
 
-    // doc.text(20, 20, "This is the first title.");
-    // doc.text(20, 60, "This is the second title.");
-    // doc.text(20, 100, "This is the thrid title.");
+    doc.text(270, 20, `Date: ${receiptDate}`);
+    doc.text(20, 60, "This is the second title.");
+    doc.text(20, 100, "This is the thrid title.");
 
-    doc.html(document.getElementById("receipt"), {
-      callback: function (doc) {
-        doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
-      },
-    });
+    // doc.fromHTML(document.getElementById("receipt"), {
+    //   callback: function (doc) {
+    //     doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
+    //   },
+    // });
 
-    // doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
+    doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
   };
 
   useEffect(() => {}, [dispatch, receipt]);

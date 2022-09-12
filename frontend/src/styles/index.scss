@@ -336,9 +336,7 @@ h1 {
       .receipt-head {
         width: 100%;
         @include flex-between();
-        .btn {
-          margin-left: 3.5rem;
-        }
+
         h1 {
           padding: 0;
         }
