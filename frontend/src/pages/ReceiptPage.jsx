@@ -35,30 +35,39 @@ const ReceiptPage = () => {
     // rectangle border
     doc.rect(24, 24, 585, 350);
     doc.setFontSize(18);
-    doc.text(40, 30, `N0. ${receipt[0].receiptNumber}`);
+    doc.text(40, 60, `N0. ${receipt[0].receiptNumber}`);
 
     doc.setFontSize(28);
-    doc.text(190, 30, "Alberta Vipassana Foundation");
+    doc.text(190, 60, "Alberta Vipassana Foundation");
 
     doc.setFontSize(16);
-    doc.text(200, 50, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
+    doc.text(200, 80, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
 
-    doc.text(200, 65, "Charitable Reg. #85502 1739 RR 0001");
-    doc.text(200, 80, "Canadian Revenue Agency: www.cra-arc.gc.ca");
+    doc.text(200, 95, "Charitable Reg. #85502 1739 RR 0001");
+    doc.text(200, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
 
     doc.setFontSize(18);
-    doc.text(100, 120, `Date: ${receiptDate}`);
-    doc.text(100, 140, `Donation Location: ${receipt[0].place}`);
-    doc.text(100, 160, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
-    doc.text(100, 180, `Address: ${receipt[0].address},`);
-    doc.text(100, 200, `Postal Code: ${receipt[0].postalCode}`);
-    doc.text(340, 120, `Donation Type: ${receipt[0].type}`);
-    doc.text(340, 140, `Amount: $${receipt[0].number}`);
-    doc.text(340, 160, `Total Amount Received: ${receipt[0].words} `);
-    doc.text(340, 200, `Digital Signature: ${receipt[0].signature}`);
+    doc.text(90, 160, `Date: ${receiptDate}`);
+    doc.text(90, 180, `Donation Location: ${receipt[0].place}`);
+    doc.text(90, 200, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
+    doc.text(90, 220, `Address: ${receipt[0].address},`);
+    doc.text(90, 240, `Postal Code: ${receipt[0].postalCode}`);
+    doc.text(340, 160, `Donation Type: ${receipt[0].type}`);
+    doc.text(340, 180, `Amount: $${receipt[0].number}`);
+    doc.text(340, 200, `${receipt[0].words} `);
+    doc.setLineWidth(0.8);
+    doc.line(340, 205, 500, 205);
+
+    doc.setFontSize(12);
+    doc.text(340, 220, `Total Amount Received ${receipt[0].words} `);
+    doc.setFontSize(20);
+    doc.text(340, 240, `${receipt[0].signature} `);
+    doc.line(340, 245, 500, 245);
+    doc.setFontSize(12);
+    doc.text(340, 260, `Digital Signature`);
 
     doc.setFontSize(16);
-    doc.text(180, 250, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
+    doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
 
     // doc.fromHTML(document.getElementById("receipt"), {
     //   callback: function (doc) {
