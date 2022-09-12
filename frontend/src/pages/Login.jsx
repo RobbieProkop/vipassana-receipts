@@ -97,7 +97,7 @@ const Login = () => {
           </div>
           <div className="form-group">
             <button className="btn btn-block" type="submit">
-              Hi there
+              Login
             </button>
           </div>
         </form>
