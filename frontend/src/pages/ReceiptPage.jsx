@@ -26,6 +26,14 @@ const ReceiptPage = () => {
   const province = addressArr[2];
   const country = addressArr[3];
 
+  //used to put the amount on different lines of the pdf
+  const amount = receipt[0].words.split(" ");
+
+  const amount1 =
+    amount.length > 2 ? [...amount].splice(0, 2).join(" ") : amount.join(" ");
+
+  const amount2 = amount.length > 2 ? [...amount].splice(2).join(" ") : "";
+
   //jspdf onclick function
   const generatePDF = () => {
     var doc = new jsPDF("l", "px", "a4");
@@ -42,19 +50,19 @@ const ReceiptPage = () => {
     doc.text(190, 60, "Alberta Vipassana Foundation");
 
     doc.setFontSize(16);
-    doc.text(200, 80, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
+    doc.text(195, 80, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
 
-    doc.text(200, 95, "Charitable Reg. #85502 1739 RR 0001");
-    doc.text(200, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
+    doc.text(195, 95, "Charitable Reg. #85502 1739 RR 0001");
+    doc.text(195, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
 
     //donation info
     doc.setFontSize(18);
     doc.text(90, 160, `Date: ${receiptDate}`);
-    doc.text(90, 180, `Donation Location: ${receipt[0].place}`);
+    doc.text(90, 180, `Location: ${receipt[0].place}`);
     doc.text(90, 200, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
     doc.text(90, 220, `${addy},`);
     doc.setLineWidth(0.7);
-    doc.line(90, 225, 300, 225);
+    doc.line(90, 200, 300, 200);
     doc.text(85, 240, `${city}, ${province}, ${country}`);
     doc.line(90, 245, 300, 245);
     doc.text(90, 260, `${receipt[0].postalCode}`);
@@ -65,13 +73,15 @@ const ReceiptPage = () => {
 
     doc.setFontSize(18);
     doc.text(410, 160, `Donation Type: ${receipt[0].type}`);
-    doc.text(410, 180, `Amount: $${receipt[0].number}`);
-    doc.text(410, 200, `${receipt[0].words} `);
-
+    doc.text(410, 180, `Amount: $${receipt[0].number} `);
+    doc.text(410, 200, `${amount1} `);
     doc.line(410, 205, 540, 205);
 
+    doc.text(410, 220, `${amount2} `);
+    doc.line(410, 225, 540, 225);
+
     doc.setFontSize(12);
-    doc.text(410, 220, `Total Amount Received`);
+    doc.text(410, 240, `Total Amount Received`);
     doc.setFontSize(20);
     doc.text(410, 260, `${receipt[0].signature} `);
     doc.line(410, 265, 540, 265);
@@ -136,7 +146,7 @@ const ReceiptPage = () => {
           </div>
           <div>
             <h3>Donation Type: {receipt[0].type}</h3>
-            <h3>Amount: ${receipt[0].number}</h3>
+            <h3>Amount: ${amount}</h3>
             <h3>Total Amount Received: {receipt[0].words} </h3>
             <h3>Digital Signature: {receipt[0].signature}</h3>
           </div>
