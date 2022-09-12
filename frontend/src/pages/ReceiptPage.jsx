@@ -62,13 +62,13 @@ const ReceiptPage = () => {
     doc.text(90, 200, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
     doc.text(90, 220, `${addy},`);
     doc.setLineWidth(0.7);
-    doc.line(90, 200, 300, 200);
+    doc.line(90, 225, 280, 225);
     doc.text(85, 240, `${city}, ${province}, ${country}`);
-    doc.line(90, 245, 300, 245);
+    doc.line(90, 245, 280, 245);
     doc.text(90, 260, `${receipt[0].postalCode}`);
     doc.line(90, 265, 140, 265);
 
-    doc.setFontSize(12);
+    doc.setFontSize(14);
     doc.text(90, 280, `Address`);
 
     doc.setFontSize(18);
@@ -83,10 +83,10 @@ const ReceiptPage = () => {
     doc.setFontSize(12);
     doc.text(410, 240, `Total Amount Received`);
     doc.setFontSize(20);
-    doc.text(410, 260, `${receipt[0].signature} `);
-    doc.line(410, 265, 540, 265);
+    doc.text(410, 280, `${receipt[0].signature} `);
+    doc.line(410, 285, 540, 285);
     doc.setFontSize(12);
-    doc.text(410, 280, `Digital Signature`);
+    doc.text(410, 300, `Digital Signature`);
 
     doc.setFontSize(16);
     doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
@@ -146,7 +146,7 @@ const ReceiptPage = () => {
           </div>
           <div>
             <h3>Donation Type: {receipt[0].type}</h3>
-            <h3>Amount: ${amount}</h3>
+            <h3>Amount: ${receipt[0].number}</h3>
             <h3>Total Amount Received: {receipt[0].words} </h3>
             <h3>Digital Signature: {receipt[0].signature}</h3>
           </div>
