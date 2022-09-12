@@ -11,7 +11,6 @@ const ReceiptPage = () => {
   const receipt = useSelector((state) => {
     return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
   });
-  console.log("receipt", receipt[0]);
 
   const receiptDate = new Date(receipt[0].createdAt).toLocaleString("en-GB", {
     year: "numeric",

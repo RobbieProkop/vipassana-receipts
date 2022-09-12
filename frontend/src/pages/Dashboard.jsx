@@ -15,10 +15,6 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    // if (isError) {
-    //   console.log(message);
-    // }
-
     if (!user) {
       navigate("/login");
     }
