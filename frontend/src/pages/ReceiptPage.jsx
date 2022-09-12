@@ -19,24 +19,25 @@ const ReceiptPage = () => {
     day: "numeric",
   });
 
-  const generatePDF = () => {
-    // html2canvas($("#canvas"), {
-    //   onrendered: function (canvas) {
-    //     var imgData = canvas.toDataURL("image/png");
-    //     var doc = new jsPDF("l", "px");
-    //     doc.addImage(imgData, "PNG", 10, 10);
-    //     doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
-    //   },
-    // });
-    // Bring the page zoom level back to 100%
+  //variables for pdf print
+  const addressArr = receipt[0].address.split(",");
+  const addy = addressArr[0];
+  const city = addressArr[1];
+  const province = addressArr[2];
+  const country = addressArr[3];
 
+  //jspdf onclick function
+  const generatePDF = () => {
     var doc = new jsPDF("l", "px", "a4");
 
     // rectangle border
     doc.rect(24, 24, 585, 350);
+
+    //pdf content
     doc.setFontSize(18);
     doc.text(40, 60, `N0. ${receipt[0].receiptNumber}`);
 
+    //header
     doc.setFontSize(28);
     doc.text(190, 60, "Alberta Vipassana Foundation");
 
@@ -46,25 +47,36 @@ const ReceiptPage = () => {
     doc.text(200, 95, "Charitable Reg. #85502 1739 RR 0001");
     doc.text(200, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
 
+    //donation info
     doc.setFontSize(18);
     doc.text(90, 160, `Date: ${receiptDate}`);
     doc.text(90, 180, `Donation Location: ${receipt[0].place}`);
     doc.text(90, 200, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
-    doc.text(90, 220, `Address: ${receipt[0].address},`);
-    doc.text(90, 240, `Postal Code: ${receipt[0].postalCode}`);
-    doc.text(340, 160, `Donation Type: ${receipt[0].type}`);
-    doc.text(340, 180, `Amount: $${receipt[0].number}`);
-    doc.text(340, 200, `${receipt[0].words} `);
-    doc.setLineWidth(0.8);
-    doc.line(340, 205, 500, 205);
+    doc.text(90, 220, `${addy},`);
+    doc.setLineWidth(0.7);
+    doc.line(90, 225, 300, 225);
+    doc.text(85, 240, `${city}, ${province}, ${country}`);
+    doc.line(90, 245, 300, 245);
+    doc.text(90, 260, `${receipt[0].postalCode}`);
+    doc.line(90, 265, 140, 265);
 
     doc.setFontSize(12);
-    doc.text(340, 220, `Total Amount Received ${receipt[0].words} `);
-    doc.setFontSize(20);
-    doc.text(340, 240, `${receipt[0].signature} `);
-    doc.line(340, 245, 500, 245);
+    doc.text(90, 280, `Address`);
+
+    doc.setFontSize(18);
+    doc.text(410, 160, `Donation Type: ${receipt[0].type}`);
+    doc.text(410, 180, `Amount: $${receipt[0].number}`);
+    doc.text(410, 200, `${receipt[0].words} `);
+
+    doc.line(410, 205, 540, 205);
+
     doc.setFontSize(12);
-    doc.text(340, 260, `Digital Signature`);
+    doc.text(410, 220, `Total Amount Received`);
+    doc.setFontSize(20);
+    doc.text(410, 260, `${receipt[0].signature} `);
+    doc.line(410, 265, 540, 265);
+    doc.setFontSize(12);
+    doc.text(410, 280, `Digital Signature`);
 
     doc.setFontSize(16);
     doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
