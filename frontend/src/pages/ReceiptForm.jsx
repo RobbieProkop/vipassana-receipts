@@ -27,6 +27,7 @@ const ReceiptForm = () => {
     place: "",
     firstName: "",
     lastName: "",
+    email: "",
     // houseNumber: "",
     // street: "",
     // city: "",
@@ -44,6 +45,7 @@ const ReceiptForm = () => {
     place,
     firstName,
     lastName,
+    email,
     // houseNumber,
     // street,
     // city,
@@ -64,6 +66,7 @@ const ReceiptForm = () => {
       place,
       firstName,
       lastName,
+      email,
       postalCode,
       type,
       number,
@@ -78,6 +81,7 @@ const ReceiptForm = () => {
             place,
             firstName,
             lastName,
+            email,
             address,
             postalCode,
             type,
@@ -92,6 +96,7 @@ const ReceiptForm = () => {
           place: "",
           firstName: "",
           lastName: "",
+          email: "",
           postalCode: "",
           type: "",
           number: 0,
@@ -174,6 +179,16 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={onChange}
+            />
           </div>
 
           {/* Address */}

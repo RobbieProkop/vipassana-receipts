@@ -59,18 +59,15 @@ const ReceiptPage = () => {
     doc.text(90, 160, `Date: ${receiptDate}`);
     doc.text(90, 180, `Location: ${receipt[0].place}`);
     doc.text(90, 200, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
-    doc.text(90, 220, `${addy},`);
+    doc.text(90, 220, `Email: ${receipt[0].email}`);
+    doc.text(90, 240, `${addy},`);
     doc.setLineWidth(0.7);
-    doc.line(90, 225, 280, 225);
-    doc.text(85, 240, `${city}, ${province}, ${country}`);
     doc.line(90, 245, 280, 245);
-    doc.text(90, 260, `${receipt[0].postalCode}`);
-    doc.line(90, 265, 140, 265);
+    doc.text(85, 260, `${city}, ${province}, ${country}`);
+    doc.line(90, 265, 280, 265);
+    doc.text(90, 280, `${receipt[0].postalCode}`);
+    doc.line(90, 285, 140, 285);
 
-    doc.setFontSize(14);
-    doc.text(90, 280, `Address`);
-
-    doc.setFontSize(18);
     doc.text(410, 160, `Donation Type: ${receipt[0].type}`);
     doc.text(410, 180, `Amount: $${receipt[0].number} `);
     doc.text(410, 200, `${amount1} `);
