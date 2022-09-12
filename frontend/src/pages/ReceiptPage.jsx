@@ -158,9 +158,9 @@ const ReceiptPage = () => {
         <Link to={`/edit/${receipt[0]._id}`} className="btn btn-edit btn-block">
           Edit
         </Link>
-        {/*  need to figure out where this will go. should be downloadable and emailable */}
+
         <a
-          className="btn btn-delete btn-block"
+          className="btn btn-down btn-block"
           target="_blank"
           onClick={generatePDF}
         >
