@@ -20,8 +20,8 @@ const ReceiptForm = () => {
     receipt.length ? receipt[0].receiptNumber + 1 : 1
   );
 
-  //temporary key
-  let tempkey = 0;
+  //temporary key for google places input
+  let tempkey = Math.round(Math.random() * 1000000000000000);
 
   const [receiptData, setReceiptData] = useState({
     place: "",
@@ -222,7 +222,7 @@ const ReceiptForm = () => {
                         return (
                           <div
                             //For some reason teh google places api is causing an error with this
-                            key={receiptNumber}
+                            key={tempkey + 1}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}
