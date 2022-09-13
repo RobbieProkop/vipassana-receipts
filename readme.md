@@ -1,3 +1,5 @@
+<h1>APP STILL IN PROGRESS!</h1>
+
 <h1>Alberta Vipassana Foundation tax receipt app</h1>
 
 This is a single-page react app created for the Alberta Vipassana Foundatoin. This project was created 100% by Robbie Prokop.

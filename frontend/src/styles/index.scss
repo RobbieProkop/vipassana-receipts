@@ -49,9 +49,9 @@ body {
     margin-right: 10px;
     border: 1px solid $white;
     &:hover {
-      background: $black;
-      border: 1px solid $black;
-      color: $white;
+      background: $btn;
+      border: 1px solid $btn;
+      color: $black;
       transform: translate(0.2rem, -0.2rem);
     }
   }
@@ -61,8 +61,19 @@ body {
     color: $white;
     border: 1px solid $black;
     &:hover {
-      background: $white;
-      border: 1px solid $white;
+      background: $red;
+      border: 1px solid $red;
+      color: $black;
+      transform: translate(0.2rem, -0.2rem);
+    }
+  }
+  &-down {
+    background: $black;
+    color: $white;
+    border: 1px solid $black;
+    &:hover {
+      background: $btn;
+      border: 1px solid $btn;
       color: $black;
       transform: translate(0.2rem, -0.2rem);
     }
@@ -336,9 +347,7 @@ h1 {
       .receipt-head {
         width: 100%;
         @include flex-between();
-        .btn {
-          margin-left: 3.5rem;
-        }
+
         h1 {
           padding: 0;
         }
