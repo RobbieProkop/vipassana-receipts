@@ -46,7 +46,7 @@ const Dashboard = () => {
         {/* THIS IS NOT DOING A GET REQUEST BY POST ID, IT IS FILTERING THE POSTS INSTEAD. MAY CHANGE LATER */}
         <div className="search">
           <div className="column">
-            <label htmlFor="postSearch">Search by User</label>
+            <label htmlFor="postSearch">Search by Month</label>
             <input
               type="text"
               name="user"
