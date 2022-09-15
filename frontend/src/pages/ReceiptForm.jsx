@@ -17,11 +17,8 @@ const ReceiptForm = () => {
 
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
-    receipt.length ? receipt[0].receiptNumber + 1 : 1
+    receipt.length ? receipt[0].receiptNumber + 1 : 198765432
   );
-
-  //temporary key
-  let tempkey = 0;
 
   const [receiptData, setReceiptData] = useState({
     place: "",
@@ -215,14 +212,14 @@ const ReceiptForm = () => {
                     <div>
                       {loading && <p>Loading...</p>}
 
-                      {suggestions.map((suggestion) => {
+                      {suggestions.map((suggestion, index) => {
                         const className = suggestion.active
                           ? "select-active"
                           : null;
                         return (
                           <div
                             //For some reason teh google places api is causing an error with this
-                            key={receiptNumber}
+                            key={index}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}
