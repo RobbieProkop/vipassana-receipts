@@ -15,8 +15,8 @@ const Dashboard = () => {
   );
 
   //useStates
-  const [searchId, setSearchId] = useState("");
-  const [userId, setUserId] = useState("");
+  const [searchId, setSearchMonth] = useState("");
+  const [donor, setDonor] = useState("");
 
   useEffect(() => {
     if (!user) {
@@ -46,28 +46,28 @@ const Dashboard = () => {
         {/* THIS IS NOT DOING A GET REQUEST BY POST ID, IT IS FILTERING THE POSTS INSTEAD. MAY CHANGE LATER */}
         <div className="search">
           <div className="column">
-            <label htmlFor="postSearch">Search by Month</label>
+            <label htmlFor="postSearch">Search by Donor</label>
             <input
               type="text"
               name="user"
               id="search-user"
-              value={userId}
-              placeholder="User:"
-              onChange={(e) => setUserId(e.target.value)}
+              value={donor}
+              placeholder="Donor:"
+              onChange={(e) => setDonor(e.target.value)}
               disabled={searchId}
             />
           </div>
 
           <div className="column">
-            <label htmlFor="postSearch">Search by ID</label>
+            <label htmlFor="postSearch">Search by Month</label>
             <input
               type="text"
               name="searchId"
               id="search-postId"
               value={searchId}
-              placeholder="ID:"
-              onChange={(e) => setSearchId(e.target.value)}
-              disabled={userId}
+              placeholder="Month:"
+              onChange={(e) => setSearchMonth(e.target.value)}
+              disabled={donor}
             />
           </div>
         </div>
