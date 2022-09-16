@@ -108,6 +108,16 @@ const ReceiptForm = () => {
         console.log(message);
       }
     } else {
+      console.log("place", place);
+      console.log("firstName", firstName);
+      console.log("lastName", lastName);
+      console.log("email", email);
+      console.log("postalCode", postalCode);
+      console.log("type", type);
+      console.log("number", number);
+      console.log("words", words);
+      console.log("signature", signature);
+      console.log("address", address);
       console.log("Please fill in all fields!");
       toast.error("Please Fill In All Fields", {
         position: toast.POSITION.TOP_LEFT,

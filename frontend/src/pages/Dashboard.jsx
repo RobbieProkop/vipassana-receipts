@@ -21,19 +21,14 @@ const Dashboard = () => {
   //selecting the month
   const onChange = (e) => {
     setSearchMonth(e.target.value);
-    console.log("YUppie");
   };
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      return navigate("/login");
     }
 
     dispatch(getAll());
-
-    // return () => {
-    //   dispatch(reset());
-    // };
   }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
