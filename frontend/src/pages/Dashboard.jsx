@@ -91,6 +91,12 @@ const Dashboard = () => {
                   return receipt;
                 }
               })
+              //newest receipts will show first
+              .sort((a, b) => {
+                if (a.createdAt < b.createdAt) return 1;
+                if (a.createdAt > b.createdAt) return -1;
+                return 0;
+              })
 
               .map((receipt) => (
                 <ReceiptItem receipt={receipt} key={receipt._id} />
