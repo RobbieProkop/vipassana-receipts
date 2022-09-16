@@ -198,6 +198,18 @@ h1 {
       .column {
         display: flex;
         flex-direction: column;
+
+        label {
+          font-size: 1.5rem;
+        }
+        input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #e6e6e6;
+          border-radius: 5px;
+          font-family: inherit;
+          outline: none;
+        }
       }
     }
   }
