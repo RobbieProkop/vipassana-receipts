@@ -118,8 +118,8 @@ const Dashboard = () => {
                 return 0;
               })
 
-              .map((receipt) => (
-                <ReceiptItem receipt={receipt} key={receipt._id} />
+              .map((receipt, index) => (
+                <ReceiptItem receipt={receipt} key={index} />
               ))}
           </div>
         ) : (
