@@ -59,7 +59,7 @@ const Dashboard = () => {
           </div>
 
           <div className="column">
-            <label htmlFor="postSearch">Search by Month</label>
+            {/* <label htmlFor="postSearch">Search by Month</label>
             <input
               type="text"
               name="searchId"
@@ -68,7 +68,13 @@ const Dashboard = () => {
               placeholder="Month:"
               onChange={(e) => setSearchMonth(e.target.value)}
               disabled={donor}
-            />
+            /> */}
+            <label htmlFor="postSearch">Search by Month</label>
+            <select name="month">
+              <option value="">Sort by Month</option>
+              <option value="01 - January">01 - January</option>
+              <option value="02 - February">02 - February</option>
+            </select>
           </div>
         </div>
       </section>
