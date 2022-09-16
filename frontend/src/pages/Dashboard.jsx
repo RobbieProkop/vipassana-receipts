@@ -18,6 +18,12 @@ const Dashboard = () => {
   const [searchMonth, setSearchMonth] = useState("");
   const [donor, setDonor] = useState("");
 
+  //selecting the month
+  const onChange = (e) => {
+    setSearchMonth(e.target.value);
+    console.log("YUppie");
+  };
+
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -42,8 +48,6 @@ const Dashboard = () => {
           {" "}
           <button className="btn">Add A Receipt</button>
         </Link>
-
-        {/* THIS IS NOT DOING A GET REQUEST BY POST ID, IT IS FILTERING THE POSTS INSTEAD. MAY CHANGE LATER */}
         <div className="search">
           <div className="column">
             <label htmlFor="postSearch">Search by Donor</label>
@@ -59,21 +63,23 @@ const Dashboard = () => {
           </div>
 
           <div className="column">
-            {/* <label htmlFor="postSearch">Search by Month</label>
-            <input
-              type="text"
-              name="searchId"
-              id="search-postId"
-              value={searchMonth}
-              placeholder="Month:"
-              onChange={(e) => setSearchMonth(e.target.value)}
-              disabled={donor}
-            /> */}
             <label htmlFor="postSearch">Search by Month</label>
-            <select name="month">
-              <option value="">Sort by Month</option>
-              <option value="01 - January">01 - January</option>
-              <option value="02 - February">02 - February</option>
+            <select name="month" onChange={onChange} disabled={donor}>
+              <option value="" defaultValue>
+                Sort by Month
+              </option>
+              <option value="01">01 - January</option>
+              <option value="02">02 - February</option>
+              <option value="03">03 - March</option>
+              <option value="04">04 - April</option>
+              <option value="05">05 - May</option>
+              <option value="06">06 - June</option>
+              <option value="07">07 - July</option>
+              <option value="08">08 - August</option>
+              <option value="09">09 - September</option>
+              <option value="10">10 - October</option>
+              <option value="11">11 - November</option>
+              <option value="12">12 - December</option>
             </select>
           </div>
         </div>
@@ -84,16 +90,24 @@ const Dashboard = () => {
             {receiptsArr
               .filter((receipt) => {
                 const month = receipt.createdAt.split("-")[1];
+                //returns all receipts
                 if (!searchMonth && !donor) {
                   return receipt;
                 } else if (
-                  receipt.firstName === donor ||
-                  receipt.lastName === donor ||
-                  receipt.firstName + receipt.lastName === donor
+                  //returns Donor Names that match
+                  receipt.firstName
+                    .toLowerCase()
+                    .includes(donor.toLowerCase()) ||
+                  receipt.lastName
+                    .toLowerCase()
+                    .includes(donor.toLowerCase()) ||
+                  (receipt.firstName + " " + receipt.lastName)
+                    .toLowerCase()
+                    .includes(donor.toLowerCase())
                 ) {
                   return receipt;
                 } else if (month === searchMonth) {
-                  // this needs to be converted to month names
+                  //returns donation month matches
                   return receipt;
                 }
               })
