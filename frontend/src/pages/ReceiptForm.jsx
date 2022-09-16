@@ -36,7 +36,6 @@ const ReceiptForm = () => {
     words: "",
     signature: "",
   });
-  const initialReceipt = { ...receiptData };
 
   const {
     place,
@@ -218,7 +217,6 @@ const ReceiptForm = () => {
                           : null;
                         return (
                           <div
-                            //For some reason teh google places api is causing an error with this
                             key={index}
                             {...getSuggestionItemProps(suggestion, {
                               className,

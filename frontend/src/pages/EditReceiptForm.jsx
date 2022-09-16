@@ -222,14 +222,14 @@ const ReceiptForm = () => {
                     <div>
                       {loading && <p>Loading...</p>}
 
-                      {suggestions.map((suggestion) => {
+                      {suggestions.map((suggestion, index) => {
                         const className = suggestion.active
                           ? "select-active"
                           : null;
                         return (
                           <div
                             //change this key to receipt num
-                            key={id}
+                            key={index}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                             })}
