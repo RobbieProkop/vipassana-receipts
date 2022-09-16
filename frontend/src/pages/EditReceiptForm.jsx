@@ -28,10 +28,6 @@ const ReceiptForm = () => {
     if (!receiptsArr) {
       navigate("/");
     }
-
-    // return () => {
-    //   dispatch(reset());
-    // };
   }, [user, navigate, isError, message, dispatch]);
 
   let receipt = receiptsArr.find((receipt) => receipt._id === id);
