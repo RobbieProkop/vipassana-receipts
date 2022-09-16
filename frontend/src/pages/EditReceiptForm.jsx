@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import PlacesAutocomplete from "react-places-autocomplete";
 import { toast } from "react-toastify";
 import { editReceipt } from "../features/receipts/receiptSlice";
+import Spinner from "../components/Spinner";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
@@ -70,10 +71,11 @@ const ReceiptForm = () => {
       email,
       postalCode,
       type,
-      number,
+      number.toString(),
       words,
       signature,
     ].every((el) => el.length >= 1);
+    console.log("canSave", canSave);
     if (canSave) {
       try {
         dispatch(
@@ -83,6 +85,7 @@ const ReceiptForm = () => {
             firstName,
             lastName,
             email,
+            address,
             postalCode,
             type,
             number,
@@ -111,6 +114,17 @@ const ReceiptForm = () => {
         console.log(message);
       }
     } else {
+      console.log(canSave);
+      console.log("place", place.length);
+      console.log("firstName", firstName.length);
+      console.log("lastName", lastName.length);
+      console.log("email", email.length);
+      console.log("postalCode", postalCode.length);
+      console.log("type", type.length);
+      console.log("number", number.length);
+      console.log("words", words.length);
+      console.log("signature", signature.length);
+      console.log("address", address.length);
       console.log("Please fill in all fields!");
       toast.error("Please Fill In All Fields", {
         position: toast.POSITION.TOP_LEFT,
@@ -140,6 +154,10 @@ const ReceiptForm = () => {
         <h2>Receipt not found</h2>
       </section>
     );
+  }
+
+  if (isLoading) {
+    return <Spinner />;
   }
   return (
     <section className="receipt-form">

@@ -108,10 +108,13 @@ export const receiptSlice = createSlice({
       .addCase(getAll.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isError = false;
+        state.message = "";
         state.receiptsArr = action.payload;
       })
       .addCase(getAll.rejected, (state, action) => {
         state.isLoading = false;
+        state.isSuccess = false;
         state.isError = true;
         state.message = action.payload;
         state.receiptsArr = [];
@@ -151,13 +154,14 @@ export const receiptSlice = createSlice({
       .addCase(editReceipt.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        if (!action.payload?.id) {
+        if (!action.payload?._id) {
           console.log("action payload", action.payload);
           return console.log("could not update post");
         }
-        const { id } = action.payload;
+        const { _id } = action.payload;
+        console.log("some id", _id);
         const receipts = state.receiptsArr.filter(
-          (receipt) => receipt._id !== id
+          (receipt) => receipt._id !== _id
         );
         state.receiptsArr = [...receipts, action.payload];
       })
