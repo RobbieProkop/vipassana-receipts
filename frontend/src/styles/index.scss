@@ -179,18 +179,30 @@ h1 {
   height: 100%;
   flex-direction: column;
 
-  //register
+  //heading
   .heading {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 3rem;
     padding: 0 1.2rem;
     text-align: center;
+    width: 80%;
     p {
       color: rgb(175, 175, 175);
     }
+
+    .search {
+      display: flex;
+      justify-content: space-between;
+
+      .column {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 
+  //forms for registration
   .form {
     width: 40%;
     margin: 0 auto;
@@ -239,6 +251,7 @@ h1 {
       }
     }
   }
+  // add new receipt
   .receipt-form {
     width: 80%;
     border: 1px solid $grey;
