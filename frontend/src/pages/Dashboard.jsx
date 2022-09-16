@@ -15,7 +15,7 @@ const Dashboard = () => {
   );
 
   //useStates
-  const [searchId, setSearchMonth] = useState("");
+  const [searchMonth, setSearchMonth] = useState("");
   const [donor, setDonor] = useState("");
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Dashboard = () => {
               value={donor}
               placeholder="Donor:"
               onChange={(e) => setDonor(e.target.value)}
-              disabled={searchId}
+              disabled={searchMonth}
             />
           </div>
 
@@ -64,7 +64,7 @@ const Dashboard = () => {
               type="text"
               name="searchId"
               id="search-postId"
-              value={searchId}
+              value={searchMonth}
               placeholder="Month:"
               onChange={(e) => setSearchMonth(e.target.value)}
               disabled={donor}
@@ -75,9 +75,26 @@ const Dashboard = () => {
       <section className="content">
         {receiptsArr.length > 0 ? (
           <div className="receipts">
-            {receiptsArr.map((receipt) => (
-              <ReceiptItem receipt={receipt} key={receipt._id} />
-            ))}
+            {receiptsArr
+              .filter((receipt) => {
+                const month = receipt.createdAt.split("-")[1];
+                if (!searchMonth && !donor) {
+                  return receipt;
+                } else if (
+                  receipt.firstName === donor ||
+                  receipt.lastName === donor ||
+                  receipt.firstName + receipt.lastName === donor
+                ) {
+                  return receipt;
+                } else if (month === searchMonth) {
+                  // this needs to be converted to month names
+                  return receipt;
+                }
+              })
+
+              .map((receipt) => (
+                <ReceiptItem receipt={receipt} key={receipt._id} />
+              ))}
           </div>
         ) : (
           <h3>No Receipts to show</h3>
