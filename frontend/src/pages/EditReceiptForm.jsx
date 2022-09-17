@@ -134,7 +134,6 @@ const ReceiptForm = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
   //for google places address
   const handleSelect = (value) => {
     setAddress(value);
@@ -328,7 +327,12 @@ const ReceiptForm = () => {
           {/* Donation Amount */}
           <div className="donation">
             <div className="form-group">
-              <select name="type" id="type">
+              <select
+                name="type"
+                id="type"
+                defaultValue={type}
+                onChange={onChange}
+              >
                 <option value="">--Please Select A Donation Type--</option>
                 <option value="Visa">Visa</option>
                 <option value="MasterCard">MasterCard</option>
