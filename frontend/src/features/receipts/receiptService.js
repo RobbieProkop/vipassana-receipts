@@ -1,5 +1,6 @@
 import axios from "axios";
 
+axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 const API_URL = "/api/receipts/";
 
 //get all receipts
