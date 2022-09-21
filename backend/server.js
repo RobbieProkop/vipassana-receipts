@@ -9,6 +9,15 @@ connectDB();
 
 const app = express();
 
+// cors middleware
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "https://extraordinary-sfogliatella-735ea0.netlify.app/",
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
