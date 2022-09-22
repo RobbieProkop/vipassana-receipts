@@ -12,6 +12,8 @@ const app = express();
 // cors middleware
 const cors = require("cors");
 
+app.options("*", cors());
+
 app.use(
   cors({
     origin: "https://extraordinary-sfogliatella-735ea0.netlify.app",
