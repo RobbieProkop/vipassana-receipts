@@ -71,7 +71,6 @@ const ReceiptForm = () => {
       words,
       signature,
     ].every((el) => el.length >= 1);
-    console.log("canSave", canSave);
     if (canSave) {
       try {
         dispatch(

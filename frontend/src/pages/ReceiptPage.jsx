@@ -34,7 +34,6 @@ const ReceiptPage = () => {
 
     //variables for pdf print
     const addressArr = receipt[0].address.split(",");
-    console.log(addressArr);
     const addy = addressArr[4] ? addressArr[0] + addressArr[1] : addressArr[0];
     const city = addressArr[4] ? addressArr[2] : addressArr[1];
     const province = addressArr[4] ? addressArr[3] : addressArr[2];
@@ -107,8 +106,6 @@ const ReceiptPage = () => {
       doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
       doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
     };
-
-    console.log("empty?", receiptsArr);
 
     if (isLoading) {
       return <Spinner />;

@@ -159,7 +159,6 @@ export const receiptSlice = createSlice({
           return console.log("could not update post");
         }
         const { _id } = action.payload;
-        console.log("some id", _id);
         const receipts = state.receiptsArr.filter(
           (receipt) => receipt._id !== _id
         );
