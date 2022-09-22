@@ -14,7 +14,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "https://extraordinary-sfogliatella-735ea0.netlify.app/",
+    origin: "https://extraordinary-sfogliatella-735ea0.netlify.app",
   })
 );
 
