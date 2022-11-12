@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container">&copy; DhammaDevs -- 2022</div>
+      <div className="container">
+        &copy; <a href="https://dhammadevs.com">DhammaDevs</a> -- 2022
+      </div>
     </footer>
   );
 };
