@@ -39,6 +39,7 @@ const ReceiptPage = () => {
     const province = addressArr[4] ? addressArr[3] : addressArr[2];
     const country = addressArr[4] ? addressArr[4] : addressArr[3];
 
+    // const addy = receipt[0].address;
     //used to put the amount on different lines of the pdf
     const amount = receipt[0].words.split(" ");
 
