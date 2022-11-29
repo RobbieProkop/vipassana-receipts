@@ -58,7 +58,8 @@ const Login = () => {
   }
 
   return (
-    <>
+    <div className="login-container">
+      <h2>PRIVATE WEBSITE FOR AVF TREASURER</h2>
       <section className="heading">
         <h1>
           <FaSignInAlt /> Login
@@ -102,7 +103,7 @@ const Login = () => {
           </div>
         </form>
       </section>
-    </>
+    </div>
   );
 };
 export default Login;
