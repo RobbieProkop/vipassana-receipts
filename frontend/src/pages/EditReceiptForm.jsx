@@ -32,13 +32,14 @@ const ReceiptForm = () => {
 
   let receipt = receiptsArr.find((receipt) => receipt._id === id);
 
-  const [address, setAddress] = useState(receipt ? receipt.address : "");
+  // const [address, setAddress] = useState(receipt ? receipt.address : "");
 
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
     firstName: receipt.firstName,
     lastName: receipt.lastName,
     email: receipt.email,
+    address: receipt.address,
     postalCode: receipt.postalCode,
     type: receipt.type,
     number: receipt.number,
@@ -51,6 +52,7 @@ const ReceiptForm = () => {
     firstName,
     lastName,
     email,
+    address,
     postalCode,
     type,
     number,
@@ -65,6 +67,7 @@ const ReceiptForm = () => {
       firstName,
       lastName,
       email,
+      address,
       postalCode,
       type,
       number.toString(),
@@ -89,12 +92,13 @@ const ReceiptForm = () => {
           })
         ).unwrap();
         toast.success("Receipt Edited Successfully");
-        setAddress("");
+        // setAddress("");
         setReceiptData({
           place: "",
           firstName: "",
           lastName: "",
           email: "",
+          address: "",
           postalCode: "",
           type: "",
           number: 0,
@@ -114,6 +118,7 @@ const ReceiptForm = () => {
       console.log("firstName", firstName.length);
       console.log("lastName", lastName.length);
       console.log("email", email.length);
+      console.log("address", address.length);
       console.log("postalCode", postalCode.length);
       console.log("type", type.length);
       console.log("number", number.length);
@@ -133,14 +138,14 @@ const ReceiptForm = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  //for google places address
-  const handleSelect = (value) => {
-    setAddress(value);
-    setReceiptData((prevState) => ({
-      ...prevState,
-      address: value,
-    }));
-  };
+  // //for google places address
+  // const handleSelect = (value) => {
+  //   setAddress(value);
+  //   setReceiptData((prevState) => ({
+  //     ...prevState,
+  //     address: value,
+  //   }));
+  // };
 
   if (!receipt) {
     return (
@@ -213,6 +218,17 @@ const ReceiptForm = () => {
           {/* Address */}
           <div className="address">
             <div className="form-group">
+              <input
+                type="text"
+                name="address"
+                id="address"
+                placeholder="Address"
+                value={address}
+                onChange={onChange}
+              />
+            </div>
+            {/* for google places api */}
+            {/* <div className="form-group">
               <PlacesAutocomplete
                 value={address}
                 onChange={setAddress}
@@ -254,7 +270,7 @@ const ReceiptForm = () => {
                   </div>
                 )}
               </PlacesAutocomplete>
-            </div>
+            </div> */}
 
             {/* <div className="form-group">
               <input

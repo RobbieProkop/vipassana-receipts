@@ -179,6 +179,25 @@ h1 {
   height: 100%;
   flex-direction: column;
 
+  .login-container {
+    height: 80vh;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    @include flex-center();
+    flex-direction: column;
+
+    h2 {
+      color: red;
+    }
+
+    h1 {
+      @include flex-center();
+
+      gap: 5px;
+    }
+  }
+
   //heading
   .heading {
     font-size: 2rem;
