@@ -13,7 +13,7 @@ const ReceiptForm = () => {
   // get the last known receipt in the receiptsArr
   const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
 
-  const [address, setAddress] = useState("");
+  // const [address, setAddress] = useState("");
 
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
@@ -25,11 +25,7 @@ const ReceiptForm = () => {
     firstName: "",
     lastName: "",
     email: "",
-    // houseNumber: "",
-    // street: "",
-    // city: "",
-    // province: "",
-    // country: "",
+    address: "",
     postalCode: "",
     type: "",
     number: 0,
@@ -42,11 +38,7 @@ const ReceiptForm = () => {
     firstName,
     lastName,
     email,
-    // houseNumber,
-    // street,
-    // city,
-    // province,
-    // country,
+    address,
     postalCode,
     type,
     number,
@@ -63,6 +55,7 @@ const ReceiptForm = () => {
       firstName,
       lastName,
       email,
+      address,
       postalCode,
       type,
       number,
@@ -87,12 +80,13 @@ const ReceiptForm = () => {
           })
         ).unwrap();
         toast.success("Receipt Added Successfully");
-        setAddress("");
+        // setAddress("");
         setReceiptData({
           place: "",
           firstName: "",
           lastName: "",
           email: "",
+          address: "",
           postalCode: "",
           type: "",
           number: 0,
@@ -132,14 +126,14 @@ const ReceiptForm = () => {
     }));
   };
 
-  //for google places address
-  const handleSelect = (value) => {
-    setAddress(value);
-    setReceiptData((prevState) => ({
-      ...prevState,
-      address: value,
-    }));
-  };
+  // //for google places address
+  // const handleSelect = (value) => {
+  //   setAddress(value);
+  //   setReceiptData((prevState) => ({
+  //     ...prevState,
+  //     address: value,
+  //   }));
+  // };
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
@@ -200,6 +194,16 @@ const ReceiptForm = () => {
           {/* Address */}
           <div className="address">
             <div className="form-group">
+              <input
+                type="text"
+                name="address"
+                id="address"
+                placeholder="Address"
+                value={address}
+                onChange={onChange}
+              />
+            </div>
+            {/* <div className="form-group">
               <PlacesAutocomplete
                 value={address}
                 onChange={setAddress}
@@ -240,7 +244,7 @@ const ReceiptForm = () => {
                   </div>
                 )}
               </PlacesAutocomplete>
-            </div>
+            </div> */}
 
             {/* <div className="form-group">
               <input
