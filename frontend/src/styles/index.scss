@@ -229,6 +229,10 @@ h1 {
           font-family: inherit;
           outline: none;
         }
+
+        &.month-search {
+          display: none;
+        }
       }
     }
   }

@@ -57,7 +57,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <div className="column">
+          <div className="column month-search">
             <label htmlFor="postSearch">Search by Month</label>
             <select name="month" onChange={onChange} disabled={donor}>
               <option value="" defaultValue>
