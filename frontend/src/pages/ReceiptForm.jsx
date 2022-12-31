@@ -19,8 +19,6 @@ const ReceiptForm = () => {
   const [receiptNumber, setReceiptNumber] = useState(
     receipt.length ? receipt[0].receiptNumber + 1 : 6043
   );
-  console.log("receiptnumber", receiptNumber);
-  console.log("receipt.length", receipt.length);
 
   const [receiptData, setReceiptData] = useState({
     place: "",
