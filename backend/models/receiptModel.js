@@ -42,14 +42,14 @@ const receiptSchema = mongoose.Schema(
     //   type: String,
     //   required: [true, "Please add a street"],
     // },
-    // city: {
-    //   type: String,
-    //   required: [true, "Please add a city"],
-    // },
-    // province: {
-    //   type: String,
-    //   required: [true, "Please add a provine"],
-    // },
+    city: {
+      type: String,
+      required: [true, "Please add a city"],
+    },
+    province: {
+      type: String,
+      required: [true, "Please add a provine"],
+    },
     // country: {
     //   type: String,
     //   required: [true, "Please add a country"],
