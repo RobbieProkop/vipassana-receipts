@@ -33,11 +33,14 @@ const ReceiptPage = () => {
     });
 
     //variables for pdf print
-    const addressArr = receipt[0].address.split(",");
-    const addy = addressArr[4] ? addressArr[0] + addressArr[1] : addressArr[0];
-    const city = addressArr[4] ? addressArr[2] : addressArr[1];
-    const province = addressArr[4] ? addressArr[3] : addressArr[2];
-    const country = addressArr[4] ? addressArr[4] : addressArr[3];
+    // const addressArr = receipt[0].address.split(",");
+    // const addy = addressArr[4] ? addressArr[0] + addressArr[1] : addressArr[0];
+    // const city = addressArr[4] ? addressArr[2] : addressArr[1];
+    // const province = addressArr[4] ? addressArr[3] : addressArr[2];
+    // const country = addressArr[4] ? addressArr[4] : addressArr[3];
+    const addy = receipt[0].address;
+    const city = receipt[0].city;
+    const province = receipt[0].province;
 
     // const addy = receipt[0].address;
     //used to put the amount on different lines of the pdf
@@ -82,7 +85,7 @@ const ReceiptPage = () => {
       doc.text(90, 240, `${addy},`);
       doc.setLineWidth(0.7);
       doc.line(90, 245, 280, 245);
-      doc.text(85, 260, `${city}, ${province}, ${country}`);
+      doc.text(85, 260, `${city}, ${province}`);
       doc.line(90, 265, 280, 265);
       doc.text(90, 280, `${receipt[0].postalCode}`);
       doc.line(90, 285, 140, 285);
@@ -154,6 +157,8 @@ const ReceiptPage = () => {
                     Donor: {receipt[0].firstName} {receipt[0].lastName}
                   </h3>
                   <h3>Address: {receipt[0].address},</h3>
+                  <h3>City: {receipt[0].city},</h3>
+                  <h3>Province: {receipt[0].province},</h3>
                   <h3>Postal Code: {receipt[0].postalCode}</h3>
                 </div>
                 <div>

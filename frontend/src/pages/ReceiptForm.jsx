@@ -26,6 +26,8 @@ const ReceiptForm = () => {
     lastName: "",
     email: "",
     address: "",
+    city: "Calgary",
+    province: "AB",
     postalCode: "",
     type: "",
     number: 0,
@@ -39,6 +41,8 @@ const ReceiptForm = () => {
     lastName,
     email,
     address,
+    city,
+    province,
     postalCode,
     type,
     number,
@@ -56,6 +60,8 @@ const ReceiptForm = () => {
       lastName,
       email,
       address,
+      city,
+      province,
       postalCode,
       type,
       number,
@@ -72,6 +78,8 @@ const ReceiptForm = () => {
             lastName,
             email,
             address,
+            city,
+            province,
             postalCode,
             type,
             number,
@@ -87,6 +95,8 @@ const ReceiptForm = () => {
           lastName: "",
           email: "",
           address: "",
+          city: "Calgary",
+          province: "AB",
           postalCode: "",
           type: "",
           number: 0,
@@ -200,6 +210,26 @@ const ReceiptForm = () => {
                 id="address"
                 placeholder="Address"
                 value={address}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="city"
+                id="city"
+                placeholder="City"
+                value={city}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="province"
+                id="province"
+                placeholder="Province"
+                value={province}
                 onChange={onChange}
               />
             </div>
@@ -321,6 +351,7 @@ const ReceiptForm = () => {
                 <option value="Visa">Visa</option>
                 <option value="MasterCard">MasterCard</option>
                 <option value="Amex">American Express</option>
+                <option value="Debit">Debit</option>
                 <option value="Cash">Cash</option>
                 <option value="Cheque">Cheque</option>
               </select>
