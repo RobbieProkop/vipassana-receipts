@@ -40,6 +40,8 @@ const ReceiptForm = () => {
     lastName: receipt.lastName,
     email: receipt.email,
     address: receipt.address,
+    city: receipt.city,
+    province: receipt.province,
     postalCode: receipt.postalCode,
     type: receipt.type,
     number: receipt.number,
@@ -53,6 +55,8 @@ const ReceiptForm = () => {
     lastName,
     email,
     address,
+    city,
+    province,
     postalCode,
     type,
     number,
@@ -68,6 +72,8 @@ const ReceiptForm = () => {
       lastName,
       email,
       address,
+      city,
+      province,
       postalCode,
       type,
       number.toString(),
@@ -84,6 +90,8 @@ const ReceiptForm = () => {
             lastName,
             email,
             address,
+            city,
+            province,
             postalCode,
             type,
             number,
@@ -99,6 +107,8 @@ const ReceiptForm = () => {
           lastName: "",
           email: "",
           address: "",
+          city: "Calgary",
+          province: "AB",
           postalCode: "",
           type: "",
           number: 0,
@@ -119,6 +129,8 @@ const ReceiptForm = () => {
       console.log("lastName", lastName.length);
       console.log("email", email.length);
       console.log("address", address.length);
+      console.log("city", city.length);
+      console.log("province", province.length);
       console.log("postalCode", postalCode.length);
       console.log("type", type.length);
       console.log("number", number.length);
@@ -224,6 +236,26 @@ const ReceiptForm = () => {
                 id="address"
                 placeholder="Address"
                 value={address}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="city"
+                id="city"
+                placeholder="City"
+                value={city}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="province"
+                id="province"
+                placeholder="Province"
+                value={province}
                 onChange={onChange}
               />
             </div>
@@ -352,6 +384,7 @@ const ReceiptForm = () => {
                 <option value="Visa">Visa</option>
                 <option value="MasterCard">MasterCard</option>
                 <option value="Amex">Amex</option>
+                <option value="Debit">Debit</option>
                 <option value="Cash">Cash</option>
                 <option value="Cheque">Cheque</option>
               </select>
