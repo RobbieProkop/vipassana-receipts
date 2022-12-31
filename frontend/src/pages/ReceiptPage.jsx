@@ -157,6 +157,8 @@ const ReceiptPage = () => {
                     Donor: {receipt[0].firstName} {receipt[0].lastName}
                   </h3>
                   <h3>Address: {receipt[0].address},</h3>
+                  <h3>City: {receipt[0].city},</h3>
+                  <h3>Province: {receipt[0].province},</h3>
                   <h3>Postal Code: {receipt[0].postalCode}</h3>
                 </div>
                 <div>
