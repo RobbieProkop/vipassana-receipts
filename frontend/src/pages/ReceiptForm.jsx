@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +19,7 @@ const ReceiptForm = () => {
 
   const [receiptData, setReceiptData] = useState({
     place: "Youngstown",
-    firstName: "",
-    lastName: "",
+    donor: "",
     email: "",
     address: "",
     city: "Calgary",
@@ -36,8 +34,7 @@ const ReceiptForm = () => {
 
   const {
     place,
-    firstName,
-    lastName,
+    donor,
     email,
     address,
     city,
@@ -50,14 +47,11 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  // useEffect(() => {});
-
   const onSubmit = (e) => {
     e.preventDefault();
     const canSave = [
       place,
-      firstName,
-      lastName,
+      donor,
       email,
       address,
       city,
@@ -75,8 +69,7 @@ const ReceiptForm = () => {
           createReceipt({
             receiptNumber,
             place,
-            firstName,
-            lastName,
+            donor,
             email,
             address,
             city,
@@ -90,11 +83,9 @@ const ReceiptForm = () => {
           })
         ).unwrap();
         toast.success("Receipt Added Successfully");
-        // setAddress("");
         setReceiptData({
           place: "Youngstown",
-          firstName: "",
-          lastName: "",
+          donor: "",
           email: "",
           address: "",
           city: "Calgary",
@@ -116,8 +107,7 @@ const ReceiptForm = () => {
       }
     } else {
       console.log("place", place);
-      console.log("firstName", firstName);
-      console.log("lastName", lastName);
+      console.log("Donor", donor);
       console.log("email", email);
       console.log("postalCode", postalCode);
       console.log("type", type);
@@ -165,34 +155,24 @@ const ReceiptForm = () => {
                 type="text"
                 name="place"
                 id="place"
-                placeholder="Current Location (Youngstown)"
+                placeholder="Current Location"
                 value={place}
                 onChange={onChange}
               />
             </div>
           </div>
-          <div className="names">
-            <div className="form-group">
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-                value={firstName}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={onChange}
-              />
-            </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              name="donor"
+              id="donor"
+              placeholder="Donor/Company Name"
+              value={donor}
+              onChange={onChange}
+            />
           </div>
+
           <div className="form-group">
             <input
               type="text"
@@ -226,25 +206,27 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="province"
-                id="province"
-                placeholder="Province"
-                value={province}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="country"
-                id="country"
-                placeholder="Country"
-                value={country}
-                onChange={onChange}
-              />
+            <div className="names">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="province"
+                  id="province"
+                  placeholder="Province"
+                  value={province}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="country"
+                  id="country"
+                  placeholder="Country"
+                  value={country}
+                  onChange={onChange}
+                />
+              </div>
             </div>
             {/* <div className="form-group">
               <PlacesAutocomplete
@@ -288,7 +270,13 @@ const ReceiptForm = () => {
                 )}
               </PlacesAutocomplete>
             </div> */}
+          </div>
+        </div>
 
+        {/* Right Section */}
+        <div className="right">
+          {/* Donation Amount */}
+          <div className="donation">
             <div className="form-group">
               <input
                 type="text"
@@ -299,13 +287,6 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          </div>
-        </div>
-
-        {/* Right Section */}
-        <div className="right">
-          {/* Donation Amount */}
-          <div className="donation">
             <div className="form-group">
               <select name="type" id="type" onChange={onChange}>
                 <option value="">--Please Select Donation Type--</option>
