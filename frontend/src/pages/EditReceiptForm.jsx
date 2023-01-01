@@ -387,6 +387,7 @@ const ReceiptForm = () => {
                 <option value="Debit">Debit</option>
                 <option value="Cash">Cash</option>
                 <option value="Cheque">Cheque</option>
+                <option value="Void">Void</option>
               </select>
             </div>
             <div className="form-group">
@@ -395,7 +396,7 @@ const ReceiptForm = () => {
                 name="number"
                 id="number"
                 placeholder="Amount (Number)"
-                value={number <= 0 ? "" : number}
+                value={number < 0 ? "" : number}
                 onChange={onChange}
               />
             </div>
