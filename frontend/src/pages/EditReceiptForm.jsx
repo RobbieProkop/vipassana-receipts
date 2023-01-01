@@ -32,8 +32,6 @@ const ReceiptForm = () => {
 
   let receipt = receiptsArr.find((receipt) => receipt._id === id);
 
-  // const [address, setAddress] = useState(receipt ? receipt.address : "");
-
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
     firstName: receipt.firstName,
@@ -42,6 +40,7 @@ const ReceiptForm = () => {
     address: receipt.address,
     city: receipt.city,
     province: receipt.province,
+    country: receipt.country,
     postalCode: receipt.postalCode,
     type: receipt.type,
     number: receipt.number,
@@ -57,6 +56,7 @@ const ReceiptForm = () => {
     address,
     city,
     province,
+    country,
     postalCode,
     type,
     number,
@@ -74,6 +74,7 @@ const ReceiptForm = () => {
       address,
       city,
       province,
+      country,
       postalCode,
       type,
       number.toString(),
@@ -92,6 +93,7 @@ const ReceiptForm = () => {
             address,
             city,
             province,
+            country,
             postalCode,
             type,
             number,
@@ -109,6 +111,7 @@ const ReceiptForm = () => {
           address: "",
           city: "Calgary",
           province: "AB",
+          country: "Canada",
           postalCode: "",
           type: "",
           number: 0,
@@ -259,6 +262,16 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="country"
+                id="country"
+                placeholder="Country"
+                value={country}
+                onChange={onChange}
+              />
+            </div>
             {/* for google places api */}
             {/* <div className="form-group">
               <PlacesAutocomplete
@@ -303,58 +316,6 @@ const ReceiptForm = () => {
                 )}
               </PlacesAutocomplete>
             </div> */}
-
-            {/* <div className="form-group">
-              <input
-                type="text"
-                name="houseNumber"
-                id="houseNumber"
-                placeholder="House Number"
-                value={houseNumber}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="street"
-                id="stree"
-                placeholder="Street"
-                value={street}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="city"
-                id="city"
-                placeholder="City"
-                value={city}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="province"
-                id="province"
-                placeholder="Province"
-                value={province}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="country"
-                id="country"
-                placeholder="Country"
-                value={country}
-                onChange={onChange}
-              />
-            </div>
-                    */}
 
             <div className="form-group">
               <input
