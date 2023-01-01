@@ -145,27 +145,19 @@ const ReceiptPage = () => {
               </div>
               <div className="donor">
                 <div>
-                  <h3>
-                    Date: {receiptDate}
-                    {/* {new Date(receipt[0].createdAt).toLocaleString("en-GB", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-            })} */}
-                  </h3>
-                  <h3>Location: {receipt[0].place}</h3>
-                  <h3>
-                    Donor: {receipt[0].firstName} {receipt[0].lastName}
-                  </h3>
-                  <h3>Address: {receipt[0].address},</h3>
-                  <h3>City: {receipt[0].city},</h3>
-                  <h3>Province: {receipt[0].province},</h3>
+                  <h3>Donor: {receipt[0].donor}</h3>
+                  <h3>Address: {receipt[0].address}</h3>
+                  <h3>City: {receipt[0].city}</h3>
+                  <h3>Province: {receipt[0].province}</h3>
+                  <h3>Country: {receipt[0].country}</h3>
                   <h3>Postal Code: {receipt[0].postalCode}</h3>
                 </div>
                 <div>
+                  <h3>Date: {receiptDate}</h3>
+                  <h3>Location: {receipt[0].place}</h3>
                   <h3>Donation Type: {receipt[0].type}</h3>
                   <h3>Amount: ${receipt[0].number}</h3>
-                  <h3>Total Amount Received: {receipt[0].words} </h3>
+                  <h3>Total: {receipt[0].words} </h3>
                   <h3>Digital Signature: {receipt[0].signature}</h3>
                 </div>
                 <p>OFFICIAL RECEIPT FOR INCOME TAX PURPOSES</p>
