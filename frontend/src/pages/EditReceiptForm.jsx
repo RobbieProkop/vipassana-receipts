@@ -104,7 +104,7 @@ const ReceiptForm = () => {
         toast.success("Receipt Edited Successfully");
         // setAddress("");
         setReceiptData({
-          place: "",
+          place: "Youngstown",
           firstName: "",
           lastName: "",
           email: "",

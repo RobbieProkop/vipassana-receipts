@@ -19,7 +19,7 @@ const ReceiptForm = () => {
   );
 
   const [receiptData, setReceiptData] = useState({
-    place: "",
+    place: "Youngstown",
     firstName: "",
     lastName: "",
     email: "",
@@ -92,7 +92,7 @@ const ReceiptForm = () => {
         toast.success("Receipt Added Successfully");
         // setAddress("");
         setReceiptData({
-          place: "",
+          place: "Youngstown",
           firstName: "",
           lastName: "",
           email: "",
