@@ -31,9 +31,13 @@ const ReceiptItem = ({ receipt }) => {
         <div className="receipt-snippet">
           <h2>ID: {receipt.receiptNumber}</h2>
           <div>
-            <h3>
-              Donor: {receipt.firstName} {receipt.lastName}
-            </h3>
+            {receipt.firstName ? (
+              <h3>
+                Donor: {receipt.firstName} {receipt.lastName}
+              </h3>
+            ) : (
+              <h3>Donor: {receipt.donor}</h3>
+            )}
             <h3>Amount: ${receipt.number}</h3>
           </div>
         </div>
