@@ -100,7 +100,7 @@ const ReceiptPage = () => {
       doc.line(410, 225, 540, 225);
 
       doc.setFontSize(12);
-      doc.text(410, 240, `Total Amount Received`);
+      doc.text(410, 240, `Total`);
       doc.setFontSize(20);
       doc.text(410, 280, `${receipt[0].signature} `);
       doc.line(410, 285, 540, 285);
