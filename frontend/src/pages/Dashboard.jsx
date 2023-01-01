@@ -90,15 +90,7 @@ const Dashboard = () => {
                   return receipt;
                 } else if (
                   //returns Donor Names that match
-                  receipt.firstName
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  receipt.lastName
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  (receipt.firstName + " " + receipt.lastName)
-                    .toLowerCase()
-                    .includes(donor.toLowerCase())
+                  receipt.donor.toLowerCase().includes(donor.toLowerCase())
                 ) {
                   return receipt;
                 } else if (month === searchMonth) {
