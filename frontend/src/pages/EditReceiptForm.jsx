@@ -35,6 +35,8 @@ const ReceiptForm = () => {
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
     donor: receipt.donor,
+    firstName: receipt.firstName ? receipt.firstName : "",
+    lastName: receipt.lastName ? receipt.lastName : "",
     email: receipt.email,
     address: receipt.address,
     city: receipt.city,
@@ -50,6 +52,8 @@ const ReceiptForm = () => {
   const {
     place,
     donor,
+    firstName,
+    lastName,
     email,
     address,
     city,

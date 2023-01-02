@@ -82,7 +82,7 @@ const Dashboard = () => {
       <section className="content">
         {receiptsArr.length > 0 ? (
           <div className="receipts">
-            {receiptsArr
+            {/* {receiptsArr
               .filter((receipt) => {
                 const month = receipt.createdAt.split("-")[1];
                 //returns all receipts
@@ -105,6 +105,29 @@ const Dashboard = () => {
                 return 0;
               })
 
+              .map((receipt, index) => (
+                <ReceiptItem receipt={receipt} key={index} />
+              ))} */}
+            {receiptsArr
+              // .filter((receipt) => {
+              //   // const month = receipt.createdAt.split("-")[1];
+              //   //returns all receipts
+              //   if (!searchMonth && !donor) {
+              //     return receipt;
+              //   } else if (
+              //     //returns Donor Names that match
+              //     receipt.donor.toLowerCase().includes(donor.toLowerCase())
+              //   ) {
+              //     return receipt;
+              //   }
+              // })
+
+              // //newest receipts will show first
+              .sort((a, b) => {
+                if (a.createdAt < b.createdAt) return 1;
+                if (a.createdAt > b.createdAt) return -1;
+                return 0;
+              })
               .map((receipt, index) => (
                 <ReceiptItem receipt={receipt} key={index} />
               ))}
