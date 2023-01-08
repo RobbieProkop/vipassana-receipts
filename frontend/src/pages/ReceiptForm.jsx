@@ -62,11 +62,11 @@ const ReceiptForm = () => {
       country,
       postalCode,
       type,
-      number,
       words,
       signature,
     ].every((el) => el.length >= 1);
-    if (canSave) {
+    const numValidation = number >= 0;
+    if (canSave && numValidation) {
       try {
         dispatch(
           createReceipt({
@@ -262,7 +262,7 @@ const ReceiptForm = () => {
                 <option value="Debit">Debit</option>
                 <option value="Cash">Cash</option>
                 <option value="Cheque">Cheque</option>
-                <option value="Void">Void</option>
+                <option value="VOID">VOID</option>
               </select>
             </div>
             <div className="form-group">
