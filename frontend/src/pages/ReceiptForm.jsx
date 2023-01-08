@@ -19,6 +19,8 @@ const ReceiptForm = () => {
   const [receiptData, setReceiptData] = useState({
     place: "Youngstown",
     donor: "",
+    firstName: "",
+    lastName: "",
     email: "",
     address: "",
     city: "Calgary",
@@ -30,10 +32,27 @@ const ReceiptForm = () => {
     words: "",
     signature: "",
   });
+  // const names =
+  //   receipt.firstName && receipt.lastName
+  //     ? `${receipt.firstName} ${receipt.lastName}`
+  //     : receipt.donor
+  //     ? receipt.donor.split(" ")
+  //     : ["first", "last"];
+  // const donorFirst = names[0];
+  // const donorSecond = names[1];
+
+  // const [firstLastName, setFirstLastName] = useState({
+  //   firstName: receipt.firstName ? receipt.firstName : donorFirst,
+  //   lastName: receipt.lastName ? receipt.lastName : donorSecond,
+  // });
+  // const { firstName, lastName } = firstLastName;
 
   const {
     place,
     donor,
+    firstName,
+    lastName,
+
     email,
     address,
     city,
@@ -70,6 +89,8 @@ const ReceiptForm = () => {
             receiptNumber,
             place,
             donor,
+            firstName,
+            lastName,
             email,
             address,
             city,
@@ -108,6 +129,8 @@ const ReceiptForm = () => {
     } else {
       console.log("place", place);
       console.log("Donor", donor);
+      console.log("firstName", firstName);
+      console.log("lastName", lastName);
       console.log("email", email);
       console.log("postalCode", postalCode);
       console.log("type", type);

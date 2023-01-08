@@ -37,6 +37,8 @@ const createReceipt = asyncHandler(async (req, res) => {
     receiptNumber: req.body.receiptNumber,
     place: req.body.place,
     donor: req.body.donor,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
     address: req.body.address,
     city: req.body.city,

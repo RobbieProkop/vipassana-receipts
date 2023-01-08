@@ -28,15 +28,21 @@ const ReceiptForm = () => {
     if (!receiptsArr) {
       navigate("/");
     }
-  }, [user, navigate, isError, message, dispatch]);
+  }, [user, navigate, isError, message, dispatch, receiptsArr]);
 
   let receipt = receiptsArr.find((receipt) => receipt._id === id);
+  const names =
+    receipt.firstName && receipt.lastName
+      ? `${receipt.firstName} ${receipt.lastName}`
+      : receipt.donor.split(" ");
+  const donorFirst = names[0];
+  const donorSecond = names[1];
 
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
-    donor: receipt.donor,
-    firstName: receipt.firstName ? receipt.firstName : "",
-    lastName: receipt.lastName ? receipt.lastName : "",
+    donor: receipt.donor ? receipt.donor : names,
+    firstName: receipt.firstName ? receipt.firstName : donorFirst,
+    lastName: receipt.lastName ? receipt.lastName : donorSecond,
     email: receipt.email,
     address: receipt.address,
     city: receipt.city,
@@ -71,6 +77,8 @@ const ReceiptForm = () => {
     const canSave = [
       place,
       donor,
+      firstName,
+      lastName,
       email,
       address,
       city,
@@ -89,6 +97,8 @@ const ReceiptForm = () => {
             id: id,
             place,
             donor,
+            firstName,
+            lastName,
             email,
             address,
             city,
@@ -106,6 +116,8 @@ const ReceiptForm = () => {
         setReceiptData({
           place: "Youngstown",
           donor: "",
+          firstName: "",
+          lastName: "",
           email: "",
           address: "",
           city: "Calgary",
