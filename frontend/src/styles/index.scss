@@ -303,13 +303,13 @@ h1 {
       }
       .left {
         grid-column: 1/3;
-        .names {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          div {
-            width: 48%;
-          }
+      }
+      .names {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        div {
+          width: 48%;
         }
       }
       .right {

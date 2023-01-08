@@ -223,6 +223,13 @@ const ReceiptForm = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Right Section */}
+        <div className="right">
+          {/* Donation Amount */}
+          <div className="donation">
             <div className="names">
               <div className="form-group">
                 <input
@@ -246,13 +253,6 @@ const ReceiptForm = () => {
                 />
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Right Section */}
-        <div className="right">
-          {/* Donation Amount */}
-          <div className="donation">
             <div className="form-group">
               <select name="type" id="type" onChange={onChange}>
                 <option value="">--Please Select Donation Type--</option>
