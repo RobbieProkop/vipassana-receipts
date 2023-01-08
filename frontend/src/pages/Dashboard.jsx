@@ -31,6 +31,8 @@ const Dashboard = () => {
     dispatch(getAll());
   }, [user, navigate, isError, message, dispatch]);
 
+  const receiptsCopy = [...receiptsArr];
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -82,33 +84,7 @@ const Dashboard = () => {
       <section className="content">
         {receiptsArr.length > 0 ? (
           <div className="receipts">
-            {/* {receiptsArr
-              .filter((receipt) => {
-                const month = receipt.createdAt.split("-")[1];
-                //returns all receipts
-                if (!searchMonth && !donor) {
-                  return receipt;
-                } else if (
-                  //returns Donor Names that match
-                  receipt.donor.toLowerCase().includes(donor.toLowerCase())
-                ) {
-                  return receipt;
-                } else if (month === searchMonth) {
-                  //returns donation month matches
-                  return receipt;
-                }
-              })
-              //newest receipts will show first
-              .sort((a, b) => {
-                if (a.createdAt < b.createdAt) return 1;
-                if (a.createdAt > b.createdAt) return -1;
-                return 0;
-              })
-
-              .map((receipt, index) => (
-                <ReceiptItem receipt={receipt} key={index} />
-              ))} */}
-            {receiptsArr
+            {receiptsCopy
               // .filter((receipt) => {
               //   // const month = receipt.createdAt.split("-")[1];
               //   //returns all receipts
