@@ -25,7 +25,7 @@ const ReceiptForm = () => {
     address: "",
     city: "Calgary",
     province: "AB",
-    Country: "Canada",
+    country: "Canada",
     postalCode: "",
     type: "",
     number: 0,

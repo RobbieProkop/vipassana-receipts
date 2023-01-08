@@ -19,7 +19,6 @@ const receiptSchema = mongoose.Schema(
     //donor name
     donor: {
       type: String,
-      required: [true, "Please add a first name"],
     },
     firstName: {
       type: String,

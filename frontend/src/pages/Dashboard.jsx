@@ -82,32 +82,32 @@ const Dashboard = () => {
         </div>
       </section>
       <section className="content">
-        {receiptsArr.length > 0 ? (
+        {receiptCopy.length > 0 ? (
           <div className="receipts">
-            {receiptsArr
-              .filter((receipt) => {
-                const month = receipt.createdAt.split("-")[1];
-                //returns all receipts
-                if (!searchMonth && !donor) {
-                  return receipt;
-                } else if (
-                  //returns Donor Names that match
-                  receipt.firstName
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  receipt.lastName
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  (receipt.firstName + " " + receipt.lastName)
-                    .toLowerCase()
-                    .includes(donor.toLowerCase())
-                ) {
-                  return receipt;
-                } else if (month === searchMonth) {
-                  //returns donation month matches
-                  return receipt;
-                }
-              })
+            {receiptCopy
+              // .filter((receipt) => {
+              //   const month = receipt.createdAt.split("-")[1];
+              //   //returns all receipts
+              //   if (!searchMonth && !donor) {
+              //     return receipt;
+              //   } else if (
+              //     //returns Donor Names that match
+              //     receipt.firstName
+              //       .toLowerCase()
+              //       .includes(donor.toLowerCase()) ||
+              //     receipt.lastName
+              //       .toLowerCase()
+              //       .includes(donor.toLowerCase()) ||
+              //     (receipt.firstName + " " + receipt.lastName)
+              //       .toLowerCase()
+              //       .includes(donor.toLowerCase())
+              //   ) {
+              //     return receipt;
+              //   } else if (month === searchMonth) {
+              //     //returns donation month matches
+              //     return receipt;
+              //   }
+              // })
               //newest receipts will show first
               .sort((a, b) => {
                 if (a.createdAt < b.createdAt) return 1;
