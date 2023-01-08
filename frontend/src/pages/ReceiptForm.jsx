@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PlacesAutocomplete from "react-places-autocomplete";
 import { toast } from "react-toastify";
 import { createReceipt } from "../features/receipts/receiptSlice";
 
@@ -13,21 +11,21 @@ const ReceiptForm = () => {
   // get the last known receipt in the receiptsArr
   const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
 
-  // const [address, setAddress] = useState("");
-
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
     receipt.length ? receipt[0].receiptNumber + 1 : 5985
   );
 
   const [receiptData, setReceiptData] = useState({
-    place: "",
+    place: "Youngstown",
+    donor: "",
     firstName: "",
     lastName: "",
     email: "",
     address: "",
     city: "Calgary",
     province: "AB",
+    Country: "Canada",
     postalCode: "",
     type: "",
     number: 0,
@@ -37,12 +35,14 @@ const ReceiptForm = () => {
 
   const {
     place,
+    donor,
     firstName,
     lastName,
     email,
     address,
     city,
     province,
+    country,
     postalCode,
     type,
     number,
@@ -50,18 +50,16 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  // useEffect(() => {});
-
   const onSubmit = (e) => {
     e.preventDefault();
     const canSave = [
       place,
-      firstName,
-      lastName,
+      donor,
       email,
       address,
       city,
       province,
+      country,
       postalCode,
       type,
       number,
@@ -74,12 +72,14 @@ const ReceiptForm = () => {
           createReceipt({
             receiptNumber,
             place,
+            donor,
             firstName,
             lastName,
             email,
             address,
             city,
             province,
+            country,
             postalCode,
             type,
             number,
@@ -88,15 +88,17 @@ const ReceiptForm = () => {
           })
         ).unwrap();
         toast.success("Receipt Added Successfully");
-        // setAddress("");
+
         setReceiptData({
-          place: "",
+          place: "Youngstown",
+          donor: "",
           firstName: "",
           lastName: "",
           email: "",
           address: "",
           city: "Calgary",
           province: "AB",
+          country: "Canada",
           postalCode: "",
           type: "",
           number: 0,
@@ -115,6 +117,10 @@ const ReceiptForm = () => {
       console.log("place", place);
       console.log("firstName", firstName);
       console.log("lastName", lastName);
+      console.log("address", address);
+      console.log("city", city);
+      console.log("province", province);
+      console.log("country", country);
       console.log("email", email);
       console.log("postalCode", postalCode);
       console.log("type", type);
@@ -136,14 +142,6 @@ const ReceiptForm = () => {
     }));
   };
 
-  // //for google places address
-  // const handleSelect = (value) => {
-  //   setAddress(value);
-  //   setReceiptData((prevState) => ({
-  //     ...prevState,
-  //     address: value,
-  //   }));
-  // };
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
@@ -168,28 +166,18 @@ const ReceiptForm = () => {
               />
             </div>
           </div>
-          <div className="names">
-            <div className="form-group">
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-                value={firstName}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={onChange}
-              />
-            </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              name="donor"
+              id="donor"
+              placeholder="Donor / Company Name"
+              value={donor}
+              onChange={onChange}
+            />
           </div>
+
           <div className="form-group">
             <input
               type="text"
@@ -213,130 +201,50 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="city"
-                id="city"
-                placeholder="City"
-                value={city}
-                onChange={onChange}
-              />
+            <div className="names">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  placeholder="City"
+                  value={city}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="province"
+                  id="province"
+                  placeholder="Province"
+                  value={province}
+                  onChange={onChange}
+                />
+              </div>
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="province"
-                id="province"
-                placeholder="Province"
-                value={province}
-                onChange={onChange}
-              />
-            </div>
-            {/* <div className="form-group">
-              <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-              >
-                {({
-                  getInputProps,
-                  suggestions,
-                  getSuggestionItemProps,
-                  loading,
-                }) => (
-                  <div>
-                    <input
-                      {...getInputProps({
-                        placeholder: "Enter address",
-                        id: "addressSearch",
-                      })}
-                    />
-                    <div>
-                      {loading && <p>Loading...</p>}
+            <div className="names">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="country"
+                  id="country"
+                  placeholder="Country"
+                  value={country}
+                  onChange={onChange}
+                />
+              </div>
 
-                      {suggestions.map((suggestion, index) => {
-                        const className = suggestion.active
-                          ? "select-active"
-                          : null;
-                        return (
-                          <div
-                            key={index}
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                            })}
-                          >
-                            {suggestion.description}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
-            </div> */}
-
-            {/* <div className="form-group">
-              <input
-                type="text"
-                name="houseNumber"
-                id="houseNumber"
-                placeholder="House Number"
-                value={houseNumber}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="street"
-                id="stree"
-                placeholder="Street"
-                value={street}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="city"
-                id="city"
-                placeholder="City"
-                value={city}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="province"
-                id="province"
-                placeholder="Province"
-                value={province}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="country"
-                id="country"
-                placeholder="Country"
-                value={country}
-                onChange={onChange}
-              />
-            </div>
-                    */}
-
-            <div className="form-group">
-              <input
-                type="text"
-                name="postalCode"
-                id="postalCode"
-                placeholder="Postal Code"
-                value={postalCode}
-                onChange={onChange}
-              />
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="postalCode"
+                  id="postalCode"
+                  placeholder="Postal Code"
+                  value={postalCode}
+                  onChange={onChange}
+                />
+              </div>
             </div>
           </div>
         </div>
