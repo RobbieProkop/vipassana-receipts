@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PlacesAutocomplete from "react-places-autocomplete";
 import { toast } from "react-toastify";
 import { createReceipt } from "../features/receipts/receiptSlice";
 
@@ -130,14 +129,6 @@ const ReceiptForm = () => {
     }));
   };
 
-  // //for google places address
-  // const handleSelect = (value) => {
-  //   setAddress(value);
-  //   setReceiptData((prevState) => ({
-  //     ...prevState,
-  //     address: value,
-  //   }));
-  // };
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
@@ -229,48 +220,6 @@ const ReceiptForm = () => {
                 />
               </div>
             </div>
-            {/* <div className="form-group">
-              <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-              >
-                {({
-                  getInputProps,
-                  suggestions,
-                  getSuggestionItemProps,
-                  loading,
-                }) => (
-                  <div>
-                    <input
-                      {...getInputProps({
-                        placeholder: "Enter address",
-                        id: "addressSearch",
-                      })}
-                    />
-                    <div>
-                      {loading && <p>Loading...</p>}
-
-                      {suggestions.map((suggestion, index) => {
-                        const className = suggestion.active
-                          ? "select-active"
-                          : null;
-                        return (
-                          <div
-                            key={index}
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                            })}
-                          >
-                            {suggestion.description}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
-            </div> */}
           </div>
         </div>
 
