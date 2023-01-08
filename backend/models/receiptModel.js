@@ -17,13 +17,15 @@ const receiptSchema = mongoose.Schema(
       required: [true, "Please add a location"],
     },
     //donor name
-    firstName: {
+    donor: {
       type: String,
       required: [true, "Please add a first name"],
     },
+    firstName: {
+      type: String,
+    },
     lastName: {
       type: String,
-      required: [true, "Please add a last name"],
     },
     email: {
       type: String,
@@ -34,14 +36,6 @@ const receiptSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add an address"],
     },
-    // houseNumber: {
-    //   type: Number,
-    //   required: [true, "Please add a house number"],
-    // },
-    // street: {
-    //   type: String,
-    //   required: [true, "Please add a street"],
-    // },
     city: {
       type: String,
       required: [true, "Please add a city"],
@@ -50,10 +44,10 @@ const receiptSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a provine"],
     },
-    // country: {
-    //   type: String,
-    //   required: [true, "Please add a country"],
-    // },
+    country: {
+      type: String,
+      required: [true, "Please add a country"],
+    },
     postalCode: {
       type: String,
       required: [true, "Please add a postal code"],

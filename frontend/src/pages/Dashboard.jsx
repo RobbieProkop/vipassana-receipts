@@ -31,6 +31,8 @@ const Dashboard = () => {
     dispatch(getAll());
   }, [user, navigate, isError, message, dispatch]);
 
+  const receiptCopy = [...receiptsArr];
+
   if (isLoading) {
     return <Spinner />;
   }
