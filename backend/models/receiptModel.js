@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const receiptSchema = mongoose.Schema(
+const receiptSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,6 +19,7 @@ const receiptSchema = mongoose.Schema(
     //donor name
     donor: {
       type: String,
+      required: [true, "Please add a Donor"],
     },
     firstName: {
       type: String,
@@ -41,7 +42,7 @@ const receiptSchema = mongoose.Schema(
     },
     province: {
       type: String,
-      required: [true, "Please add a provine"],
+      required: [true, "Please add a province"],
     },
     country: {
       type: String,

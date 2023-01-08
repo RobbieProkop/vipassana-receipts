@@ -32,6 +32,7 @@ const createReceipt = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please complete all text fields");
   }
+  console.log("from Controller", req.body.donor);
   const receipt = await Receipt.create({
     user: req.user.id,
     receiptNumber: req.body.receiptNumber,

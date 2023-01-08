@@ -46,10 +46,7 @@ export const createReceipt = createAsyncThunk(
   async (receiptData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      console.log(
-        "receiptSlice createReceipt",
-        await receiptService.createReceipt(receiptData, token)
-      );
+      console.log("from slice", receiptData);
       return await receiptService.createReceipt(receiptData, token);
     } catch (error) {
       const message =

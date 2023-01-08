@@ -33,7 +33,7 @@ const createReceipt = async (receiptData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
+  console.log("receiptData", receiptData);
   const { data } = await axios.post(API_URL, receiptData, config);
   console.log("createReceipt Service Data", data);
   return data;

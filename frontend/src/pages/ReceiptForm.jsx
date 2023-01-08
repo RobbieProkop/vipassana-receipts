@@ -73,8 +73,8 @@ const ReceiptForm = () => {
             receiptNumber,
             place,
             donor,
-            firstName,
-            lastName,
+            // firstName,
+            // lastName,
             email,
             address,
             city,
@@ -88,6 +88,7 @@ const ReceiptForm = () => {
           })
         ).unwrap();
         toast.success("Receipt Added Successfully");
+        console.log("after submit donor,", donor);
 
         setReceiptData({
           place: "Youngstown",
