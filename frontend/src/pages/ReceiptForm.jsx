@@ -19,8 +19,8 @@ const ReceiptForm = () => {
   const [receiptData, setReceiptData] = useState({
     place: "Youngstown",
     donor: "",
-    firstName: "",
-    lastName: "",
+    firstName: "test",
+    lastName: "test",
     email: "",
     address: "",
     city: "Calgary",
