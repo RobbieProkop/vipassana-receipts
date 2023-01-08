@@ -33,9 +33,12 @@ const createReceipt = async (receiptData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
-  const { data } = await axios.post(API_URL, receiptData, config);
-  return data;
+  try {
+    const { data } = await axios.post(API_URL, receiptData, config);
+    return data;
+  } catch (error) {
+    console.log("create receipt didn't work:", error);
+  }
 };
 
 //Edit Receipt

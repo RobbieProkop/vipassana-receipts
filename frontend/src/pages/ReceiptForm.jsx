@@ -59,11 +59,12 @@ const ReceiptForm = () => {
       country,
       postalCode,
       type,
-      number,
       words,
       signature,
     ].every((el) => el.length >= 1);
-    if (canSave) {
+    const numValidation = number >= 0;
+
+    if (canSave && numValidation) {
       try {
         dispatch(
           createReceipt({
