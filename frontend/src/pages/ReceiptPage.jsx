@@ -85,7 +85,7 @@ const ReceiptPage = () => {
       doc.text(90, 240, `${addy},`);
       doc.setLineWidth(0.7);
       doc.line(90, 245, 280, 245);
-      doc.text(85, 260, `${city}, ${province}`);
+      doc.text(85, 260, `  ${city}, ${province}, Canada`);
       doc.line(90, 265, 280, 265);
       doc.text(90, 280, `${receipt[0].postalCode}`);
       doc.line(90, 285, 140, 285);
@@ -108,7 +108,7 @@ const ReceiptPage = () => {
 
       doc.setFontSize(16);
       doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
-      doc.save(`AVF-tax-receipt-${receiptDate}.pdf`);
+      doc.save(`AVF-#${receipt[0].receiptNumber}-${receiptDate}`);
     };
 
     if (isLoading) {
