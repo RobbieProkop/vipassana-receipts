@@ -108,7 +108,9 @@ const ReceiptPage = () => {
 
       doc.setFontSize(16);
       doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
-      doc.save(`AVF-${receipt[0].firstName} ${receipt[0].lastName}.pdf`);
+      doc.save(
+        `AVF-${receipt[0].receiptNumber}-${receipt[0].firstName}-${receipt[0].lastName}.pdf`
+      );
     };
 
     if (isLoading) {
