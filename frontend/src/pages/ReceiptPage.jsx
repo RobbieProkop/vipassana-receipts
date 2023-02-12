@@ -77,7 +77,7 @@ const ReceiptPage = () => {
       doc.setFontSize(18);
 
       // CHANGE THIS BACK TO ${receiptDate}
-      doc.text(90, 160, `Date: Dec, 31, 2022`);
+      doc.text(90, 160, `Date: Dec 31, 2022`);
       doc.text(90, 180, `Location: ${receipt[0].place}`);
       doc.text(
         90,
