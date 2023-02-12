@@ -60,7 +60,8 @@ const ReceiptPage = () => {
 
       //pdf content
       doc.setFontSize(18);
-      doc.text(40, 60, `N0. ${receipt[0].receiptNumber}`);
+      // CHANGE THIS BACK TO REMOVE 2022-
+      doc.text(40, 60, `N0. 2022-${receipt[0].receiptNumber}`);
 
       //header
       doc.setFontSize(28);
@@ -74,7 +75,9 @@ const ReceiptPage = () => {
 
       //donation info
       doc.setFontSize(18);
-      doc.text(90, 160, `Date: ${receiptDate}`);
+
+      // CHANGE THIS BACK TO ${receiptDate}
+      doc.text(90, 160, `Date: Dec, 31, 2022`);
       doc.text(90, 180, `Location: ${receipt[0].place}`);
       doc.text(
         90,
@@ -125,7 +128,7 @@ const ReceiptPage = () => {
               <div className="receipt-info">
                 <div className="receipt-head">
                   <h3>
-                    N<sub>0</sub>. {receipt[0].receiptNumber}
+                    N<sub>0</sub>. 2022-{receipt[0].receiptNumber}
                   </h3>
                   <h1>Alberta Vipassana Foundation</h1>
 

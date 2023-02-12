@@ -18,10 +18,11 @@ const ReceiptForm = () => {
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
     receipt.length ? receipt[0].receiptNumber + 1 : 5985
+    
   );
 
   const [receiptData, setReceiptData] = useState({
-    place: "",
+    place: "Youngstown",
     firstName: "",
     lastName: "",
     email: "",
@@ -149,7 +150,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {receiptNumber}</p>
+            <p>ID: 2022-{receiptNumber}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
