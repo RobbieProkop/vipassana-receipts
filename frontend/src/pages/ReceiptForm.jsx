@@ -48,8 +48,6 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  // useEffect(() => {});
-
   const onSubmit = (e) => {
     e.preventDefault();
     const canSave = [
