@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PlacesAutocomplete from "react-places-autocomplete";
 import { toast } from "react-toastify";
 import { createReceipt } from "../features/receipts/receiptSlice";
 
@@ -17,8 +15,7 @@ const ReceiptForm = () => {
 
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
-    // receipt.length ? receipt[0].receiptNumber + 1 : 5985
-    6061
+    receipt.length ? receipt[0].receiptNumber + 1 : 6061
   );
 
   const [receiptData, setReceiptData] = useState({
@@ -31,7 +28,7 @@ const ReceiptForm = () => {
     province: "AB",
     postalCode: "",
     type: "",
-    number: 0,
+    number: "",
     words: "",
     signature: "",
   });
@@ -136,21 +133,12 @@ const ReceiptForm = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
-  // //for google places address
-  // const handleSelect = (value) => {
-  //   setAddress(value);
-  //   setReceiptData((prevState) => ({
-  //     ...prevState,
-  //     address: value,
-  //   }));
-  // };
   return (
     <section className="receipt-form">
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: 2022-{receiptNumber}</p>
+            <p>ID: {receiptNumber}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>

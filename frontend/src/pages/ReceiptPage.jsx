@@ -126,7 +126,7 @@ const ReceiptPage = () => {
               <div className="receipt-info">
                 <div className="receipt-head">
                   <h3>
-                    N<sub>0</sub>. 2022-{receipt[0].receiptNumber}
+                    N<sub>0</sub>. {receipt[0].receiptNumber}
                   </h3>
                   <h1>Alberta Vipassana Foundation</h1>
 
