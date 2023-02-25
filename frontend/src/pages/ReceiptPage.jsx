@@ -60,8 +60,8 @@ const ReceiptPage = () => {
 
       //pdf content
       doc.setFontSize(18);
-      // CHANGE THIS BACK TO REMOVE 2022-
-      doc.text(40, 60, `N0. 2022-${receipt[0].receiptNumber}`);
+
+      doc.text(40, 60, `N0. ${receipt[0].receiptNumber}`);
 
       //header
       doc.setFontSize(28);
@@ -75,9 +75,7 @@ const ReceiptPage = () => {
 
       //donation info
       doc.setFontSize(18);
-
-      // CHANGE THIS BACK TO ${receiptDate}
-      doc.text(90, 160, `Date: Dec 31, 2022`);
+      doc.text(90, 160, `${receiptDate}`);
       doc.text(90, 180, `Location: ${receipt[0].place}`);
       doc.text(
         90,

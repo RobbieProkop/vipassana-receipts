@@ -17,8 +17,8 @@ const ReceiptForm = () => {
 
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
-    receipt.length ? receipt[0].receiptNumber + 1 : 5985
-    
+    // receipt.length ? receipt[0].receiptNumber + 1 : 5985
+    6061
   );
 
   const [receiptData, setReceiptData] = useState({
@@ -234,7 +234,6 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-          
 
             {/* 
             <div className="form-group">

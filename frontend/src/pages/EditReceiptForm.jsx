@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import PlacesAutocomplete from "react-places-autocomplete";
 import { toast } from "react-toastify";
 import { editReceipt } from "../features/receipts/receiptSlice";
 import Spinner from "../components/Spinner";
@@ -102,7 +101,7 @@ const ReceiptForm = () => {
         toast.success("Receipt Edited Successfully");
         // setAddress("");
         setReceiptData({
-          place: "",
+          place: "Youngstown",
           firstName: "",
           lastName: "",
           email: "",
@@ -150,14 +149,6 @@ const ReceiptForm = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  // //for google places address
-  // const handleSelect = (value) => {
-  //   setAddress(value);
-  //   setReceiptData((prevState) => ({
-  //     ...prevState,
-  //     address: value,
-  //   }));
-  // };
 
   if (!receipt) {
     return (
@@ -259,50 +250,6 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-            {/* for google places api */}
-            {/* <div className="form-group">
-              <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-              >
-                {({
-                  getInputProps,
-                  suggestions,
-                  getSuggestionItemProps,
-                  loading,
-                }) => (
-                  <div>
-                    <input
-                      {...getInputProps({
-                        placeholder: "Enter address",
-                        id: "addressSearch",
-                      })}
-                    />
-                    <div>
-                      {loading && <p>Loading...</p>}
-
-                      {suggestions.map((suggestion, index) => {
-                        const className = suggestion.active
-                          ? "select-active"
-                          : null;
-                        return (
-                          <div
-                            //change this key to receipt num
-                            key={index}
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                            })}
-                          >
-                            {suggestion.description}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
-            </div> */}
 
             {/* <div className="form-group">
               <input
