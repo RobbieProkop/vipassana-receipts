@@ -2,6 +2,8 @@ import jsPDF from "jspdf";
 const generateReport = (receipts) => {
   var doc = new jsPDF("l", "px", "a4");
 
+  console.log("receiptsGen", receipts);
+
   // rectangle border
   doc.rect(24, 24, 585, 350);
 

@@ -1,16 +1,28 @@
 import { useState } from "react";
 import generateReport from "../helpers/generateReport";
 
-const Reports = () => {
+const Reports = ({ receipts }) => {
   const [donor, setDonor] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const onClick = () => {
     setShowForm(!showForm);
   };
 
   const onSubmit = () => {
-    generateReport();
+    const filteredReceipts = receipts.filter((receipt) => {
+      const date = new Date(receipt.createdAt.split("T")[0]);
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      console.log("date", date <= end);
+
+      return date <= end && date >= start;
+    });
+
+    generateReport(filteredReceipts);
   };
   return (
     <>
@@ -39,11 +51,20 @@ const Reports = () => {
           <div className="form-group">
             <div className="form-control">
               <label htmlFor="report start">Start</label>
-              <input type="date" className="form-group" />
+              <input
+                type="date"
+                className="form-group"
+                onChange={(e) => setStartDate(e.target.value)}
+              />
             </div>
             <div className="form-control">
               <label htmlFor="report end">End</label>
-              <input type="date" className="form-group" />
+              <input
+                type="date"
+                min="2022-01-01"
+                className="form-group"
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </div>
           </div>
 
