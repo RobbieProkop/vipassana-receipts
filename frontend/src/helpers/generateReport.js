@@ -1,26 +1,78 @@
 import jsPDF from "jspdf";
 const generateReport = (receipts, start, end) => {
-  var doc = new jsPDF("l", "px", "a4");
+  let totalDonations = 0;
+  let visaTotal = 0;
+  let mcTotal = 0;
+  let debitTotal = 0;
+  let cashTotal = 0;
+  let chequeTotal = 0;
+  let inKind = 0;
 
-  console.log("receiptsGen", receipts);
+  receipts.forEach((receipt) => {
+    if (receipt.type === "VOID") return;
+    switch (receipt.type) {
+      case "Visa":
+        visaTotal += receipt.number;
+        break;
+      case "MasterCard":
+        mcTotal += receipt.number;
+        break;
+      case "Debit":
+        debitTotal += receipt.number;
+        break;
+      case "Cash":
+        cashTotal += receipt.number;
+        break;
+      case "Cheque":
+        chequeTotal += receipt.number;
+        break;
+      case "In-Kind":
+        inKind += receipt.number;
+      default:
+        break;
+    }
 
-  // rectangle border
-  // doc.rect(24, 24, 585, 350);
+    totalDonations += receipt.number;
+  });
 
+  console.log("total", totalDonations);
+  let doc = new jsPDF("p", "px", "a4");
   //pdf content
   doc.setFontSize(18);
 
-  doc.text(40, 60, `Report from  ${start} to ${end}`);
+  //Heading
+  let headingText = `AVF Donations Report`;
+  let headingWidth = doc.getTextWidth(headingText);
+  let subHeading =
+    "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4 \nCharitable Reg. #85502 1739 RR 0001\nCanadian Revenue Agency: www.cra-arc.gc.ca";
+  let subheadingWidth = doc.getTextWidth(subHeading);
+  let pageWidth = doc.internal.pageSize.width;
+  let xPos = (pageWidth - headingWidth) / 2;
+  doc.text(xPos, 60, headingText);
+
+  let xPos2 = (pageWidth - subheadingWidth) / 2;
+
+  doc.setFontSize(16);
+  doc.text(xPos2, 80, subHeading);
+
+  // doc.text(195, 95, "Charitable Reg. #85502 1739 RR 0001");
+  // doc.text(195, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
+
+  //Report Start Date
+  doc.text(40, 140, `Report Start Date: ${start}`);
+
+  //Report End Date
+  doc.text(40, 160, `Report End Date: ${end}`);
+
+  // Donation total
+  doc.text(40, 180, `Total Donations: $${totalDonations.toLocaleString()}`);
+
+  // Donor Count
+  doc.text(40, 200, `Number of Donors: ${receipts.length.toLocaleString()}`);
 
   // //header
   // doc.setFontSize(28);
   // doc.text(190, 60, "Alberta Vipassana Foundation");
-
-  // doc.setFontSize(16);
-  // doc.text(195, 80, "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4");
-
-  // doc.text(195, 95, "Charitable Reg. #85502 1739 RR 0001");
-  // doc.text(195, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
 
   // //donation info
   // doc.setFontSize(18);
