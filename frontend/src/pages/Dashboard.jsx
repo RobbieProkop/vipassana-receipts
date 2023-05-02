@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ReceiptItem from "../components/ReceiptItem";
 import Spinner from "../components/Spinner";
 import { getAll, reset } from "../features/receipts/receiptSlice";
+import Reports from "../components/Reports";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -44,20 +45,9 @@ const Dashboard = () => {
           <button className="btn">Add A Receipt</button>
         </Link>
         <div className="search">
-          <div className="column">
-            <label htmlFor="postSearch">Search by Donor</label>
-            <input
-              type="text"
-              name="user"
-              id="search-user"
-              value={donor}
-              placeholder="Donor:"
-              onChange={(e) => setDonor(e.target.value)}
-              disabled={searchMonth}
-            />
-          </div>
+          <Reports />
 
-          <div className="column month-search">
+          {/* <div className="column month-search">
             <label htmlFor="postSearch">Search by Month</label>
             <select name="month" onChange={onChange} disabled={donor}>
               <option value="" defaultValue>
@@ -76,7 +66,7 @@ const Dashboard = () => {
               <option value="11">11 - November</option>
               <option value="12">12 - December</option>
             </select>
-          </div>
+          </div> */}
         </div>
       </section>
       <section className="content">

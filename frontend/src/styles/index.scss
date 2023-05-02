@@ -42,7 +42,7 @@ body {
     background: $black;
     border: 1px solid $black;
     color: $white;
-    transform: translate(0.2rem, -0.2rem);
+    // transform: translate(0.2rem, -0.2rem);
   }
   &-edit {
     background: $white;
@@ -52,7 +52,7 @@ body {
       background: $btn;
       border: 1px solid $btn;
       color: $black;
-      transform: translate(0.2rem, -0.2rem);
+      // transform: translate(0.2rem, -0.2rem);
     }
   }
 
@@ -64,7 +64,7 @@ body {
       background: $red;
       border: 1px solid $red;
       color: $black;
-      transform: translate(0.2rem, -0.2rem);
+      // transform: translate(0.2rem, -0.2rem);
     }
   }
   &-down {
@@ -75,7 +75,7 @@ body {
       background: $btn;
       border: 1px solid $btn;
       color: $black;
-      transform: translate(0.2rem, -0.2rem);
+      // transform: translate(0.2rem, -0.2rem);
     }
   }
 
@@ -212,6 +212,43 @@ h1 {
 
     .search {
       @include flex-between();
+
+      .reports-form {
+        @include flex-center();
+        flex-direction: column;
+        width: 100%;
+        margin-top: 4rem;
+
+        .form-group {
+          width: 100%;
+          @include flex-between();
+          text-align: left;
+          grid-gap: 2rem;
+          .form-control {
+            margin-bottom: 1rem;
+            width: 50%;
+
+            label {
+              font-size: 1.5rem;
+            }
+            input,
+            select {
+              padding: 10px;
+              border: 1px solid #e6e6e6;
+              border-radius: 5px;
+              font-family: inherit;
+              outline: none;
+            }
+          }
+        }
+        .form-btn {
+          @include flex-center();
+          flex-direction: column;
+          margin: auto;
+          width: 50%;
+          margin-bottom: 1rem;
+        }
+      }
 
       .column {
         width: 25%;
