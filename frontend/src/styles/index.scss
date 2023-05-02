@@ -1,15 +1,5 @@
-// @use "variables";
+@import "variables";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
-$primaryColor: #81bece;
-$btn: #aec670;
-$btn-edit: green;
-$btn-delete: red;
-$black: #333;
-$white: #fff;
-$grey: rgb(175, 175, 175);
-$hover: rgb(123, 195, 123);
-$red: rgb(190, 14, 14);
 
 //reset
 * {
@@ -43,6 +33,11 @@ body {
     border: 1px solid $black;
     color: $white;
     // transform: translate(0.2rem, -0.2rem);
+  }
+  &-secondary {
+    background-color: $secondary;
+    border: 1px solid $secondary;
+    color: $white;
   }
   &-edit {
     background: $white;
@@ -246,7 +241,7 @@ h1 {
           flex-direction: column;
           margin: auto;
           width: 50%;
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
           &:nth-of-type(1) {
             margin-top: 2rem;
           }

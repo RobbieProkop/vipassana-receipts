@@ -10,19 +10,19 @@ const Reports = ({ receipts }) => {
   const onClick = () => {
     setShowForm(!showForm);
   };
+  const start = new Date(startDate);
+  const end = new Date(endDate);
 
-  const onSubmit = () => {
-    const filteredReceipts = receipts.filter((receipt) => {
-      const date = new Date(receipt.createdAt.split("T")[0]);
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+  const filteredReceipts = receipts.filter((receipt) => {
+    const date = new Date(receipt.createdAt.split("T")[0]);
 
-      console.log("date", date <= end);
+    return date <= end && date >= start;
+  });
 
-      return date <= end && date >= start;
-    });
+  const createExcel = () => {};
 
-    generateReport(filteredReceipts);
+  const createReport = () => {
+    generateReport(filteredReceipts, startDate, endDate);
   };
   return (
     <>
@@ -41,7 +41,7 @@ const Reports = ({ receipts }) => {
           </div>
           <div className="column">
             <button onClick={onClick} className="btn btn-secondary">
-              Report
+              Documents
             </button>
           </div>
         </>
@@ -68,12 +68,15 @@ const Reports = ({ receipts }) => {
             </div>
           </div>
 
+          <button className="form-btn btn" type="button" onClick={createExcel}>
+            Excel
+          </button>
           <button
-            className="form-btn btn btn-primary"
+            className="form-btn btn btn-secondary"
             type="button"
-            onClick={onSubmit}
+            onClick={createReport}
           >
-            Submit
+            Report
           </button>
 
           <button

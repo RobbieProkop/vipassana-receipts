@@ -1,16 +1,16 @@
 import jsPDF from "jspdf";
-const generateReport = (receipts) => {
+const generateReport = (receipts, start, end) => {
   var doc = new jsPDF("l", "px", "a4");
 
   console.log("receiptsGen", receipts);
 
   // rectangle border
-  doc.rect(24, 24, 585, 350);
+  // doc.rect(24, 24, 585, 350);
 
   //pdf content
   doc.setFontSize(18);
 
-  // doc.text(40, 60, `N0. ${receipt[0].receiptNumber}`);
+  doc.text(40, 60, `Report from  ${start} to ${end}`);
 
   // //header
   // doc.setFontSize(28);
@@ -54,8 +54,6 @@ const generateReport = (receipts) => {
 
   // doc.setFontSize(16);
   // doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
-  // doc.save(
-  //   `AVF-${receipt[0].receiptNumber}-${receipt[0].firstName}-${receipt[0].lastName}.pdf`
-  // );
+  doc.save(`AVF-report-${start}-to-${end}.pdf`);
 };
 export default generateReport;
