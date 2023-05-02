@@ -1,4 +1,5 @@
 import { useState } from "react";
+import generateReport from "../helpers/generateReport";
 
 const Reports = () => {
   const [donor, setDonor] = useState("");
@@ -8,7 +9,9 @@ const Reports = () => {
     setShowForm(!showForm);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    generateReport();
+  };
   return (
     <>
       {!showForm && (
@@ -43,7 +46,7 @@ const Reports = () => {
               <input type="date" className="form-group" />
             </div>
           </div>
-          {/* <div className="form-group"> */}
+
           <button
             className="form-btn btn btn-primary"
             type="button"
@@ -59,7 +62,6 @@ const Reports = () => {
           >
             Cancel
           </button>
-          {/* </div> */}
         </form>
       )}
     </>

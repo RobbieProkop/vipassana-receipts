@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import jsPDF from "jspdf";
-import { getAll, getOneReceipt } from "../features/receipts/receiptSlice";
+import { getAll } from "../features/receipts/receiptSlice";
 import Spinner from "../components/Spinner";
 
 const ReceiptPage = () => {
@@ -10,9 +10,7 @@ const ReceiptPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { receiptsArr, isLoading, isError, message } = useSelector(
-    (state) => state.receipts
-  );
+  const { receiptsArr, isLoading } = useSelector((state) => state.receipts);
 
   useEffect(() => {
     if (!receiptsArr.length) {
