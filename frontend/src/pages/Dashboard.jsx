@@ -19,11 +19,6 @@ const Dashboard = () => {
   const [searchMonth, setSearchMonth] = useState("");
   const [donor, setDonor] = useState("");
 
-  //selecting the month
-  const onChange = (e) => {
-    setSearchMonth(e.target.value);
-  };
-
   useEffect(() => {
     if (!user) {
       return navigate("/login");
@@ -55,7 +50,7 @@ const Dashboard = () => {
               .filter((receipt) => {
                 const month = receipt.createdAt.split("-")[1];
                 //returns all receipts
-                if (!searchMonth && !donor) {
+                if (!donor) {
                   return receipt;
                 } else if (
                   //returns Donor Names that match

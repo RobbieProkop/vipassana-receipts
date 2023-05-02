@@ -35,28 +35,30 @@ const generateReport = (receipts, start, end) => {
     totalDonations += receipt.number;
   });
 
+  const centerText = (text) => {
+    let textWidth = doc.getTextWidth(text);
+    let pageWidth = doc.internal.pageSize.width;
+    return (pageWidth - textWidth) / 2;
+  };
   console.log("total", totalDonations);
   let doc = new jsPDF("p", "px", "a4");
   //pdf content
-  doc.setFontSize(18);
+  doc.setFontSize(20);
 
   //Heading
   let headingText = `AVF Donations Report`;
-  let headingWidth = doc.getTextWidth(headingText);
-  let subHeading =
-    "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4 \nCharitable Reg. #85502 1739 RR 0001\nCanadian Revenue Agency: www.cra-arc.gc.ca";
-  let subheadingWidth = doc.getTextWidth(subHeading);
-  let pageWidth = doc.internal.pageSize.width;
-  let xPos = (pageWidth - headingWidth) / 2;
-  doc.text(xPos, 60, headingText);
+  let PObox = "PO Box 8412 - Market Mall, Calgary, AB, T3A 5C4";
+  let charitable = "Charitable Reg. #85502 1739 RR 0001";
+  let cra = "Canadian Revenue Agency: www.cra-arc.gc.ca";
 
-  let xPos2 = (pageWidth - subheadingWidth) / 2;
+  doc.text(centerText(headingText), 60, headingText);
+
+  doc.setFontSize(12);
+  doc.text(centerText(PObox), 80, PObox);
+  doc.text(centerText(charitable), 100, charitable);
+  doc.text(centerText(cra), 120, cra);
 
   doc.setFontSize(16);
-  doc.text(xPos2, 80, subHeading);
-
-  // doc.text(195, 95, "Charitable Reg. #85502 1739 RR 0001");
-  // doc.text(195, 110, "Canadian Revenue Agency: www.cra-arc.gc.ca");
 
   //Report Start Date
   doc.text(40, 140, `Report Start Date: ${start}`);
@@ -64,11 +66,12 @@ const generateReport = (receipts, start, end) => {
   //Report End Date
   doc.text(40, 160, `Report End Date: ${end}`);
 
+  doc// Donor Count
+  .doc
+    .text(40, 200, `Number of Donors: ${receipts.length.toLocaleString()}`);
+
   // Donation total
   doc.text(40, 180, `Total Donations: $${totalDonations.toLocaleString()}`);
-
-  // Donor Count
-  doc.text(40, 200, `Number of Donors: ${receipts.length.toLocaleString()}`);
 
   // //header
   // doc.setFontSize(28);
