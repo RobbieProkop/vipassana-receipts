@@ -15,8 +15,15 @@ const generateExcel = (receipts, start, end) => {
     "postalCode",
   ];
 
+  const filteredData = receipts.map((receipt) =>
+    headers.reduce((acc, key) => {
+      acc[key] = receipt[key];
+      return acc;
+    }, {})
+  );
+
   const workbook = new XLSX.utils.book_new();
-  const worksheet = XLSX.utils.json_to_sheet(receipts, { header: headers });
+  const worksheet = XLSX.utils.json_to_sheet(filteredData);
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
   const filename = `dana-report-${start}-course.xlsx`;
   const file = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
