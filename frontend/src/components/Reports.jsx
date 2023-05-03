@@ -30,6 +30,7 @@ const Reports = ({ receipts }) => {
     }
 
     generateExcel(filteredReceipts, startDate, endDate);
+    setShowForm(!showForm);
   };
 
   const createReport = () => {
@@ -40,6 +41,7 @@ const Reports = ({ receipts }) => {
       return toast.error("Please select an end date");
     }
     generateReport(filteredReceipts, startDate, endDate);
+    setShowForm(!showForm);
   };
   return (
     <>
