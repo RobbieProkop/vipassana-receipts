@@ -43,7 +43,7 @@ const generateReport = (receipts, start, end) => {
   console.log("total", totalDonations);
   let doc = new jsPDF("p", "px", "a4");
   //pdf content
-  doc.setFontSize(20);
+  doc.setFontSize(28);
 
   //Heading
   let headingText = `AVF Donations Report`;
@@ -55,8 +55,8 @@ const generateReport = (receipts, start, end) => {
 
   doc.setFontSize(12);
   doc.text(centerText(PObox), 80, PObox);
-  doc.text(centerText(charitable), 100, charitable);
-  doc.text(centerText(cra), 120, cra);
+  doc.text(centerText(charitable), 90, charitable);
+  doc.text(centerText(cra), 100, cra);
 
   doc.setFontSize(16);
 
@@ -66,49 +66,27 @@ const generateReport = (receipts, start, end) => {
   //Report End Date
   doc.text(40, 160, `Report End Date: ${end}`);
 
-  doc// Donor Count
-  .doc
-    .text(40, 200, `Number of Donors: ${receipts.length.toLocaleString()}`);
+  doc.setFontSize(20);
+  // Counts
+  doc.text(40, 200, `Totals`);
+  doc.line(40, 205, 80, 205);
+
+  doc.setFontSize(16);
+  doc.text(40, 225, `Visa: $${visaTotal}`);
+  doc.text(40, 245, `MasterCard: $${mcTotal}`);
+  doc.text(40, 265, `Debit: $${debitTotal}`);
+  doc.text(40, 285, `Cash: $${cashTotal}`);
+  doc.text(40, 305, `Cheque: $${chequeTotal}`);
+  doc.text(40, 325, `In Kind: $${inKind}`);
+
+  // Donor Count
+  doc.text(40, 365, `Number of Donors: ${receipts.length.toLocaleString()}`);
 
   // Donation total
-  doc.text(40, 180, `Total Donations: $${totalDonations.toLocaleString()}`);
+  doc.text(40, 385, `Total Donations: $${totalDonations.toLocaleString()}`);
 
-  // //header
-  // doc.setFontSize(28);
-  // doc.text(190, 60, "Alberta Vipassana Foundation");
-
-  // //donation info
-  // doc.setFontSize(18);
-  // doc.text(90, 160, `${receiptDate}`);
-  // doc.text(90, 180, `Location: ${receipt[0].place}`);
-  // doc.text(90, 200, `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`);
-  // doc.text(90, 220, `Email: ${receipt[0].email}`);
-  // doc.text(90, 240, `${addy},`);
-  // doc.setLineWidth(0.7);
-  // doc.line(90, 245, 280, 245);
-  // doc.text(85, 260, ` ${city}, ${province}, Canada`);
-  // doc.line(90, 265, 280, 265);
-  // doc.text(90, 280, `${receipt[0].postalCode}`);
-  // doc.line(90, 285, 140, 285);
-
-  // doc.text(410, 160, `Donation Type: ${receipt[0].type}`);
-  // doc.text(410, 180, `Amount: $${receipt[0].number} `);
-  // doc.text(410, 200, `${amount1} `);
-  // doc.line(410, 205, 540, 205);
-
-  // doc.text(410, 220, `${amount2} `);
-  // doc.line(410, 225, 540, 225);
-
-  // doc.setFontSize(12);
-  // doc.text(410, 240, `Total Amount Received`);
-  // doc.setFontSize(20);
-  // doc.text(410, 280, `${receipt[0].signature} `);
   // doc.line(410, 285, 540, 285);
-  // doc.setFontSize(12);
-  // doc.text(410, 300, `Digital Signature`);
 
-  // doc.setFontSize(16);
-  // doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
   doc.save(`AVF-report-${start}-to-${end}.pdf`);
 };
 export default generateReport;
