@@ -23,33 +23,86 @@ const generateExcel = (receipts, start, end) => {
   );
 
   let total = 0;
+  let visaTotal = 0;
+  let mcTotal = 0;
+  let debitTotal = 0;
+  let cashTotal = 0;
+  let chequeTotal = 0;
+  let inKind = 0;
+
   receipts.forEach((receipt) => {
+    if (receipt.type === "VOID") return;
+    switch (receipt.type) {
+      case "Visa":
+        visaTotal += receipt.number;
+        break;
+      case "MasterCard":
+        mcTotal += receipt.number;
+        break;
+      case "Debit":
+        debitTotal += receipt.number;
+        break;
+      case "Cash":
+        cashTotal += receipt.number;
+        break;
+      case "Cheque":
+        chequeTotal += receipt.number;
+        break;
+      case "In-Kind":
+        inKind += receipt.number;
+        break;
+      default:
+        break;
+    }
+
     total += receipt.number;
   });
-
   const workbook = new XLSX.utils.book_new();
   const worksheet = XLSX.utils.json_to_sheet(filteredData);
 
-  // Add the "Total" header
-  const totalHeaderCell = XLSX.utils.encode_cell({
-    r: 0,
-    c: headers.length,
-  });
-  worksheet[totalHeaderCell] = { t: "s", v: "Total" };
+  // Add the "Total" headers
+  const totalHeaders = [
+    "visa Total",
+    "mc Total",
+    "debit Total",
+    "cash Total",
+    "cheque Total",
+    "inKind Total",
+    "Total",
+  ];
 
-  // Set the total value
+  totalHeaders.forEach((header, index) => {
+    const headerCell = XLSX.utils.encode_cell({
+      r: 0,
+      c: headers.length + index,
+    });
+    worksheet[headerCell] = { t: "s", v: header };
+  });
+
+  // Set the total values
   const totalRow = filteredData.length + 5;
-  const totalColumn = headers.length;
-  const totalCell = XLSX.utils.encode_cell({
-    r: totalRow,
-    c: totalColumn,
-  });
-  worksheet[totalCell] = { t: "n", v: total };
+  const totalValues = [
+    visaTotal,
+    mcTotal,
+    debitTotal,
+    cashTotal,
+    chequeTotal,
+    inKind,
+    total,
+  ];
 
-  // Update worksheet dimensions to include the total cell
+  totalValues.forEach((value, index) => {
+    const totalCell = XLSX.utils.encode_cell({
+      r: totalRow,
+      c: headers.length + index,
+    });
+    worksheet[totalCell] = { t: "n", v: value };
+  });
+
+  // Update worksheet dimensions to include the total cells
   worksheet["!ref"] = XLSX.utils.encode_range({
     s: { c: 0, r: 0 },
-    e: { c: totalColumn, r: totalRow },
+    e: { c: headers.length + totalHeaders.length - 1, r: totalRow },
   });
 
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
