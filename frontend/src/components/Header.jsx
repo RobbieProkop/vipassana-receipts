@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -25,7 +25,7 @@ const Header = () => {
             </div>
             <ul>
               <li>
-                <button className="btn" onClick={onLogout}>
+                <button className="btn btn-edit" onClick={onLogout}>
                   <FaSignOutAlt /> Logout
                 </button>
               </li>
