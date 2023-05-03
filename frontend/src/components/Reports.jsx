@@ -1,6 +1,7 @@
 import { useState } from "react";
 import generateReport from "../helpers/generateReport";
 import { toast } from "react-toastify";
+import generateExcel from "../helpers/generateExcel";
 
 const Reports = ({ receipts }) => {
   const [donor, setDonor] = useState("");
@@ -20,7 +21,16 @@ const Reports = ({ receipts }) => {
     return date <= end && date >= start;
   });
 
-  const createExcel = () => {};
+  const createExcel = () => {
+    if (!startDate) {
+      return toast.error("Please select a start date");
+    }
+    if (!endDate) {
+      return toast.error("Please select an end date");
+    }
+
+    generateExcel(filteredReceipts, startDate, endDate);
+  };
 
   const createReport = () => {
     if (!startDate) {

@@ -28,6 +28,7 @@ const generateReport = (receipts, start, end) => {
         break;
       case "In-Kind":
         inKind += receipt.number;
+        break;
       default:
         break;
     }
