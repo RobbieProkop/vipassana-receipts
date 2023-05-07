@@ -3,6 +3,7 @@ import { saveAs } from "file-saver";
 
 const generateExcel = (receipts, start, end) => {
   const headers = [
+    "receiptNumber",
     "firstName",
     "lastName",
     "email",
