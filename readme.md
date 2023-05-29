@@ -34,3 +34,10 @@ To setup, please install all the dependencies with `npm install`.
 ```sh
 npm start
 ```
+
+## To do list
+
+- change databse from MongoDB to MySQL or PostgreSQL
+- add ability to manually change receiptNumber
+- add filtering system to only display x number of receipts unless if you scroll down and click "load more" button.
+- error sometimes appears where the receiptNumber does not increment properly. Make it so the next receiptNumber is the previous one + 1;
