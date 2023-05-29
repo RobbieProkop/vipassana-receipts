@@ -11,8 +11,6 @@ const ReceiptForm = () => {
   // get the last known receipt in the receiptsArr
   const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
 
-  // const [address, setAddress] = useState("");
-
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
     receipt.length ? receipt[0].receiptNumber + 1 : 6061

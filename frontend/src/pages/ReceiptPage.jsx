@@ -31,16 +31,10 @@ const ReceiptPage = () => {
     });
 
     //variables for pdf print
-    // const addressArr = receipt[0].address.split(",");
-    // const addy = addressArr[4] ? addressArr[0] + addressArr[1] : addressArr[0];
-    // const city = addressArr[4] ? addressArr[2] : addressArr[1];
-    // const province = addressArr[4] ? addressArr[3] : addressArr[2];
-    // const country = addressArr[4] ? addressArr[4] : addressArr[3];
     const addy = receipt[0].address;
     const city = receipt[0].city;
     const province = receipt[0].province;
 
-    // const addy = receipt[0].address;
     //used to put the amount on different lines of the pdf
     const amount = receipt[0].words.split(" ");
 
