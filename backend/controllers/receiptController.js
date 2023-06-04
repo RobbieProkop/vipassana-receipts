@@ -31,9 +31,9 @@ const getAllReceipts = asyncHandler(async (req, res) => {
   let receipts = []
   if (SQL_ENABLED) {
     receipts = await sequelize.query(
-      `SELECT *
-      FROM Persons
-      ORDER BY personid DESC
+      `SELECT receipt_number, place, first_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      FROM Receipts
+      ORDER BY receipt_number DESC
       LIMIT 50
       OFFSET :offset;`, {
         raw: true,
