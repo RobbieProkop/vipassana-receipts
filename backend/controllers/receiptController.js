@@ -31,11 +31,18 @@ const getAllReceipts = asyncHandler(async (req, res) => {
   let receipts = []
   if (SQL_ENABLED) {
     receipts = await sequelize.query(
-      `SELECT * FROM Persons;`, {
-        raw: true
+      `SELECT *
+      FROM Persons
+      ORDER BY personid DESC
+      LIMIT 50
+      OFFSET :offset;`, {
+        raw: true,
+        type: QueryTypes.SELECT,
+        replacements: {
+          offset: offset
+        }
       }
     )
-    receipts = receipts[0]
   } else {
     receipts = await Receipt.find({ user: req.user.id });
   }
