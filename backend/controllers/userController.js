@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 
@@ -58,7 +59,13 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   //check for user usernanme
-  const user = await User.findOne({ username });
+  const user = {
+    id: process.env.ID,
+    username: process.env.USER,
+    password: process.env.PASS,
+    email: process.env.EMAIL,
+    isAdmin: process.env.ADMIN
+  };
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
