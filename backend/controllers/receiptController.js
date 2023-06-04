@@ -1,13 +1,44 @@
-const asyncHandler = require("express-async-handler");
+require('dotenv').config();
 
+const asyncHandler = require("express-async-handler");
 const Receipt = require("../models/receiptModel");
 const User = require("../models/userModel");
+const { Sequelize, DataTypes, Op, QueryTypes } = require('sequelize');
+const { DB_HOST, DB_USER, DB_PORT, DB_PASSWORD, DB_NAME } = process.env;
+
+// This is to allow the backend to continue working with mongo until the sql migration is 100% complete
+const SQL_ENABLED = process.env.SQL_ENABLED
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  dialect: 'postgres',
+  pool: {
+    max: 1,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
+
+// To continue using mongo during migration all new code will be in if (SQL_ENABLED) and old code will be the else
 
 // @desc:   Get All Receipts
 //@route:   GET /api/receipts
 //@access   Private
 const getAllReceipts = asyncHandler(async (req, res) => {
-  const receipts = await Receipt.find({ user: req.user.id });
+  // sql will grab 50 receipts at a time this is prep for that
+  const offset = req.query.offset ? Number(req.query.offset) : 0
+  let receipts = []
+  if (SQL_ENABLED) {
+    receipts = await sequelize.query(
+      `SELECT * FROM Persons;`, {
+        raw: true
+      }
+    )
+    receipts = receipts[0]
+  } else {
+    receipts = await Receipt.find({ user: req.user.id });
+  }
   res.status(200).json(receipts);
 });
 
