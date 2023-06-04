@@ -15,7 +15,6 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     idle: 10000
   }
 });
-module.exports = sequelize
 
 const mongoose = require("mongoose");
 
