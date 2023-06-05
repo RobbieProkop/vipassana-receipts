@@ -70,27 +70,53 @@ const createReceipt = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please complete all text fields");
   }
-  const receipt = await Receipt.create({
-    user: req.user.id,
-    receiptNumber: req.body.receiptNumber,
-    place: req.body.place,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    address: req.body.address,
-    // houseNumber: req.body.houseNumber,
-    // street: req.body.street,
-    city: req.body.city,
-    province: req.body.province,
-    // country: req.body.country,
-    postalCode: req.body.postalCode,
-    type: req.body.type,
-
-    number: req.body.number,
-    words: req.body.words,
-
-    signature: req.body.signature,
-  });
+  let receipt = []
+  if (SQL_ENABLED) {
+    receipt = await sequelize.query(
+      `INSERT INTO Receipts (place, first_name, email, address, city, province, postal_code, type, number, words, signature, created_at)
+      VALUES (:place, :first_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature, :created_at);`, {
+        raw: true,
+        type: QueryTypes.INSERT,
+        replacements: {
+          place: req.body.place ? req.body.place : null,
+          first_name: req.body.firstName ? req.body.firstName : null,
+          last_name: req.body.lastName ? req.body.lastName : null,
+          email: req.body.email ? req.body.email : null,
+          address: req.body.address ? req.body.address : null,
+          city: req.body.city ? req.body.city : null,
+          province: req.body.province ? req.body.province : null,
+          postal_code: req.body.postalCode ? req.body.postalCode : null,
+          type: req.body.type ? req.body.type : null,
+          number: req.body.number ? req.body.number : null,
+          words: req.body.words ? req.body.words : null,
+          signature: req.body.signature ? req.body.signature : null,
+          created_at: req.body.createdAt ? req.body.createdAt : null
+        }
+      }
+    )
+  } else {
+    receipt = await Receipt.create({
+      user: req.user.id,
+      receiptNumber: req.body.receiptNumber,
+      place: req.body.place,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      address: req.body.address,
+      // houseNumber: req.body.houseNumber,
+      // street: req.body.street,
+      city: req.body.city,
+      province: req.body.province,
+      // country: req.body.country,
+      postalCode: req.body.postalCode,
+      type: req.body.type,
+  
+      number: req.body.number,
+      words: req.body.words,
+  
+      signature: req.body.signature,
+    });
+  }
 
   res.status(200).json(receipt);
 });
