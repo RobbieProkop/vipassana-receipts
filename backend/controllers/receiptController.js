@@ -53,7 +53,23 @@ const getAllReceipts = asyncHandler(async (req, res) => {
 //@route:   GET /api/receipts/:id
 //@access   Private
 const getOneReceipt = asyncHandler(async (req, res) => {
-  const receipt = await Receipt.findById(req.params.id);
+  let receipt = []
+  if (SQL_ENABLED) {
+    receipt = await sequelize.query(
+      `SELECT receipt_number, place, first_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      FROM Receipts
+      WHERE receipt_number = :id;
+      `, {
+        raw: true,
+        type: QueryTypes.SELECT,
+        replacements: {
+          id: req.params.id
+        }
+      }
+    )
+  } else {
+    receipt = await Receipt.findById(req.params.id);
+  }
 
   if (!receipt) {
     res.status(400);
@@ -73,8 +89,8 @@ const createReceipt = asyncHandler(async (req, res) => {
   let receipt = []
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
-      `INSERT INTO Receipts (place, first_name, email, address, city, province, postal_code, type, number, words, signature, created_at)
-      VALUES (:place, :first_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature, :created_at);`, {
+      `INSERT INTO Receipts (place, first_name, email, address, city, province, postal_code, type, number, words, signature)
+      VALUES (:place, :first_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature);`, {
         raw: true,
         type: QueryTypes.INSERT,
         replacements: {
@@ -89,8 +105,7 @@ const createReceipt = asyncHandler(async (req, res) => {
           type: req.body.type ? req.body.type : null,
           number: req.body.number ? req.body.number : null,
           words: req.body.words ? req.body.words : null,
-          signature: req.body.signature ? req.body.signature : null,
-          created_at: req.body.createdAt ? req.body.createdAt : null
+          signature: req.body.signature ? req.body.signature : null
         }
       }
     )
