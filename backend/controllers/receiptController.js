@@ -171,7 +171,23 @@ const updateReceipt = asyncHandler(async (req, res) => {
 //@route:   DELETE /api/receipts/:id
 //@access   Private
 const deleteReceipt = asyncHandler(async (req, res) => {
-  const receipt = await Receipt.findById(req.params.id);
+  let receipt = []
+  if (SQL_ENABLED) {
+    receipt = await sequelize.query(
+      `DELETE FROM Receipts
+      WHERE receipt_id = :id;
+      `,
+      {
+        raw: true,
+        type: QueryTypes.DELETE,
+        replacements: {
+          id: req.params.id
+        }
+      }
+    )
+  } else {
+    receipt = await Receipt.findById(req.params.id);
+  }
 
   if (!receipt) {
     res.status(400);
