@@ -53,7 +53,11 @@ const ReceiptPage = () => {
       //pdf content
       doc.setFontSize(18);
 
-      doc.text(40, 60, `N0. ${receipt[0].receiptNumber}`);
+      doc.text(
+        40,
+        60,
+        `N0. ${receipt[0].receiptNumber || receipt[0].receipt_number}`
+      );
 
       //header
       doc.setFontSize(28);
@@ -72,7 +76,9 @@ const ReceiptPage = () => {
       doc.text(
         90,
         200,
-        `Donor: ${receipt[0].firstName} ${receipt[0].lastName}`
+        `Donor: ${
+          receipt[0].firstName ? receipt[0].firstName : receipt[0].full_name
+        } ${receipt[0].lastName ? receipt[0].lastName : ""}`
       );
       doc.text(90, 220, `Email: ${receipt[0].email}`);
       doc.text(90, 240, `${addy},`);
@@ -102,7 +108,13 @@ const ReceiptPage = () => {
       doc.setFontSize(16);
       doc.text(180, 350, `OFFICIAL RECEIPT FOR INCOME TAX PURPOSES`);
       doc.save(
-        `AVF-${receipt[0].receiptNumber}-${receipt[0].firstName}-${receipt[0].lastName}.pdf`
+        `AVF-${
+          receipt[0].receiptNumber
+            ? receipt[0].receiptNumber
+            : receipt[0].receipt_number
+        }-${
+          receipt[0].firstName ? receipt[0].firstName : receipt[0].full_name
+        }-${receipt[0].lastName ? receipt[0].lastName : ""}.pdf`
       );
     };
 
@@ -118,7 +130,10 @@ const ReceiptPage = () => {
               <div className="receipt-info">
                 <div className="receipt-head">
                   <h3>
-                    N<sub>0</sub>. {receipt[0].receiptNumber}
+                    N<sub>0</sub>.{" "}
+                    {receipt[0].receiptNumber
+                      ? receipt[0].receiptNumber
+                      : receipt[0].receipt_number}
                   </h3>
                   <h1>Alberta Vipassana Foundation</h1>
 
@@ -148,9 +163,13 @@ const ReceiptPage = () => {
             })} */}
                   </h3>
                   <h3>Location: {receipt[0].place}</h3>
-                  <h3>
-                    Donor: {receipt[0].firstName} {receipt[0].lastName}
-                  </h3>
+                  {receipt[0].firstName ? (
+                    <h3>
+                      Donor: {receipt[0].firstName} {receipt[0].lastName}
+                    </h3>
+                  ) : (
+                    <h3>Donor: {receipt[0].full_name}</h3>
+                  )}
                   <h3>Address: {receipt[0].address},</h3>
                   <h3>City: {receipt[0].city},</h3>
                   <h3>Province: {receipt[0].province},</h3>

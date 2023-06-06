@@ -55,6 +55,9 @@ const Dashboard = () => {
                   return receipt;
                 } else if (
                   //returns Donor Names that match
+                  receipt.full_name
+                    .toLowerCase()
+                    .includes(donor.toLowerCase()) ||
                   receipt.firstName
                     .toLowerCase()
                     .includes(donor.toLowerCase()) ||
