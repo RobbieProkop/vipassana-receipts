@@ -34,7 +34,6 @@ const Dashboard = () => {
   return (
     <>
       <section className="heading">
-        <h1>Welcome {user && user.username}</h1>
         <p>Receipts Dashboard</p>
         <Link to="/form">
           {" "}
@@ -55,6 +54,9 @@ const Dashboard = () => {
                   return receipt;
                 } else if (
                   //returns Donor Names that match
+                  receipt.full_name
+                    .toLowerCase()
+                    .includes(donor.toLowerCase()) ||
                   receipt.firstName
                     .toLowerCase()
                     .includes(donor.toLowerCase()) ||

@@ -35,13 +35,13 @@ const ReceiptForm = () => {
 
   const [receiptData, setReceiptData] = useState({
     place: receipt.place,
-    firstName: receipt.firstName,
-    lastName: receipt.lastName,
+    full_name: receipt.full_name,
+    // lastName: receipt.lastName,
     email: receipt.email,
     address: receipt.address,
     city: receipt.city,
     province: receipt.province,
-    postalCode: receipt.postalCode,
+    postal_code: receipt.postal_code,
     type: receipt.type,
     number: receipt.number,
     words: receipt.words,
@@ -50,13 +50,12 @@ const ReceiptForm = () => {
 
   const {
     place,
-    firstName,
-    lastName,
+    full_name,
     email,
     address,
     city,
     province,
-    postalCode,
+    postal_code,
     type,
     number,
     words,
@@ -67,13 +66,12 @@ const ReceiptForm = () => {
     e.preventDefault();
     const canSave = [
       place,
-      firstName,
-      lastName,
+      full_name,
       email,
       address,
       city,
       province,
-      postalCode,
+      postal_code,
       type,
       number.toString(),
       words,
@@ -85,13 +83,12 @@ const ReceiptForm = () => {
           editReceipt({
             id: id,
             place,
-            firstName,
-            lastName,
+            full_name,
             email,
             address,
             city,
             province,
-            postalCode,
+            postal_code,
             type,
             number,
             words,
@@ -102,13 +99,12 @@ const ReceiptForm = () => {
         // setAddress("");
         setReceiptData({
           place: "Youngstown",
-          firstName: "",
-          lastName: "",
+          full_name: "",
           email: "",
           address: "",
           city: "Calgary",
           province: "AB",
-          postalCode: "",
+          postal_code: "",
           type: "",
           number: 0,
           words: "",
@@ -124,13 +120,12 @@ const ReceiptForm = () => {
     } else {
       console.log(canSave);
       console.log("place", place.length);
-      console.log("firstName", firstName.length);
-      console.log("lastName", lastName.length);
+      console.log("full_name", full_name.length);
       console.log("email", email.length);
       console.log("address", address.length);
       console.log("city", city.length);
       console.log("province", province.length);
-      console.log("postalCode", postalCode.length);
+      console.log("postal_code", postal_code.length);
       console.log("type", type.length);
       console.log("number", number.length);
       console.log("words", words.length);
@@ -166,7 +161,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {receipt.receiptNumber}</p>
+            <p>ID: {receipt.receiptNumber || receipt.receipt_number}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
@@ -189,10 +184,10 @@ const ReceiptForm = () => {
             <div className="form-group">
               <input
                 type="text"
-                name="firstName"
-                id="firstName"
+                name="full_name"
+                id="full_name"
                 placeholder="First Name"
-                value={firstName}
+                value={full_name}
                 onChange={onChange}
               />
             </div>
@@ -306,10 +301,10 @@ const ReceiptForm = () => {
             <div className="form-group">
               <input
                 type="text"
-                name="postalCode"
-                id="postalCode"
+                name="postal_code"
+                id="postal_code"
                 placeholder="Postal Code"
-                value={postalCode}
+                value={postal_code}
                 onChange={onChange}
               />
             </div>

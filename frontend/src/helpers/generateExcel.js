@@ -3,9 +3,8 @@ import { saveAs } from "file-saver";
 
 const generateExcel = (receipts, start, end) => {
   const headers = [
-    "receiptNumber",
-    "firstName",
-    "lastName",
+    "receipt_number",
+    "full_name",
     "email",
     "number",
     "words",
@@ -13,7 +12,7 @@ const generateExcel = (receipts, start, end) => {
     "address",
     "city",
     "province",
-    "postalCode",
+    "postal_code",
   ];
 
   const filteredData = receipts.map((receipt) =>
