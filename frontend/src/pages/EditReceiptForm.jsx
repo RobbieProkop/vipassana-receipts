@@ -161,7 +161,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {receipt.receiptNumber}</p>
+            <p>ID: {receipt.receiptNumber || receipt.receipt_number}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>

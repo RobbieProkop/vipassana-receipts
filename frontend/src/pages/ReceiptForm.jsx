@@ -12,13 +12,15 @@ const ReceiptForm = () => {
   const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
 
   // used to increament the receipts number
-  const [receiptNumber, setReceiptNumber] = useState(
-    receipt.length ? receipt[0].receiptNumber + 1 : 6061
+  const [receipt_number, setReceiptNumber] = useState(
+    receipt.length && receipt[0].receipt_number
+      ? receipt[0].receipt_number + 1
+      : 6174
   );
 
   const [receiptData, setReceiptData] = useState({
     place: "Youngstown",
-    first_name: "",
+    full_name: "",
     email: "",
     address: "",
     city: "Calgary",
@@ -27,12 +29,12 @@ const ReceiptForm = () => {
     type: "",
     number: "",
     words: "",
-    signature: "",
+    signature: "Paz",
   });
 
   const {
     place,
-    first_name,
+    full_name,
     email,
     address,
     city,
@@ -48,7 +50,7 @@ const ReceiptForm = () => {
     e.preventDefault();
     const canSave = [
       place,
-      first_name,
+      full_name,
       email,
       address,
       city,
@@ -63,9 +65,9 @@ const ReceiptForm = () => {
       try {
         dispatch(
           createReceipt({
-            receiptNumber,
+            receipt_number,
             place,
-            first_name,
+            full_name,
             email,
             address,
             city,
@@ -78,10 +80,9 @@ const ReceiptForm = () => {
           })
         ).unwrap();
         toast.success("Receipt Added Successfully");
-        // setAddress("");
         setReceiptData({
           place: "",
-          first_name: "",
+          full_name: "",
           email: "",
           address: "",
           city: "Calgary",
@@ -92,7 +93,7 @@ const ReceiptForm = () => {
           words: "",
           signature: "",
         });
-        setReceiptNumber(receipt[0].receiptNumber + 1);
+        setReceiptNumber(receipt[0].receipt_number + 1);
         navigate("/");
       } catch (error) {
         const message =
@@ -102,7 +103,7 @@ const ReceiptForm = () => {
       }
     } else {
       console.log("place", place);
-      console.log("first_name", first_name);
+      console.log("full_name", full_name);
       console.log("email", email);
       console.log("postal_code", postal_code);
       console.log("type", type);
@@ -128,7 +129,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {receiptNumber}</p>
+            <p>ID: {receipt_number}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
@@ -151,10 +152,10 @@ const ReceiptForm = () => {
             <div className="form-group">
               <input
                 type="text"
-                name="first_name"
-                id="first_name"
+                name="full_name"
+                id="full_name"
                 placeholder="First Name"
-                value={first_name}
+                value={full_name}
                 onChange={onChange}
               />
             </div>
