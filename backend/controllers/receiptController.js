@@ -142,9 +142,30 @@ const createReceipt = asyncHandler(async (req, res) => {
 //@route:   PUT /api/receipts/:id
 //@access   Private
 const updateReceipt = asyncHandler(async (req, res) => {
+  const updateableFields = [
+    "receipt_number",
+    "place",
+    "first_name",
+    "email",
+    "address",
+    "city",
+    "province",
+    "postal_code",
+    "type",
+    "number",
+    "words",
+    "signature",
+    "created_at"
+  ]
   let receipt = []
   if (SQL_ENABLED) {
-    console.log('')
+    sqlUpdate = `UPDATE Receipts SET (`
+    for (let i = 0; i < updateableFields.length; i++) {
+      console.log(updateableFields[i])
+    }
+    sqlWhere = ` WHERE receipt_number = "id RETURNING *;`
+    sql = sqlUpdate + sqlWhere 
+    console.log(sql)
     receipt = ['test']
   } else {
     receipt = await Receipt.findById(req.params.id);
@@ -166,13 +187,13 @@ const updateReceipt = asyncHandler(async (req, res) => {
       throw new Error("User Not Authorized");
     }
   
-    const updatedReceipt = await Receipt.findByIdAndUpdate(
+    receipt = await Receipt.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
   }
-  res.status(200).json(updatedReceipt ? updatedReceipt : receipt);
+  res.status(200).json(receipt);
 });
 
 // @desc:   Delete Receipt
