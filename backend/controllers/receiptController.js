@@ -90,7 +90,8 @@ const createReceipt = asyncHandler(async (req, res) => {
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
       `INSERT INTO Receipts (place, first_name, email, address, city, province, postal_code, type, number, words, signature)
-      VALUES (:place, :first_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature);`, {
+      VALUES (:place, :first_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature)
+      RETURNING *;`, {
         raw: true,
         type: QueryTypes.INSERT,
         replacements: {
@@ -109,6 +110,7 @@ const createReceipt = asyncHandler(async (req, res) => {
         }
       }
     )
+    receipt = receipt[0]
   } else {
     receipt = await Receipt.create({
       user: req.user.id,
@@ -140,31 +142,37 @@ const createReceipt = asyncHandler(async (req, res) => {
 //@route:   PUT /api/receipts/:id
 //@access   Private
 const updateReceipt = asyncHandler(async (req, res) => {
-  const receipt = await Receipt.findById(req.params.id);
-
-  if (!receipt) {
-    res.status(400);
-    throw new Error("Receipt not found");
+  let receipt = []
+  if (SQL_ENABLED) {
+    console.log('')
+    receipt = ['test']
+  } else {
+    receipt = await Receipt.findById(req.params.id);
+  
+    if (!receipt) {
+      res.status(400);
+      throw new Error("Receipt not found");
+    }
+  
+    //check for user
+    if (!req.user) {
+      res.status(401);
+      throw new Error("User Not Found");
+    }
+  
+    //make sure logged in user matches receipt user
+    if (receipt.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error("User Not Authorized");
+    }
+  
+    const updatedReceipt = await Receipt.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
   }
-
-  //check for user
-  if (!req.user) {
-    res.status(401);
-    throw new Error("User Not Found");
-  }
-
-  //make sure logged in user matches receipt user
-  if (receipt.user.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User Not Authorized");
-  }
-
-  const updatedReceipt = await Receipt.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  res.status(200).json(updatedReceipt);
+  res.status(200).json(updatedReceipt ? updatedReceipt : receipt);
 });
 
 // @desc:   Delete Receipt
