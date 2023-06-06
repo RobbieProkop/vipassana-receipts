@@ -175,7 +175,7 @@ const deleteReceipt = asyncHandler(async (req, res) => {
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
       `DELETE FROM Receipts
-      WHERE receipt_id = :id;
+      WHERE receipt_number = :id;
       `,
       {
         raw: true,
@@ -187,26 +187,26 @@ const deleteReceipt = asyncHandler(async (req, res) => {
     )
   } else {
     receipt = await Receipt.findById(req.params.id);
+    if (!receipt) {
+      res.status(400);
+      throw new Error("Receipt not found");
+    }
+  
+    //check for user
+    if (!req.user) {
+      res.status(401);
+      throw new Error("User Not Found");
+    }
+  
+    //make sure logged in user matches receipt user
+    if (receipt.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error("User Not Authorized");
+    }
+  
+    await receipt.remove();
   }
 
-  if (!receipt) {
-    res.status(400);
-    throw new Error("Receipt not found");
-  }
-
-  //check for user
-  if (!req.user) {
-    res.status(401);
-    throw new Error("User Not Found");
-  }
-
-  //make sure logged in user matches receipt user
-  if (receipt.user.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User Not Authorized");
-  }
-
-  await receipt.remove();
 
   res.status(200).json({ id: req.params.id });
 });
