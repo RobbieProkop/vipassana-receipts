@@ -191,16 +191,6 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={onChange}
-              />
-            </div>
           </div>
           <div className="form-group">
             <input
