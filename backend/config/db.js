@@ -5,7 +5,7 @@ require('dotenv').config();
 //   (
 //     receipt_number SERIAL PRIMARY KEY,
 //     place VARCHAR(255),
-//     first_name VARCHAR(255),
+//     full_name VARCHAR(255),
 //     email VARCHAR(255),
 //     address VARCHAR(255),
 //     city VARCHAR(255),

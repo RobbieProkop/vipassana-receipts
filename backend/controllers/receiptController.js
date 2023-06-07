@@ -31,7 +31,7 @@ const getAllReceipts = asyncHandler(async (req, res) => {
   let receipts = []
   if (SQL_ENABLED) {
     receipts = await sequelize.query(
-      `SELECT receipt_number, place, first_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      `SELECT receipt_number, place, full_name, email, address, city, province, postal_code, type, number, words, signature, created_at
       FROM Receipts
       ORDER BY receipt_number DESC
       LIMIT 50
@@ -56,7 +56,7 @@ const getOneReceipt = asyncHandler(async (req, res) => {
   let receipt = []
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
-      `SELECT receipt_number, place, first_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      `SELECT receipt_number, place, full_name, email, address, city, province, postal_code, type, number, words, signature, created_at
       FROM Receipts
       WHERE receipt_number = :id;
       `, {
@@ -89,20 +89,19 @@ const createReceipt = asyncHandler(async (req, res) => {
   let receipt = []
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
-      `INSERT INTO Receipts (place, first_name, email, address, city, province, postal_code, type, number, words, signature)
-      VALUES (:place, :first_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature)
+      `INSERT INTO Receipts (place, full_name, email, address, city, province, postal_code, type, number, words, signature)
+      VALUES (:place, :full_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature)
       RETURNING *;`, {
         raw: true,
         type: QueryTypes.INSERT,
         replacements: {
           place: req.body.place ? req.body.place : null,
-          first_name: req.body.firstName ? req.body.firstName : null,
-          last_name: req.body.lastName ? req.body.lastName : null,
+          full_name: req.body.full_name ? req.body.full_name : null,
           email: req.body.email ? req.body.email : null,
           address: req.body.address ? req.body.address : null,
           city: req.body.city ? req.body.city : null,
           province: req.body.province ? req.body.province : null,
-          postal_code: req.body.postalCode ? req.body.postalCode : null,
+          postal_code: req.body.postal_code ? req.body.postal_code : null,
           type: req.body.type ? req.body.type : null,
           number: req.body.number ? req.body.number : null,
           words: req.body.words ? req.body.words : null,
@@ -145,7 +144,7 @@ const updateReceipt = asyncHandler(async (req, res) => {
   const updateableFields = [
     "receipt_number",
     "place",
-    "first_name",
+    "full_name",
     "email",
     "address",
     "city",
