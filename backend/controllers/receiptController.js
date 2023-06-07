@@ -158,15 +158,32 @@ const updateReceipt = asyncHandler(async (req, res) => {
     "created_at"
   ]
   let receipt = []
+  let updates = {id: req.params.id}
   if (SQL_ENABLED) {
-    sqlUpdate = `UPDATE Receipts SET (`
+    // build query based on updateable fields
+    sqlUpdate = `UPDATE Receipts SET`
     for (let i = 0; i < updateableFields.length; i++) {
-      console.log(updateableFields[i])
+      if (req.body[updateableFields[i]]) {
+        sqlUpdate += ` ${updateableFields[i]} = :${updateableFields[i]},`
+        updates[updateableFields[i]] = req.body[updateableFields[i]]
+      }
     }
-    sqlWhere = ` WHERE receipt_number = "id RETURNING *;`
-    sql = sqlUpdate + sqlWhere 
-    console.log(sql)
-    receipt = ['test']
+    // break out if no updates passed
+    if (Object.keys(updates).length === 1) {
+      res.status(400)
+      throw new Error("No updates needed")
+    }
+    // remove trailing ,
+    sqlUpdate = sqlUpdate.slice(0, -1)
+    sqlWhere = ` WHERE receipt_number = :id RETURNING *;`
+    // put full query together
+    sql = sqlUpdate + sqlWhere
+    receipt = await sequelize.query(sql, {
+      raw: true,
+      type: QueryTypes.UPDATE,
+      replacements: updates
+    })
+    receipt = receipt[0]
   } else {
     receipt = await Receipt.findById(req.params.id);
   
