@@ -1,12 +1,13 @@
 import { FaSignInAlt, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
+import { AppDispatch, RootState } from "../app/store";
 
-const Login = () => {
+const Login: FC = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -17,10 +18,10 @@ const Login = () => {
   const { username, password } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state: RootState) => state.auth
   );
 
   useEffect(() => {
