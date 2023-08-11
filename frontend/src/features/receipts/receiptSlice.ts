@@ -53,28 +53,31 @@ export const getAll = createAsyncThunk<
 });
 
 //Get individual receipt
-export const getOneReceipt = createAsyncThunk(
-  "receipts/getOne",
-  async (receiptsId, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await receiptService.getOneReceipt(receiptsId, token);
-    } catch (error) {
-      const message =
-        error.response.data.message || error.message || error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const getOneReceipt = createAsyncThunk<
+  ReceiptType[], //Return type
+  void, // Thunk Argument
+  { rejectValue: string; state: RootState } // ThunkAPIConfig
+>("receipts/getOne", async (receiptsId, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user?.token;
+    return await receiptService.getOneReceipt(receiptsId, token);
+  } catch (error: any) {
+    const message =
+      error.response.data.message || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 // Create new receipt
-export const createReceipt = createAsyncThunk(
+export const createReceipt = createAsyncThunk<//Return type
+// Thunk Argument
+{ rejectValue: string; state: RootState }>( // ThunkAPIConfig
   "receipts/create",
   async (receiptData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user?.token;
       return await receiptService.createReceipt(receiptData, token);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         error.response.data.message || error.message || error.toString();
 
@@ -84,14 +87,16 @@ export const createReceipt = createAsyncThunk(
 );
 
 // Edit a receipt
-export const editReceipt = createAsyncThunk(
+export const editReceipt = createAsyncThunk<//Return type
+// Thunk Argument
+{ rejectValue: string; state: RootState }>( // ThunkAPIConfig
   "receipts/edit",
   async (receiptData, thunkAPI) => {
     const { id } = receiptData;
     try {
-      const token = thunkAPI.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user?.token;
       return await receiptService.editReceipt(id, receiptData, token);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         error.response.data.message || error.message || error.toString();
       return thunkAPI.rejectWithValue(message);
@@ -100,13 +105,15 @@ export const editReceipt = createAsyncThunk(
 );
 
 // delete user Receipt
-export const deleteReceipt = createAsyncThunk(
+export const deleteReceipt = createAsyncThunk<//Return type
+// Thunk Argument
+{ rejectValue: string; state: RootState }>( // ThunkAPIConfig
   "receipts/delete",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user?.token;
       return await receiptService.deleteReceipt(id, token);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         error.response.data.message || error.message || error.toString();
 
@@ -143,7 +150,9 @@ export const receiptSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message =
+          action.payload ??
+          "An error occurred in the Receipt Slice get all receipts";
         state.receiptsArr = [];
       })
       //Get One
@@ -158,7 +167,9 @@ export const receiptSlice = createSlice({
       .addCase(getOneReceipt.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message =
+          action.payload ??
+          "An error occurred in the Receipt Slice get one receipt";
         state.receiptsArr = [];
       })
       //Create
@@ -173,7 +184,9 @@ export const receiptSlice = createSlice({
       .addCase(createReceipt.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message =
+          action.payload ??
+          "An error occurred in the Receipt Slice create receipt";
       })
       .addCase(editReceipt.pending, (state) => {
         state.isLoading = true;
@@ -194,7 +207,9 @@ export const receiptSlice = createSlice({
       .addCase(editReceipt.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message =
+          action.payload ??
+          "An error occurred in the Receipt Slice edit receipt";
       })
       //Delete
       .addCase(deleteReceipt.pending, (state) => {
@@ -210,7 +225,9 @@ export const receiptSlice = createSlice({
       .addCase(deleteReceipt.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message =
+          action.payload ??
+          "An error occurred in the Receipt Slice delete receipt";
       });
   },
 });
