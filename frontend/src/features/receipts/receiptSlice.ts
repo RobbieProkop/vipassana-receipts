@@ -69,22 +69,21 @@ export const getOneReceipt = createAsyncThunk<
 });
 
 // Create new receipt
-export const createReceipt = createAsyncThunk<//Return type
-// Thunk Argument
-{ rejectValue: string; state: RootState }>( // ThunkAPIConfig
-  "receipts/create",
-  async (receiptData, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user?.token;
-      return await receiptService.createReceipt(receiptData, token);
-    } catch (error: any) {
-      const message =
-        error.response.data.message || error.message || error.toString();
+export const createReceipt = createAsyncThunk<
+  void, //Return type
+  ReceiptType, // Thunk Argument
+  { rejectValue: string; state: RootState }
+>("receipts/create", async (receiptData, thunkAPI) => { // ThunkAPIConfig
+  try {
+    const token = thunkAPI.getState().auth.user?.token;
+    return await receiptService.createReceipt(receiptData, token);
+  } catch (error: any) {
+    const message =
+      error.response.data.message || error.message || error.toString();
 
-      return thunkAPI.rejectWithValue(message);
-    }
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 // Edit a receipt
 export const editReceipt = createAsyncThunk<//Return type
