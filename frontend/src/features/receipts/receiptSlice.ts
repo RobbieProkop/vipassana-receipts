@@ -27,7 +27,15 @@ export interface ReceiptType {
   country: string;
 }
 
-const initialState = {
+export interface ReceiptState {
+  receiptsArr: ReceiptType[] | [];
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  message: string;
+}
+
+const initialState: ReceiptState = {
   receiptsArr: [],
   isLoading: false,
   isSuccess: false,

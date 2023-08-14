@@ -35,6 +35,7 @@ const createReceipt = async (receiptData, token) => {
   };
 
   const { data } = await axios.post(API_URL, receiptData, config);
+  console.log("data", typeof data, data);
   return data;
 };
 
