@@ -1,26 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-
-export interface UserType {
-  _id: number;
-  username: string;
-  email: string;
-  isAdmin: boolean;
-  token: string;
-  message: string;
-}
+import { UserType, AuthState } from "../states";
 
 //Get user from Local Storage
 const storedUser = localStorage.getItem("user");
 const user: UserType | null = storedUser ? JSON.parse(storedUser) : null;
-
-interface AuthState {
-  user: UserType | null;
-  isError: boolean;
-  isLoading: boolean;
-  isSuccess: boolean;
-  message: string;
-}
 
 const initialState: AuthState = {
   user: user ? user : null,
@@ -45,11 +29,6 @@ export const register = createAsyncThunk<
     return thunkAPI.rejectWithValue(message);
   }
 });
-
-// //Logout
-// export const logout = createAsyncThunk("auth/logout", async () => {
-//   await authService.logout();
-// });
 
 //login User
 export const login = createAsyncThunk<

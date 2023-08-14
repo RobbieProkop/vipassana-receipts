@@ -1,39 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import receiptService from "./receiptService";
 import { RootState } from "../../app/store";
-
-export interface ReceiptType {
-  _id: string;
-  user: string;
-  receiptNumber?: number;
-  receipt_number?: number;
-  place: string;
-  full_name?: string;
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  address: string;
-  postalCode: string;
-  type: string;
-  number: number;
-  words: string;
-  signature: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  city: string;
-  province: string;
-  donor: string;
-  country: string;
-}
-
-export interface ReceiptState {
-  receiptsArr: ReceiptType[] | [];
-  isError: boolean;
-  isLoading: boolean;
-  isSuccess: boolean;
-  message: string;
-}
+import { ReceiptState, ReceiptType } from "../states";
 
 const initialState: ReceiptState = {
   receiptsArr: [],
@@ -51,6 +19,9 @@ export const getAll = createAsyncThunk<
 >("receipts/getAll", async (_, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user?.token;
+    if (!token) {
+      return thunkAPI.rejectWithValue("token not valid");
+    }
     return await receiptService.getAll(token);
   } catch (error: any) {
     const message =
@@ -63,11 +34,14 @@ export const getAll = createAsyncThunk<
 //Get individual receipt
 export const getOneReceipt = createAsyncThunk<
   ReceiptType[], //Return type
-  void, // Thunk Argument
+  string, // Thunk Argument
   { rejectValue: string; state: RootState } // ThunkAPIConfig
 >("receipts/getOne", async (receiptsId, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user?.token;
+    if (!token) {
+      return thunkAPI.rejectWithValue("token not valid");
+    }
     return await receiptService.getOneReceipt(receiptsId, token);
   } catch (error: any) {
     const message =
@@ -86,6 +60,9 @@ export const createReceipt = createAsyncThunk<
   // ThunkAPIConfig
   try {
     const token = thunkAPI.getState().auth.user?.token;
+    if (!token) {
+      return thunkAPI.rejectWithValue("token not valid");
+    }
     return await receiptService.createReceipt(receiptData, token);
   } catch (error: any) {
     const message =
@@ -106,6 +83,9 @@ export const editReceipt = createAsyncThunk<
   const { _id } = receiptData;
   try {
     const token = thunkAPI.getState().auth.user?.token;
+    if (!token) {
+      return thunkAPI.rejectWithValue("token not valid");
+    }
     return await receiptService.editReceipt(_id, receiptData, token);
   } catch (error: any) {
     const message =
@@ -116,13 +96,17 @@ export const editReceipt = createAsyncThunk<
 
 // delete user Receipt
 export const deleteReceipt = createAsyncThunk<
+  // CHEK THIS RETURN TYPE
   { id: string }, //Return type
-  { id: string }, // Thunk Argument
+  string, // Thunk Argument
   { rejectValue: string; state: RootState }
 >("receipts/delete", async (id, thunkAPI) => {
   // ThunkAPIConfig
   try {
     const token = thunkAPI.getState().auth.user?.token;
+    if (!token) {
+      return thunkAPI.rejectWithValue("token not valid");
+    }
     return await receiptService.deleteReceipt(id, token);
   } catch (error: any) {
     const message =

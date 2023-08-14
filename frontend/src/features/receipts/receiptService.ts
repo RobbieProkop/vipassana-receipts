@@ -1,10 +1,11 @@
 import axios from "axios";
+import { ReceiptType } from "../states";
 
 axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 const API_URL = "/api/receipts/";
 
 //get all receipts
-const getAll = async (token) => {
+const getAll = async (token: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -16,7 +17,7 @@ const getAll = async (token) => {
 };
 
 //Get one receipt
-const getOneReceipt = async (receiptId, token) => {
+const getOneReceipt = async (receiptId: string, token: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,7 +28,7 @@ const getOneReceipt = async (receiptId, token) => {
 };
 
 //Create new Receipt
-const createReceipt = async (receiptData, token) => {
+const createReceipt = async (receiptData: ReceiptType, token: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -40,7 +41,11 @@ const createReceipt = async (receiptData, token) => {
 };
 
 //Edit Receipt
-const editReceipt = async (receiptId, receiptData, token) => {
+const editReceipt = async (
+  receiptId: string,
+  receiptData: ReceiptType,
+  token: string
+) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -52,7 +57,7 @@ const editReceipt = async (receiptId, receiptData, token) => {
 };
 
 //Delete Receipt
-const deleteReceipt = async (receiptId, token) => {
+const deleteReceipt = async (receiptId: string, token: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

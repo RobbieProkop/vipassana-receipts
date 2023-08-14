@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserType } from "./authSlice";
+import { UserType } from "../states";
 
 axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 const API_URL = "/api/users/";

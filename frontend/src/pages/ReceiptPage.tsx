@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-// import jsPDF from "jspdf";
 import { getAll } from "../features/receipts/receiptSlice";
 import generatePDF from "../helpers/generatePDF";
 import Spinner from "../components/Spinner";
 import { AppDispatch, RootState } from "../app/store";
-import { ReceiptType } from "../features/receipts/receiptSlice";
+import { ReceiptType } from "../features/states";
 
 const ReceiptPage = () => {
   const dispatch = useDispatch<AppDispatch>();
