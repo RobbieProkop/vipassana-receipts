@@ -5,14 +5,15 @@ import ReceiptItem from "../components/ReceiptItem";
 import Spinner from "../components/Spinner";
 import { getAll } from "../features/receipts/receiptSlice";
 import Reports from "../components/Reports";
+import { AppDispatch, RootState } from "../app/store";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const { receiptsArr, isLoading, isError, message } = useSelector(
-    (state) => state.receipts
+    (state: RootState) => state.receipts
   );
 
   //useStates
@@ -40,7 +41,7 @@ const Dashboard = () => {
           <button className="btn">Add A Receipt</button>
         </Link>
         <div className="search">
-          <Reports receipts={receiptsArr} />
+          <Reports receipts={receiptsArr} donor={donor} setDonor={setDonor} />
         </div>
       </section>
       <section className="content">
@@ -49,29 +50,28 @@ const Dashboard = () => {
             {receiptsArr
               .filter((receipt) => {
                 const month = receipt.createdAt.split("-")[1];
-                //returns all receipts
-                if (!donor) {
-                  return receipt;
-                } else if (
-                  //returns Donor Names that match
-                  receipt.full_name
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  receipt.firstName
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  receipt.lastName
-                    .toLowerCase()
-                    .includes(donor.toLowerCase()) ||
-                  (receipt.firstName + " " + receipt.lastName)
-                    .toLowerCase()
-                    .includes(donor.toLowerCase())
+
+                const checkNameMatch = (name: string | undefined): boolean => {
+                  if (!name) return false;
+                  return name.toLowerCase().includes(donor.toLowerCase());
+                };
+                // If no donor, return all receipts.
+                if (!donor) return true;
+
+                // check name for matches
+                if (
+                  checkNameMatch(receipt.full_name) ||
+                  checkNameMatch(receipt.firstName) ||
+                  checkNameMatch(receipt.lastName) ||
+                  checkNameMatch(receipt.firstName + " " + receipt.lastName)
                 ) {
-                  return receipt;
-                } else if (month === searchMonth) {
-                  //returns donation month matches
-                  return receipt;
+                  return true;
                 }
+
+                // if month matches searchMonth
+                if (month === searchMonth) return true;
+
+                return false;
               })
               //newest receipts will show first
               .sort((a, b) => {

@@ -3,8 +3,8 @@ import generateReport from "../helpers/generateReport";
 import { toast } from "react-toastify";
 import generateExcel from "../helpers/generateExcel";
 
-const Reports = ({ receipts }) => {
-  const [donor, setDonor] = useState("");
+const Reports = ({ receipts, donor, setDonor }) => {
+  // const [donor, setDonor] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
