@@ -79,7 +79,7 @@ export const getOneReceipt = createAsyncThunk<
 // Create new receipt
 export const createReceipt = createAsyncThunk<
   //  CHeck this return type!!
-  void, //Return type
+  ReceiptType, //Return type
   ReceiptType, // Thunk Argument
   { rejectValue: string; state: RootState }
 >("receipts/create", async (receiptData, thunkAPI) => {
@@ -98,15 +98,15 @@ export const createReceipt = createAsyncThunk<
 // Edit a receipt
 export const editReceipt = createAsyncThunk<
   // CHECK THE RETURN TYPE!
-  void, //Return type
+  ReceiptType, //Return type
   ReceiptType, // Thunk Argument
   { rejectValue: string; state: RootState }
 >("receipts/edit", async (receiptData, thunkAPI) => {
   // ThunkAPIConfig
-  const { id } = receiptData;
+  const { _id } = receiptData;
   try {
     const token = thunkAPI.getState().auth.user?.token;
-    return await receiptService.editReceipt(id, receiptData, token);
+    return await receiptService.editReceipt(_id, receiptData, token);
   } catch (error: any) {
     const message =
       error.response.data.message || error.message || error.toString();
@@ -116,7 +116,7 @@ export const editReceipt = createAsyncThunk<
 
 // delete user Receipt
 export const deleteReceipt = createAsyncThunk<
-  void, //Return type
+  { id: string }, //Return type
   { id: string }, // Thunk Argument
   { rejectValue: string; state: RootState }
 >("receipts/delete", async (id, thunkAPI) => {
@@ -189,7 +189,8 @@ export const receiptSlice = createSlice({
       .addCase(createReceipt.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.receiptsArr.push(action.payload);
+        const newArray = [...state.receiptsArr, action.payload];
+        state.receiptsArr = newArray;
       })
       .addCase(createReceipt.rejected, (state, action) => {
         state.isLoading = false;
@@ -220,25 +221,25 @@ export const receiptSlice = createSlice({
         state.message =
           action.payload ??
           "An error occurred in the Receipt Slice edit receipt";
-      })
-      //Delete
-      .addCase(deleteReceipt.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(deleteReceipt.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.receiptsArr = state.receiptsArr.filter(
-          (receipt) => receipt._id !== action.payload.id
-        );
-      })
-      .addCase(deleteReceipt.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message =
-          action.payload ??
-          "An error occurred in the Receipt Slice delete receipt";
       });
+    // //Delete
+    // .addCase(deleteReceipt.pending, (state) => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(deleteReceipt.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isSuccess = true;
+    //   state.receiptsArr = state.receiptsArr.filter(
+    //     (receipt) => receipt._id !== action.payload.id
+    //   );
+    // })
+    // .addCase(deleteReceipt.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isError = true;
+    //   state.message =
+    //     action.payload ??
+    //     "An error occurred in the Receipt Slice delete receipt";
+    // });
   },
 });
 

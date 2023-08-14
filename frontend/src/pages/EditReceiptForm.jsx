@@ -81,7 +81,7 @@ const ReceiptForm = () => {
       try {
         dispatch(
           editReceipt({
-            id: id,
+            _id: id,
             place,
             full_name,
             email,
