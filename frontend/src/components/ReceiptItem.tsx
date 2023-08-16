@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { ReceiptType } from "../features/states";
 
-const ReceiptItem = ({ receipt }) => {
+interface ReceiptProps {
+  receipt: ReceiptType;
+}
+
+const ReceiptItem = ({ receipt }: ReceiptProps) => {
   const navigate = useNavigate();
 
   const onClick = () => {

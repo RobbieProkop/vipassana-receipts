@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteReceipt } from "../features/receipts/receiptSlice";
+import { AppDispatch } from "../app/store";
 
 const Confirm = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
-
+  if (!id) return navigate("/");
   // const receipt = useSelector((state) => {
   //   return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
   // });
@@ -14,6 +15,7 @@ const Confirm = () => {
   const onCancel = () => {
     navigate(`/${id}`);
   };
+
   const onDelete = () => {
     dispatch(deleteReceipt(id));
     navigate("/");
