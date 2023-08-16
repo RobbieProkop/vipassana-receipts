@@ -4,15 +4,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { editReceipt } from "../features/receipts/receiptSlice";
 import Spinner from "../components/Spinner";
+import { RootState } from "../app/store";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
   const { receiptsArr, isLoading, isError, message } = useSelector(
-    (state) => state.receipts
+    (state: RootState) => state.receipts
   );
 
   useEffect(() => {
@@ -34,18 +35,23 @@ const ReceiptForm = () => {
   // const [address, setAddress] = useState(receipt ? receipt.address : "");
 
   const [receiptData, setReceiptData] = useState({
-    place: receipt.place,
-    full_name: receipt.full_name,
-    // lastName: receipt.lastName,
-    email: receipt.email,
-    address: receipt.address,
-    city: receipt.city,
-    province: receipt.province,
-    postal_code: receipt.postal_code,
-    type: receipt.type,
-    number: receipt.number,
-    words: receipt.words,
-    signature: receipt.signature,
+    place: receipt && receipt.place ? receipt.place : "",
+    full_name:
+      receipt && receipt.firstName && receipt.lastName
+        ? `${receipt.firstName} ${receipt.lastName}`
+        : receipt && receipt.full_name
+        ? receipt.full_name
+        : "",
+    email: receipt && receipt.email ? receipt.email : "",
+    address: receipt && receipt.address ? receipt.address : "",
+    city: receipt && receipt.city ? receipt.city : "",
+    province: receipt && receipt.province ? receipt.province : "",
+    country: receipt && receipt.country ? receipt.country : "",
+    postalCode: receipt && receipt.postalCode ? receipt.postalCode : "",
+    type: receipt && receipt.type ? receipt.type : "",
+    number: receipt && receipt.number ? receipt.number : 0,
+    words: receipt && receipt.words ? receipt.words : "",
+    signature: receipt && receipt.signature ? receipt.signature : "",
   });
 
   const {
@@ -55,7 +61,8 @@ const ReceiptForm = () => {
     address,
     city,
     province,
-    postal_code,
+    country,
+    postalCode,
     type,
     number,
     words,
@@ -71,7 +78,8 @@ const ReceiptForm = () => {
       address,
       city,
       province,
-      postal_code,
+      country,
+      postalCode,
       type,
       number.toString(),
       words,
@@ -88,7 +96,8 @@ const ReceiptForm = () => {
             address,
             city,
             province,
-            postal_code,
+            country,
+            postalCode,
             type,
             number,
             words,
@@ -104,14 +113,15 @@ const ReceiptForm = () => {
           address: "",
           city: "Calgary",
           province: "AB",
-          postal_code: "",
+          country: "Canada",
+          postalCode: "",
           type: "",
           number: 0,
           words: "",
           signature: "",
         });
         navigate("/");
-      } catch (error) {
+      } catch (error: any) {
         const message =
           error.response.data.message || error.message || error.toString();
         toast.error(message);
@@ -125,9 +135,9 @@ const ReceiptForm = () => {
       console.log("address", address.length);
       console.log("city", city.length);
       console.log("province", province.length);
-      console.log("postal_code", postal_code.length);
+      console.log("postalCode", postalCode.length);
       console.log("type", type.length);
-      console.log("number", number.length);
+      console.log("number", number);
       console.log("words", words.length);
       console.log("signature", signature.length);
       console.log("address", address.length);
@@ -138,13 +148,19 @@ const ReceiptForm = () => {
     }
   };
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReceiptData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
+  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setReceiptData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
   if (!receipt) {
     return (
       <section>
@@ -236,46 +252,6 @@ const ReceiptForm = () => {
               />
             </div>
 
-            {/* <div className="form-group">
-              <input
-                type="text"
-                name="houseNumber"
-                id="houseNumber"
-                placeholder="House Number"
-                value={houseNumber}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="street"
-                id="stree"
-                placeholder="Street"
-                value={street}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="city"
-                id="city"
-                placeholder="City"
-                value={city}
-                onChange={onChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="province"
-                id="province"
-                placeholder="Province"
-                value={province}
-                onChange={onChange}
-              />
-            </div>
             <div className="form-group">
               <input
                 type="text"
@@ -286,15 +262,14 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-                    */}
 
             <div className="form-group">
               <input
                 type="text"
-                name="postal_code"
-                id="postal_code"
+                name="postalCode"
+                id="postalCode"
                 placeholder="Postal Code"
-                value={postal_code}
+                value={postalCode}
                 onChange={onChange}
               />
             </div>
@@ -310,13 +285,14 @@ const ReceiptForm = () => {
                 name="type"
                 id="type"
                 defaultValue={type}
-                onChange={onChange}
+                onChange={onSelectChange}
               >
                 <option value="">--Please Select A Donation Type--</option>
                 <option value="Visa">Visa</option>
                 <option value="MasterCard">MasterCard</option>
                 <option value="Amex">Amex</option>
                 <option value="Debit">Debit</option>
+                <option value="E-Transfer">E-Transfer</option>
                 <option value="Cash">Cash</option>
                 <option value="Cheque">Cheque</option>
                 <option value="Void">Void</option>
