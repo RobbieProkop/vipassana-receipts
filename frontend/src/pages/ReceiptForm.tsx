@@ -88,7 +88,7 @@ const ReceiptForm = () => {
         ).unwrap();
         toast.success("Receipt Added Successfully");
         setReceiptData({
-          place: "",
+          place: "Youngstown",
           full_name: "",
           email: "",
           address: "",
