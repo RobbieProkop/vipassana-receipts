@@ -24,19 +24,20 @@ export interface ReceiptType {
   country: string;
 }
 export interface CreateReceiptType {
+  _id?: string;
   receiptNumber: number;
   place: string;
   full_name: string;
   email: string;
   address: string;
+  city: string;
+  province: string;
+  country: string;
   postalCode: string;
   type: string;
   number: number;
   words: string;
   signature: string;
-  city: string;
-  province: string;
-  country: string;
 }
 
 export interface ReceiptState {

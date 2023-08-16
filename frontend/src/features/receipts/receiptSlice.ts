@@ -76,17 +76,15 @@ export const createReceipt = createAsyncThunk<
 export const editReceipt = createAsyncThunk<
   // CHECK THE RETURN TYPE!
   ReceiptType, //Return type
-  ReceiptType, // Thunk Argument
-  { rejectValue: string; state: RootState }
+  CreateReceiptType, // Thunk Argument
+  { rejectValue: string; state: RootState } // ThunkAPIConfig
 >("receipts/edit", async (receiptData, thunkAPI) => {
-  // ThunkAPIConfig
-  const { _id } = receiptData;
   try {
     const token = thunkAPI.getState().auth.user?.token;
     if (!token) {
       return thunkAPI.rejectWithValue("token not valid");
     }
-    return await receiptService.editReceipt(_id, receiptData, token);
+    return await receiptService.editReceipt(receiptData, token);
   } catch (error: any) {
     const message =
       error.response.data.message || error.message || error.toString();

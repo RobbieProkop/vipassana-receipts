@@ -37,23 +37,19 @@ const createReceipt = async (receiptData: CreateReceiptType, token: string) => {
   };
 
   const { data } = await axios.post(API_URL, receiptData, config);
-  console.log("data", typeof data, data);
   return data;
 };
 
 //Edit Receipt
-const editReceipt = async (
-  receiptId: string,
-  receiptData: ReceiptType,
-  token: string
-) => {
+const editReceipt = async (receiptData: CreateReceiptType, token: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+  const { _id } = receiptData;
 
-  const { data } = await axios.put(API_URL + receiptId, receiptData, config);
+  const { data } = await axios.put(API_URL + _id, receiptData, config);
   return data;
 };
 

@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { editReceipt } from "../features/receipts/receiptSlice";
 import Spinner from "../components/Spinner";
-import { RootState } from "../app/store";
+import { AppDispatch, RootState } from "../app/store";
 
 const ReceiptForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -29,12 +29,16 @@ const ReceiptForm = () => {
       navigate("/");
     }
   }, [user, navigate, isError, message, dispatch]);
+  if (!id) return <h2>Receipt not found</h2>;
 
   let receipt = receiptsArr.find((receipt) => receipt._id === id);
 
-  // const [address, setAddress] = useState(receipt ? receipt.address : "");
+  const [receiptNumber, setReceiptNumber] = useState(
+    receipt && receipt.receiptNumber ? receipt.receiptNumber : 0
+  );
 
   const [receiptData, setReceiptData] = useState({
+    // receiptNumber: receipt && receipt.receiptNumber ? receipt.receiptNumber : 0,
     place: receipt && receipt.place ? receipt.place : "",
     full_name:
       receipt && receipt.firstName && receipt.lastName
@@ -69,7 +73,7 @@ const ReceiptForm = () => {
     signature,
   } = receiptData;
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const canSave = [
       place,
@@ -87,9 +91,10 @@ const ReceiptForm = () => {
     ].every((el) => el.length >= 1);
     if (canSave) {
       try {
-        dispatch(
+        await dispatch(
           editReceipt({
             _id: id,
+            receiptNumber,
             place,
             full_name,
             email,
