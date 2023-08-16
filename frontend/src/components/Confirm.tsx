@@ -7,7 +7,10 @@ const Confirm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
-  if (!id) return navigate("/");
+  if (!id) {
+    navigate("/");
+    return <h3>Id Not Found</h3>;
+  }
   // const receipt = useSelector((state) => {
   //   return state.receipts.receiptsArr.filter((receipt) => receipt._id === id);
   // });

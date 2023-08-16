@@ -6,6 +6,7 @@ import generatePDF from "../helpers/generatePDF";
 import Spinner from "../components/Spinner";
 import { AppDispatch, RootState } from "../app/store";
 import { ReceiptType } from "../features/states";
+import ErrorPage from "./ErrorPage";
 
 const ReceiptPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -29,6 +30,8 @@ const ReceiptPage = () => {
         return receipt._id === id;
       }
     );
+
+    if (!receipt[0]) return <ErrorPage />;
 
     const receiptDate = new Date(receipt[0].createdAt).toLocaleString("en-GB", {
       year: "numeric",
