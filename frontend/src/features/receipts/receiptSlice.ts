@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import receiptService from "./receiptService";
 import { RootState } from "../../app/store";
 import { CreateReceiptType, ReceiptState, ReceiptType } from "../states";
+import { toast } from "react-toastify";
 
 const initialState: ReceiptState = {
   receiptsArr: [],
@@ -170,9 +171,18 @@ export const receiptSlice = createSlice({
       })
       .addCase(createReceipt.fulfilled, (state, action) => {
         state.isLoading = false;
+        if (action.payload.message) {
+          state.isSuccess = false;
+          state.isError = true;
+          toast.error(action.payload.message);
+          return;
+        }
         state.isSuccess = true;
+        state.isError = false;
         const newArray = [...state.receiptsArr, action.payload];
+
         state.receiptsArr = newArray;
+        toast.success("Receipt Added Successfully");
       })
       .addCase(createReceipt.rejected, (state, action) => {
         state.isLoading = false;
@@ -186,16 +196,26 @@ export const receiptSlice = createSlice({
       })
       .addCase(editReceipt.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        if (!action.payload?._id) {
+
+        if (!action.payload._id) {
           console.log("action payload", action.payload);
+          toast.success("Could not update receipt");
           return console.log("could not update post");
         }
+        if (action.payload.message) {
+          state.isSuccess = false;
+          state.isError = true;
+          toast.error(action.payload.message);
+          return;
+        }
+        state.isSuccess = true;
+        state.isError = false;
         const { _id } = action.payload;
         const receipts = state.receiptsArr.filter(
           (receipt) => receipt._id !== _id
         );
         state.receiptsArr = [...receipts, action.payload];
+        toast.success("Receipt Edited Successfully");
       })
       .addCase(editReceipt.rejected, (state, action) => {
         state.isLoading = false;
@@ -214,6 +234,7 @@ export const receiptSlice = createSlice({
         state.receiptsArr = state.receiptsArr.filter(
           (receipt) => receipt._id !== action.payload.id
         );
+        toast.success("Receipt Deleted Successfully");
       })
       .addCase(deleteReceipt.rejected, (state, action) => {
         state.isLoading = false;

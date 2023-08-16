@@ -22,6 +22,7 @@ export interface ReceiptType {
   province: string;
   donor: string;
   country: string;
+  message?: string;
 }
 export interface CreateReceiptType {
   _id?: string;

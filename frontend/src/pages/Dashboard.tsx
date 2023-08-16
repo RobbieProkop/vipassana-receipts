@@ -32,6 +32,8 @@ const Dashboard = () => {
     return <Spinner />;
   }
 
+  const receiptsArrCopy = [...receiptsArr];
+
   return (
     <>
       <section className="heading">
@@ -45,34 +47,34 @@ const Dashboard = () => {
         </div>
       </section>
       <section className="content">
-        {receiptsArr.length > 0 ? (
+        {receiptsArrCopy.length > 0 ? (
           <div className="receipts">
-            {receiptsArr
-              .filter((receipt) => {
-                const month = receipt.createdAt.split("-")[1];
+            {receiptsArrCopy
+              // .filter((receipt) => {
+              //   const month = receipt.createdAt.split("-")[1];
 
-                const checkNameMatch = (name: string | undefined): boolean => {
-                  if (!name) return false;
-                  return name.toLowerCase().includes(donor.toLowerCase());
-                };
-                // If no donor, return all receipts.
-                if (!donor) return true;
+              //   const checkNameMatch = (name: string | undefined): boolean => {
+              //     if (!name) return false;
+              //     return name.toLowerCase().includes(donor.toLowerCase());
+              //   };
+              //   // If no donor, return all receipts.
+              //   if (!donor) return true;
 
-                // check name for matches
-                if (
-                  checkNameMatch(receipt.full_name) ||
-                  checkNameMatch(receipt.firstName) ||
-                  checkNameMatch(receipt.lastName) ||
-                  checkNameMatch(receipt.firstName + " " + receipt.lastName)
-                ) {
-                  return true;
-                }
+              //   // check name for matches
+              //   if (
+              //     checkNameMatch(receipt.full_name) ||
+              //     checkNameMatch(receipt.firstName) ||
+              //     checkNameMatch(receipt.lastName) ||
+              //     checkNameMatch(receipt.firstName + " " + receipt.lastName)
+              //   ) {
+              //     return true;
+              //   }
 
-                // if month matches searchMonth
-                if (month === searchMonth) return true;
+              //   // if month matches searchMonth
+              //   if (month === searchMonth) return true;
 
-                return false;
-              })
+              //   return false;
+              // })
               //newest receipts will show first
               .sort((a, b) => {
                 if (a.createdAt < b.createdAt) return 1;

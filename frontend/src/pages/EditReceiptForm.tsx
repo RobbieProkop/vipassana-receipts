@@ -109,8 +109,6 @@ const ReceiptForm = () => {
             signature,
           })
         ).unwrap();
-        toast.success("Receipt Edited Successfully");
-        // setAddress("");
         setReceiptData({
           place: "Youngstown",
           full_name: "",

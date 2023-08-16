@@ -86,7 +86,6 @@ const ReceiptForm = () => {
             signature,
           })
         ).unwrap();
-        toast.success("Receipt Added Successfully");
         setReceiptData({
           place: "Youngstown",
           full_name: "",
@@ -247,7 +246,7 @@ const ReceiptForm = () => {
           {/* Donation Amount */}
           <div className="donation">
             <div className="form-group">
-              <select name="select" id="type" onChange={onSelectChange}>
+              <select name="type" id="type" onChange={onSelectChange}>
                 <option value="">--Please Select Donation Type--</option>
                 <option value="Visa">Visa</option>
                 <option value="MasterCard">MasterCard</option>
