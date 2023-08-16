@@ -2,7 +2,7 @@
 export interface ReceiptType {
   _id: string;
   user: string;
-  receiptNumber?: number;
+  receiptNumber: number;
   receipt_number?: number;
   place: string;
   full_name?: string;
@@ -21,6 +21,21 @@ export interface ReceiptType {
   city: string;
   province: string;
   donor: string;
+  country: string;
+}
+export interface CreateReceiptType {
+  receiptNumber: number;
+  place: string;
+  full_name: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  type: string;
+  number: number;
+  words: string;
+  signature: string;
+  city: string;
+  province: string;
   country: string;
 }
 

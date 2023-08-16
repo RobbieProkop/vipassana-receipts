@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ReceiptType } from "../states";
+import { CreateReceiptType, ReceiptType } from "../states";
 
 axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 const API_URL = "/api/receipts/";
@@ -28,7 +28,7 @@ const getOneReceipt = async (receiptId: string, token: string) => {
 };
 
 //Create new Receipt
-const createReceipt = async (receiptData: ReceiptType, token: string) => {
+const createReceipt = async (receiptData: CreateReceiptType, token: string) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

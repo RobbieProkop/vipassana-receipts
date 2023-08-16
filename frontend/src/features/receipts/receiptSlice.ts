@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import receiptService from "./receiptService";
 import { RootState } from "../../app/store";
-import { ReceiptState, ReceiptType } from "../states";
+import { CreateReceiptType, ReceiptState, ReceiptType } from "../states";
 
 const initialState: ReceiptState = {
   receiptsArr: [],
@@ -54,7 +54,7 @@ export const getOneReceipt = createAsyncThunk<
 export const createReceipt = createAsyncThunk<
   //  CHeck this return type!!
   ReceiptType, //Return type
-  ReceiptType, // Thunk Argument
+  CreateReceiptType, // Thunk Argument
   { rejectValue: string; state: RootState }
 >("receipts/create", async (receiptData, thunkAPI) => {
   // ThunkAPIConfig

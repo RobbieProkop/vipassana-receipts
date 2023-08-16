@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { ReactEventHandler, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createReceipt } from "../features/receipts/receiptSlice";
+import { AppDispatch, RootState } from "../app/store";
 
 const ReceiptForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   // get the last known receipt in the receiptsArr
-  const receipt = useSelector((state) => state.receipts.receiptsArr.slice(-1));
+  const receipt = useSelector((state: RootState) =>
+    state.receipts.receiptsArr.slice(-1)
+  );
 
   // used to increament the receipts number
-  const [receipt_number, setReceiptNumber] = useState(
-    receipt.length && receipt[0].receipt_number
-      ? receipt[0].receipt_number + 1
+  const [receiptNumber, setReceiptNumber] = useState(
+    receipt.length && receipt[0].receiptNumber
+      ? receipt[0].receiptNumber + 1
       : 6174
   );
 
@@ -25,11 +28,12 @@ const ReceiptForm = () => {
     address: "",
     city: "Calgary",
     province: "AB",
-    postal_code: "",
+    country: "Canada",
+    postalCode: "",
     type: "",
-    number: "",
+    number: 0,
     words: "",
-    signature: "Paz",
+    signature: "",
   });
 
   const {
@@ -39,14 +43,15 @@ const ReceiptForm = () => {
     address,
     city,
     province,
-    postal_code,
+    country,
+    postalCode,
     type,
     number,
     words,
     signature,
   } = receiptData;
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const canSave = [
       place,
@@ -55,9 +60,9 @@ const ReceiptForm = () => {
       address,
       city,
       province,
-      postal_code,
+      country,
+      postalCode,
       type,
-      number,
       words,
       signature,
     ].every((el) => el.length >= 1);
@@ -65,14 +70,15 @@ const ReceiptForm = () => {
       try {
         dispatch(
           createReceipt({
-            receipt_number,
+            receiptNumber,
             place,
             full_name,
             email,
             address,
             city,
             province,
-            postal_code,
+            country,
+            postalCode,
             type,
             number,
             words,
@@ -87,15 +93,16 @@ const ReceiptForm = () => {
           address: "",
           city: "Calgary",
           province: "AB",
-          postal_code: "",
+          country: "Canada",
+          postalCode: "",
           type: "",
           number: 0,
           words: "",
           signature: "",
         });
-        setReceiptNumber(receipt[0].receipt_number + 1);
+        setReceiptNumber(receipt[0].receiptNumber + 1);
         navigate("/");
-      } catch (error) {
+      } catch (error: any) {
         const message =
           error.response.data.message || error.message || error.toString();
         toast.error(message);
@@ -105,7 +112,7 @@ const ReceiptForm = () => {
       console.log("place", place);
       console.log("full_name", full_name);
       console.log("email", email);
-      console.log("postal_code", postal_code);
+      console.log("postalCode", postalCode);
       console.log("type", type);
       console.log("number", number);
       console.log("words", words);
@@ -118,7 +125,13 @@ const ReceiptForm = () => {
     }
   };
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setReceiptData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setReceiptData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -129,7 +142,7 @@ const ReceiptForm = () => {
       <form onSubmit={onSubmit}>
         <div className="receiptID">
           <div className="form-group">
-            <p>ID: {receipt_number}</p>
+            <p>ID: {receiptNumber}</p>
           </div>
           <div className="form-group">
             <p>Alberta Vipassana Foundation</p>
@@ -204,7 +217,6 @@ const ReceiptForm = () => {
               />
             </div>
 
-            {/* 
             <div className="form-group">
               <input
                 type="text"
@@ -215,15 +227,14 @@ const ReceiptForm = () => {
                 onChange={onChange}
               />
             </div>
-                    */}
 
             <div className="form-group">
               <input
                 type="text"
-                name="postal_code"
-                id="postal_code"
+                name="postalCode"
+                id="postalCode"
                 placeholder="Postal Code"
-                value={postal_code}
+                value={postalCode}
                 onChange={onChange}
               />
             </div>
@@ -235,7 +246,7 @@ const ReceiptForm = () => {
           {/* Donation Amount */}
           <div className="donation">
             <div className="form-group">
-              <select name="type" id="type" onChange={onChange}>
+              <select name="select" id="type" onChange={onSelectChange}>
                 <option value="">--Please Select Donation Type--</option>
                 <option value="Visa">Visa</option>
                 <option value="MasterCard">MasterCard</option>
