@@ -74,3 +74,11 @@ export interface TokenState {
   receiptId: string;
   receiptData: ReceiptType;
 }
+
+//////////////////////////
+// Reports
+export interface ReportsProps {
+  receipts: ReceiptType[];
+  donor: string;
+  setDonor: React.Dispatch<React.SetStateAction<string>>;
+}
