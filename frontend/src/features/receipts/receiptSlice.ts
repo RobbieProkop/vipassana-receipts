@@ -97,7 +97,7 @@ export const editReceipt = createAsyncThunk<
 // delete user Receipt
 export const deleteReceipt = createAsyncThunk<
   // CHEK THIS RETURN TYPE
-  { id: string }, //Return type
+  any, //Return type
   string, // Thunk Argument
   { rejectValue: string; state: RootState }
 >("receipts/delete", async (id, thunkAPI) => {
@@ -205,25 +205,25 @@ export const receiptSlice = createSlice({
         state.message =
           action.payload ??
           "An error occurred in the Receipt Slice edit receipt";
+      })
+      // //Delete
+      .addCase(deleteReceipt.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteReceipt.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.receiptsArr = state.receiptsArr.filter(
+          (receipt) => receipt._id !== action.payload.id
+        );
+      })
+      .addCase(deleteReceipt.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message =
+          action.payload ??
+          "An error occurred in the Receipt Slice delete receipt";
       });
-    // //Delete
-    // .addCase(deleteReceipt.pending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(deleteReceipt.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isSuccess = true;
-    //   state.receiptsArr = state.receiptsArr.filter(
-    //     (receipt) => receipt._id !== action.payload.id
-    //   );
-    // })
-    // .addCase(deleteReceipt.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isError = true;
-    //   state.message =
-    //     action.payload ??
-    //     "An error occurred in the Receipt Slice delete receipt";
-    // });
   },
 });
 
