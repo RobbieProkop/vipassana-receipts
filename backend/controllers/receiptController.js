@@ -118,8 +118,9 @@ const createReceipt = asyncHandler(async (req, res) => {
       user: req.user.id,
       receiptNumber: req.body.receiptNumber,
       place: req.body.place,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      full_name: req.body.full_name ? req.body.full_name : null,
+      firstName: req.body.firstName ? req.body.firstName : null,
+      lastName: req.body.lastName ? req.body.lastName : null,
       email: req.body.email,
       address: req.body.address,
       city: req.body.city,
@@ -127,14 +128,12 @@ const createReceipt = asyncHandler(async (req, res) => {
       country: req.body.country,
       postalCode: req.body.postalCode,
       type: req.body.type,
-
       number: req.body.number,
       words: req.body.words,
-
       signature: req.body.signature,
     });
   }
-
+  console.log("receipt", receipt);
   res.status(200).json(receipt);
 });
 

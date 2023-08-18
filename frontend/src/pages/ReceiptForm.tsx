@@ -167,7 +167,7 @@ const ReceiptForm = () => {
                 type="text"
                 name="full_name"
                 id="full_name"
-                placeholder="First Name"
+                placeholder="Full Name / Company Name"
                 value={full_name}
                 onChange={onChange}
               />

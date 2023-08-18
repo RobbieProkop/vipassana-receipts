@@ -2,8 +2,8 @@ import axios from "axios";
 import { CreateReceiptType, ReceiptType } from "../states";
 
 // axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
-axios.defaults.baseURL = "http://localhost:8080";
-const API_URL = "/api/receipts/";
+// axios.defaults.baseURL = "http://localhost:5000";
+const API_URL = "http://localhost:5000/api/receipts/";
 
 //get all receipts
 const getAll = async (token: string) => {
