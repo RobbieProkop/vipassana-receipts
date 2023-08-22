@@ -2,9 +2,10 @@ import { useState } from "react";
 import generateReport from "../helpers/generateReport";
 import { toast } from "react-toastify";
 import generateExcel from "../helpers/generateExcel";
+import { ReceiptType, ReportsProps } from "../features/states";
 
-const Reports = ({ receipts }) => {
-  const [donor, setDonor] = useState("");
+const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
+  // const [donor, setDonor] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -15,7 +16,7 @@ const Reports = ({ receipts }) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  const filteredReceipts = receipts.filter((receipt) => {
+  const filteredReceipts = receipts.filter((receipt: ReceiptType) => {
     const date = new Date(receipt.createdAt.split("T")[0]);
 
     return date <= end && date >= start;

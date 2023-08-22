@@ -1,11 +1,12 @@
 import axios from "axios";
+import { UserType } from "../states";
 
 axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 const API_URL = "/api/users/";
 // "proxy": "https://vipassana-receipts.onrender.com",
 
 //Register User
-const register = async (userData) => {
+const register = async (userData: object): Promise<UserType> => {
   const { data } = await axios.post(API_URL, userData);
 
   if (data) {
@@ -23,7 +24,7 @@ const logout = () => {
 };
 
 //Login User
-const login = async (userData) => {
+const login = async (userData: object): Promise<UserType> => {
   const { data } = await axios.post(API_URL + "login", userData);
 
   if (data.username) {

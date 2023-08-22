@@ -10,8 +10,9 @@ import ReceiptForm from "./pages/ReceiptForm";
 import EditReceiptForm from "./pages/EditReceiptForm";
 import ErrorPage from "./pages/ErrorPage";
 import ReceiptPage from "./pages/ReceiptPage";
+import { FC } from "react";
 
-function App() {
+const App: FC = () => {
   return (
     <>
       <Router>
@@ -32,6 +33,6 @@ function App() {
       <ToastContainer />
     </>
   );
-}
+};
 
 export default App;

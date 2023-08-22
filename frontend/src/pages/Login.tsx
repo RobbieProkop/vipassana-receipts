@@ -1,26 +1,23 @@
 import { FaSignInAlt, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
+import { AppDispatch, RootState } from "../app/store";
 
-const Login = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+const Login: FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [togglePassword, setTogglePassword] = useState(false);
-
-  const { username, password } = formData;
+  const [togglePassword, setTogglePassword] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state: RootState) => state.auth
   );
 
   useEffect(() => {
@@ -35,14 +32,7 @@ const Login = () => {
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const userData = {
@@ -75,7 +65,9 @@ const Login = () => {
               name="username"
               value={username}
               placeholder="Enter Username"
-              onChange={onChange}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
           </div>
           <div className="form-group password-input">
@@ -86,7 +78,9 @@ const Login = () => {
               name="password"
               value={password}
               placeholder="Enter Password"
-              onChange={onChange}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <div
               className="password-icon"
