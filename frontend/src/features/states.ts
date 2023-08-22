@@ -83,3 +83,16 @@ export interface ReportsProps {
   donor: string;
   setDonor: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface ReportType {
+  startDate: string;
+  endDate: string;
+}
+
+export interface ReportState {
+  reportReceiptsArr: ReceiptType[] | [];
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  message: string;
+}
