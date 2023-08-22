@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/receipts", require("./routes/receiptRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/reports", require("./routes/reportRoutes"));
 app.get("/heartbeat", (req, res) => {
   res.send("OK");
 });
