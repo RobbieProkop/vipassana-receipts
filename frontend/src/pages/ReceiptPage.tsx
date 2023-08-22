@@ -33,11 +33,14 @@ const ReceiptPage = () => {
 
     if (!receipt[0]) return <ErrorPage />;
 
-    const receiptDate = new Date(receipt[0].createdAt).toLocaleString("en-GB", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
+    const receiptDate = new Date(receipt[0].created_at).toLocaleString(
+      "en-GB",
+      {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }
+    );
 
     if (isLoading) {
       return <Spinner />;
@@ -77,7 +80,7 @@ const ReceiptPage = () => {
                 <div>
                   <h3>
                     Date: {receiptDate}
-                    {/* {new Date(receipt[0].createdAt).toLocaleString("en-GB", {
+                    {/* {new Date(receipt[0].created_at).toLocaleString("en-GB", {
               year: "numeric",
               month: "numeric",
               day: "numeric",

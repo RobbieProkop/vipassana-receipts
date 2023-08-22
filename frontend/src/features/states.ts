@@ -15,9 +15,9 @@ export interface ReceiptType {
   number: number;
   words: string;
   signature: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  created_at: string;
+  updated_at: string;
+  __v?: number;
   city: string;
   province: string;
   donor: string;
@@ -26,7 +26,7 @@ export interface ReceiptType {
 }
 export interface CreateReceiptType {
   _id?: string;
-  receiptNumber: number;
+  receiptNumber?: number;
   place: string;
   full_name: string;
   email: string;

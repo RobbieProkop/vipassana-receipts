@@ -77,8 +77,8 @@ const Dashboard = () => {
               // })
               //newest receipts will show first
               .sort((a, b) => {
-                if (a.createdAt < b.createdAt) return 1;
-                if (a.createdAt > b.createdAt) return -1;
+                if (a.created_at < b.created_at) return 1;
+                if (a.created_at > b.created_at) return -1;
                 return 0;
               })
 

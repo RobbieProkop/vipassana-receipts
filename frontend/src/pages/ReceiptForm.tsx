@@ -71,7 +71,6 @@ const ReceiptForm = () => {
       try {
         dispatch(
           createReceipt({
-            receiptNumber,
             place,
             full_name,
             email,

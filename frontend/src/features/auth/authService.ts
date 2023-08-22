@@ -1,7 +1,8 @@
 import axios from "axios";
 import { UserType } from "../states";
 
-axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
+// axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
+// axios.defaults.baseURL = "http://localhost:5000";
 const API_URL = "/api/users/";
 // "proxy": "https://vipassana-receipts.onrender.com",
 

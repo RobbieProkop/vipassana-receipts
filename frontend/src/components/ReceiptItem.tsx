@@ -27,7 +27,7 @@ const ReceiptItem = ({ receipt }: ReceiptProps) => {
 
       <div className="receipt-body" onClick={onClick}>
         <div>
-          {new Date(receipt.createdAt).toLocaleString("en-GB", {
+          {new Date(receipt.created_at).toLocaleString("en-GB", {
             year: "numeric",
             month: "numeric",
             day: "numeric",

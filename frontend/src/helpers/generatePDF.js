@@ -2,7 +2,7 @@ import jsPDF from "jspdf";
 
 //jspdf onclick function
 const generatePDF = (receipt) => {
-  const receiptDate = new Date(receipt[0].createdAt).toLocaleString("en-GB", {
+  const receiptDate = new Date(receipt[0].created_at).toLocaleString("en-GB", {
     year: "numeric",
     month: "numeric",
     day: "numeric",

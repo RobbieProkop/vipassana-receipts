@@ -29,7 +29,7 @@ with open('avf-receipts-19-aug-2023.csv') as file_obj:
         'number': 'number',
         'words': 'words',
         'signature': 'signature',
-        'created_at': 'createdAt'
+        'created_at': 'created_at'
     }
 
     column_list = []

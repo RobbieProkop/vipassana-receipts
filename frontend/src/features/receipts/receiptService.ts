@@ -3,7 +3,7 @@ import { CreateReceiptType, ReceiptType } from "../states";
 
 // axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 // axios.defaults.baseURL = "http://localhost:5000";
-const API_URL = "http://localhost:5000/api/receipts/";
+const API_URL = "/api/receipts/";
 
 //get all receipts
 const getAll = async (token: string) => {
