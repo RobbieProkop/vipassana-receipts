@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { editReceipt } from "../features/receipts/receiptSlice";
+import { editReceipt, getAll } from "../features/receipts/receiptSlice";
 import Spinner from "../components/Spinner";
 import { AppDispatch, RootState } from "../app/store";
+import { ReceiptType } from "../features/states";
+import ErrorPage from "./ErrorPage";
 
 const ReceiptForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,10 +30,23 @@ const ReceiptForm = () => {
     if (!receiptsArr) {
       navigate("/");
     }
+
+    if (receiptsArr.length === 0) {
+      dispatch(getAll());
+    }
   }, [user, navigate, isError, message, dispatch]);
   if (!id) return <h2>Receipt not found</h2>;
 
-  let receipt = receiptsArr.find((receipt) => receipt._id === id);
+  // let receipt = receiptsArr.find(
+  //   (receipt) => receipt.receipt_number.toString() === id
+  // );
+  const receipts: ReceiptType[] = receiptsArr.filter((receipt: ReceiptType) => {
+    return receipt.receipt_number?.toString() === id;
+  });
+
+  // if (!receipts[0]) return <ErrorPage />;
+
+  const receipt = receipts[0];
 
   const [receiptNumber, setReceiptNumber] = useState(
     receipt && receipt.receiptNumber ? receipt.receiptNumber : 0
@@ -51,7 +66,7 @@ const ReceiptForm = () => {
     city: receipt && receipt.city ? receipt.city : "",
     province: receipt && receipt.province ? receipt.province : "",
     country: receipt && receipt.country ? receipt.country : "",
-    postalCode: receipt && receipt.postalCode ? receipt.postalCode : "",
+    postal_code: receipt && receipt.postal_code ? receipt.postal_code : "",
     type: receipt && receipt.type ? receipt.type : "",
     number: receipt && receipt.number ? receipt.number : 0,
     words: receipt && receipt.words ? receipt.words : "",
@@ -66,7 +81,7 @@ const ReceiptForm = () => {
     city,
     province,
     country,
-    postalCode,
+    postal_code,
     type,
     number,
     words,
@@ -83,7 +98,7 @@ const ReceiptForm = () => {
       city,
       province,
       country,
-      postalCode,
+      postal_code,
       type,
       number.toString(),
       words,
@@ -93,7 +108,7 @@ const ReceiptForm = () => {
       try {
         await dispatch(
           editReceipt({
-            _id: id,
+            // _id: id,
             receiptNumber,
             place,
             full_name,
@@ -102,7 +117,7 @@ const ReceiptForm = () => {
             city,
             province,
             country,
-            postalCode,
+            postal_code,
             type,
             number,
             words,
@@ -117,7 +132,7 @@ const ReceiptForm = () => {
           city: "Calgary",
           province: "AB",
           country: "Canada",
-          postalCode: "",
+          postal_code: "",
           type: "",
           number: 0,
           words: "",
@@ -138,12 +153,12 @@ const ReceiptForm = () => {
       console.log("address", address.length);
       console.log("city", city.length);
       console.log("province", province.length);
-      console.log("postalCode", postalCode.length);
+      console.log("country", country.length);
+      console.log("postal_code", postal_code.length);
       console.log("type", type.length);
-      console.log("number", number);
+      console.log("number", number.toString().length);
       console.log("words", words.length);
       console.log("signature", signature.length);
-      console.log("address", address.length);
       console.log("Please fill in all fields!");
       toast.error("Please Fill In All Fields", {
         position: toast.POSITION.TOP_LEFT,
@@ -269,10 +284,10 @@ const ReceiptForm = () => {
             <div className="form-group">
               <input
                 type="text"
-                name="postalCode"
-                id="postalCode"
+                name="postal_code"
+                id="postal_code"
                 placeholder="Postal Code"
-                value={postalCode}
+                value={postal_code}
                 onChange={onChange}
               />
             </div>

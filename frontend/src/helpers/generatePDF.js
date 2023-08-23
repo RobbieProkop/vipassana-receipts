@@ -12,6 +12,7 @@ const generatePDF = (receipt) => {
   const addy = receipt[0].address;
   const city = receipt[0].city;
   const province = receipt[0].province;
+  const country = receipt[0].country;
 
   //used to put the amount on different lines of the pdf
   const amount = receipt[0].words.split(" ");
@@ -59,24 +60,24 @@ const generatePDF = (receipt) => {
   doc.text(90, 240, `${addy},`);
   doc.setLineWidth(0.7);
   doc.line(90, 245, 280, 245);
-  doc.text(85, 260, ` ${city}, ${province}, Canada`);
+  doc.text(85, 260, ` ${city}, ${province}, ${country}`);
   doc.line(90, 265, 280, 265);
   doc.text(90, 280, `${receipt[0].postalCode}`);
-  doc.line(90, 285, 140, 285);
+  doc.line(90, 285, 280, 285);
 
   doc.text(410, 160, `Donation Type: ${receipt[0].type}`);
   doc.text(410, 180, `Amount: $${receipt[0].number} `);
   doc.text(410, 200, `${amount1} `);
-  doc.line(410, 205, 540, 205);
+  doc.line(410, 205, 580, 205);
 
   doc.text(410, 220, `${amount2} `);
-  doc.line(410, 225, 540, 225);
+  doc.line(410, 225, 580, 225);
 
   doc.setFontSize(12);
   doc.text(410, 240, `Total Amount Received`);
   doc.setFontSize(20);
   doc.text(410, 280, `${receipt[0].signature} `);
-  doc.line(410, 285, 540, 285);
+  doc.line(410, 285, 580, 285);
   doc.setFontSize(12);
   doc.text(410, 300, `Digital Signature`);
 

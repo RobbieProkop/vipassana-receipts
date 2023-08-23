@@ -199,7 +199,7 @@ export const receiptSlice = createSlice({
 
         if (!action.payload._id) {
           console.log("action payload", action.payload);
-          toast.success("Could not update receipt");
+          toast.error("Could not update receipt");
           return console.log("could not update post");
         }
         if (action.payload.message) {

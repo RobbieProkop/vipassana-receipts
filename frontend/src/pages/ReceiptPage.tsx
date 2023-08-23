@@ -27,7 +27,7 @@ const ReceiptPage = () => {
   if (receiptsArr.length > 0) {
     const receipt: ReceiptType[] = receiptsArr.filter(
       (receipt: ReceiptType) => {
-        return receipt._id === id;
+        return receipt.receipt_number?.toString() === id;
       }
     );
 
@@ -78,14 +78,6 @@ const ReceiptPage = () => {
               </div>
               <div className="donor">
                 <div>
-                  <h3>
-                    Date: {receiptDate}
-                    {/* {new Date(receipt[0].created_at).toLocaleString("en-GB", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-            })} */}
-                  </h3>
                   <h3>Location: {receipt[0].place}</h3>
                   {receipt[0].firstName ? (
                     <h3>
@@ -94,12 +86,23 @@ const ReceiptPage = () => {
                   ) : (
                     <h3>Donor: {receipt[0].full_name}</h3>
                   )}
+
                   <h3>Address: {receipt[0].address},</h3>
                   <h3>City: {receipt[0].city},</h3>
                   <h3>Province: {receipt[0].province},</h3>
-                  <h3>Postal Code: {receipt[0].postalCode}</h3>
+                  {/* <h3>Country: {receipt[0].country},</h3> */}
+                  <h3>Postal Code: {receipt[0].postal_code}</h3>
                 </div>
                 <div>
+                  <h3>
+                    Date: {receiptDate}
+                    {/* {new Date(receipt[0].created_at).toLocaleString("en-GB", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+            })} */}
+                  </h3>
+                  <h3>Email: {receipt[0].email},</h3>
                   <h3>Donation Type: {receipt[0].type}</h3>
                   <h3>Amount: ${receipt[0].number}</h3>
                   <h3>Total Amount Received: {receipt[0].words} </h3>
@@ -111,7 +114,7 @@ const ReceiptPage = () => {
             {/* edit and Download receipt */}
             <div className="edit">
               <Link
-                to={`/edit/${receipt[0]._id}`}
+                to={`/edit/${receipt[0].receipt_number}`}
                 className="btn btn-edit btn-block"
               >
                 Edit

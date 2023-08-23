@@ -91,8 +91,8 @@ const createReceipt = asyncHandler(async (req, res) => {
   let receipt = [];
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
-      `INSERT INTO Receipts (place, full_name, email, address, city, province, postal_code, type, number, words, signature)
-      VALUES (:place, :full_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature)
+      `INSERT INTO Receipts (place, full_name, email, address, city, province, country, postal_code, type, number, words, signature)
+      VALUES (:place, :full_name, :email, :address, :city, :province, :country, :postal_code, :type, :number, :words, :signature)
       RETURNING *;`,
       {
         raw: true,
@@ -104,6 +104,7 @@ const createReceipt = asyncHandler(async (req, res) => {
           address: req.body.address ? req.body.address : null,
           city: req.body.city ? req.body.city : null,
           province: req.body.province ? req.body.province : null,
+          country: req.body.country ? req.body.country : null,
           postal_code: req.body.postal_code ? req.body.postal_code : null,
           type: req.body.type ? req.body.type : null,
           number: req.body.number ? req.body.number : null,

@@ -29,7 +29,7 @@ const ReceiptForm = () => {
     city: "Calgary",
     province: "AB",
     country: "Canada",
-    postalCode: "",
+    postal_code: "",
     type: "",
     number: 0,
     words: "",
@@ -44,7 +44,7 @@ const ReceiptForm = () => {
     city,
     province,
     country,
-    postalCode,
+    postal_code,
     type,
     number,
     words,
@@ -61,7 +61,7 @@ const ReceiptForm = () => {
       city,
       province,
       country,
-      postalCode,
+      postal_code,
       number.toString(),
       type,
       words,
@@ -78,7 +78,7 @@ const ReceiptForm = () => {
             city,
             province,
             country,
-            postalCode,
+            postal_code,
             type,
             number,
             words,
@@ -93,7 +93,7 @@ const ReceiptForm = () => {
           city: "Calgary",
           province: "AB",
           country: "Canada",
-          postalCode: "",
+          postal_code: "",
           type: "",
           number: 0,
           words: "",
@@ -111,7 +111,7 @@ const ReceiptForm = () => {
       console.log("place", place);
       console.log("full_name", full_name);
       console.log("email", email);
-      console.log("postalCode", postalCode);
+      console.log("postal_code", postal_code);
       console.log("type", type);
       console.log("number", number);
       console.log("words", words);
@@ -230,10 +230,10 @@ const ReceiptForm = () => {
             <div className="form-group">
               <input
                 type="text"
-                name="postalCode"
-                id="postalCode"
+                name="postal_code"
+                id="postal_code"
                 placeholder="Postal Code"
-                value={postalCode}
+                value={postal_code}
                 onChange={onChange}
               />
             </div>
