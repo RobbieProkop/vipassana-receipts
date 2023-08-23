@@ -12,7 +12,7 @@ const ReceiptItem = ({ receipt }: ReceiptProps) => {
     navigate(`/${receipt.receipt_number}`);
   };
   const onDelete = () => {
-    navigate(`/${receipt._id}/confirm`);
+    navigate(`/${receipt.receipt_number}/confirm`);
   };
 
   return (
