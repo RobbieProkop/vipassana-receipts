@@ -10,7 +10,7 @@ export interface ReceiptType {
   lastName?: string;
   email: string;
   address: string;
-  postalCode: string;
+  postal_code: string;
   type: string;
   number: number;
   words: string;
@@ -34,7 +34,7 @@ export interface CreateReceiptType {
   city: string;
   province: string;
   country: string;
-  postalCode: string;
+  postal_code: string;
   type: string;
   number: number;
   words: string;
@@ -82,4 +82,17 @@ export interface ReportsProps {
   receipts: ReceiptType[];
   donor: string;
   setDonor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ReportType {
+  startDate: string;
+  endDate: string;
+}
+
+export interface ReportState {
+  reportReceiptsArr: ReceiptType[] | [];
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  message: string;
 }

@@ -91,8 +91,8 @@ const createReceipt = asyncHandler(async (req, res) => {
   let receipt = [];
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
-      `INSERT INTO Receipts (place, full_name, email, address, city, province, postal_code, type, number, words, signature)
-      VALUES (:place, :full_name, :email, :address, :city, :province, :postal_code, :type, :number, :words, :signature)
+      `INSERT INTO Receipts (place, full_name, email, address, city, province, country, postal_code, type, number, words, signature)
+      VALUES (:place, :full_name, :email, :address, :city, :province, :country, :postal_code, :type, :number, :words, :signature)
       RETURNING *;`,
       {
         raw: true,
@@ -104,6 +104,7 @@ const createReceipt = asyncHandler(async (req, res) => {
           address: req.body.address ? req.body.address : null,
           city: req.body.city ? req.body.city : null,
           province: req.body.province ? req.body.province : null,
+          country: req.body.country ? req.body.country : null,
           postal_code: req.body.postal_code ? req.body.postal_code : null,
           type: req.body.type ? req.body.type : null,
           number: req.body.number ? req.body.number : null,
@@ -254,10 +255,39 @@ const deleteReceipt = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
+// @desc:   Generate Report. Gets all receipts between two dates for the report
+//@route:   GET /api/reports/:startDate/:endDate
+//@access   Private
+
+// @desc:   Get All Receipts
+//@route:   GET /api/receipts
+//@access   Private
+const genReport = asyncHandler(async (req, res) => {
+  let receipts = [];
+
+  receipts = await sequelize.query(
+    `SELECT receipt_number, place, full_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      FROM Receipts
+      WHERE created_at >= :startDate AND created_at < (:endDate::date + interval '1 day')
+      ORDER BY receipt_number DESC;`,
+    {
+      raw: true,
+      type: QueryTypes.SELECT,
+      replacements: {
+        startDate: req.params.startDate,
+        endDate: req.params.endDate,
+      },
+    }
+  );
+
+  res.status(200).json(receipts);
+});
+
 module.exports = {
   getAllReceipts,
   getOneReceipt,
   createReceipt,
   updateReceipt,
   deleteReceipt,
+  genReport,
 };

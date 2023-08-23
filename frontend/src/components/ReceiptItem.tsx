@@ -9,10 +9,10 @@ const ReceiptItem = ({ receipt }: ReceiptProps) => {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`/${receipt._id}`);
+    navigate(`/${receipt.receipt_number}`);
   };
   const onDelete = () => {
-    navigate(`/${receipt._id}/confirm`);
+    navigate(`/${receipt.receipt_number}/confirm`);
   };
 
   return (

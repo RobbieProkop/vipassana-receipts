@@ -197,9 +197,9 @@ export const receiptSlice = createSlice({
       .addCase(editReceipt.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        if (!action.payload._id) {
+        if (!action.payload.receipt_number) {
           console.log("action payload", action.payload);
-          toast.success("Could not update receipt");
+          toast.error("Could not update receipt");
           return console.log("could not update post");
         }
         if (action.payload.message) {
@@ -210,9 +210,9 @@ export const receiptSlice = createSlice({
         }
         state.isSuccess = true;
         state.isError = false;
-        const { _id } = action.payload;
+        const { receipt_number } = action.payload;
         const receipts = state.receiptsArr.filter(
-          (receipt) => receipt._id !== _id
+          (receipt) => receipt.receipt_number !== receipt_number
         );
         state.receiptsArr = [...receipts, action.payload];
         toast.success("Receipt Edited Successfully");
@@ -232,7 +232,7 @@ export const receiptSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.receiptsArr = state.receiptsArr.filter(
-          (receipt) => receipt._id !== action.payload.id
+          (receipt) => receipt.receipt_number !== action.payload.id
         );
         toast.success("Receipt Deleted Successfully");
       })

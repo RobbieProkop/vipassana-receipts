@@ -47,9 +47,13 @@ const editReceipt = async (receiptData: CreateReceiptType, token: string) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const { _id } = receiptData;
+  const { receiptNumber } = receiptData;
 
-  const { data } = await axios.put(API_URL + _id, receiptData, config);
+  const { data } = await axios.put(
+    API_URL + receiptNumber,
+    receiptData,
+    config
+  );
   return data;
 };
 
