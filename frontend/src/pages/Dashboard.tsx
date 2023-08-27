@@ -17,7 +17,6 @@ const Dashboard = () => {
   );
 
   //useStates
-  const [searchMonth, setSearchMonth] = useState("");
   const [donor, setDonor] = useState("");
 
   useEffect(() => {

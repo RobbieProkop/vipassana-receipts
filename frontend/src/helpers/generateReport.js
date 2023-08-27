@@ -41,7 +41,6 @@ const generateReport = (receipts, start, end) => {
     let pageWidth = doc.internal.pageSize.width;
     return (pageWidth - textWidth) / 2;
   };
-  console.log("total", totalDonations);
   let doc = new jsPDF("p", "px", "a4");
   //pdf content
   doc.setFontSize(28);

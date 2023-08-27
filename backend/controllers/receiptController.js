@@ -107,7 +107,7 @@ const createReceipt = asyncHandler(async (req, res) => {
           country: req.body.country ? req.body.country : null,
           postal_code: req.body.postal_code ? req.body.postal_code : null,
           type: req.body.type ? req.body.type : null,
-          number: req.body.number ? req.body.number : null,
+          number: req.body.number ? req.body.number : 0,
           words: req.body.words ? req.body.words : null,
           signature: req.body.signature ? req.body.signature : null,
         },

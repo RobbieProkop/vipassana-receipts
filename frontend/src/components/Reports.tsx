@@ -17,7 +17,9 @@ const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
   const end = new Date(endDate);
 
   const filteredReceipts = receipts.filter((receipt: ReceiptType) => {
-    const date = new Date(receipt.created_at.split("T")[0]);
+    console.log("trecceipt", receipt);
+    const { created_at } = receipt;
+    const date = new Date(created_at.split("T")[0]);
 
     return date <= end && date >= start;
   });

@@ -2,8 +2,8 @@
 export interface ReceiptType {
   _id: string;
   user: string;
-  receiptNumber: number;
-  receipt_number?: number;
+  receiptNumber?: number;
+  receipt_number: number;
   place: string;
   full_name?: string;
   firstName?: string;

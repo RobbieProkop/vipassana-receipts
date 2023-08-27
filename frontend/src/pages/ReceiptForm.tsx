@@ -16,9 +16,9 @@ const ReceiptForm = () => {
 
   // used to increament the receipts number
   const [receiptNumber, setReceiptNumber] = useState(
-    receipt.length && receipt[0].receiptNumber
-      ? receipt[0].receiptNumber + 1
-      : 6174
+    receipt.length && receipt[0].receipt_number
+      ? receipt[0].receipt_number + 1
+      : 6284
   );
 
   const [receiptData, setReceiptData] = useState({
@@ -99,7 +99,7 @@ const ReceiptForm = () => {
           words: "",
           signature: "",
         });
-        setReceiptNumber(receipt[0].receiptNumber + 1);
+        setReceiptNumber(receipt[0].receipt_number + 1);
         navigate("/");
       } catch (error: any) {
         const message =
