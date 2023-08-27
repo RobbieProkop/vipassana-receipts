@@ -31,7 +31,7 @@ const getAllReceipts = asyncHandler(async (req, res) => {
   let receipts = [];
   if (SQL_ENABLED) {
     receipts = await sequelize.query(
-      `SELECT receipt_number, place, full_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      `SELECT receipt_number, place, full_name, email, address, city, province, country, postal_code, type, number, words, signature, created_at
       FROM Receipts
       ORDER BY receipt_number DESC
       LIMIT 50
@@ -57,7 +57,7 @@ const getOneReceipt = asyncHandler(async (req, res) => {
   let receipt = [];
   if (SQL_ENABLED) {
     receipt = await sequelize.query(
-      `SELECT receipt_number, place, full_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+      `SELECT receipt_number, place, full_name, email, address, city, province, country, postal_code, type, number, words, signature, created_at
       FROM Receipts
       WHERE receipt_number = :id;
       `,
@@ -266,7 +266,7 @@ const genReport = asyncHandler(async (req, res) => {
   let receipts = [];
 
   receipts = await sequelize.query(
-    `SELECT receipt_number, place, full_name, email, address, city, province, postal_code, type, number, words, signature, created_at
+    `SELECT receipt_number, place, full_name, email, address, city, province, country, postal_code, type, number, words, signature, created_at
       FROM Receipts
       WHERE created_at >= :startDate AND created_at < (:endDate::date + interval '1 day')
       ORDER BY receipt_number DESC;`,
