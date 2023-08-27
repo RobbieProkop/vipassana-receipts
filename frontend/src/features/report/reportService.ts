@@ -3,19 +3,23 @@ import { ReportType } from "../states";
 
 // axios.defaults.baseURL = "https://vipassana-receipts.onrender.com";
 // axios.defaults.baseURL = "http://localhost:5000";
-const API_URL = "/api/reports/:startDate/:endDate";
+const API_URL = "/api/reports/";
 
 //Create new Receipt
 const genReport = async (reportDates: ReportType, token: string) => {
+  const { startDate, endDate } = reportDates;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    params: {
+      startDate: startDate,
+      endDate: endDate
+    }
   };
 
-  const { startDate, endDate } = reportDates;
 
-  const { data } = await axios.get(`${API_URL}${startDate}/${endDate}`, config);
+  const { data } = await axios.get(API_URL, config);
   return data;
 };
 
