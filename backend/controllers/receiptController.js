@@ -259,9 +259,6 @@ const deleteReceipt = asyncHandler(async (req, res) => {
 //@route:   GET /api/reports/:startDate/:endDate
 //@access   Private
 
-// @desc:   Get All Receipts
-//@route:   GET /api/receipts
-//@access   Private
 const genReport = asyncHandler(async (req, res) => {
   let receipts = [];
 
