@@ -48,8 +48,6 @@ const editReceipt = async (receiptData: CreateReceiptType, token: string) => {
     },
   };
   const { receipt_number } = receiptData;
-  console.log("receiptData", receiptData);
-  console.log("number", receipt_number);
   const { data } = await axios.put(
     API_URL + receipt_number,
     receiptData,

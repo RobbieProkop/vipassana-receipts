@@ -160,7 +160,6 @@ const updateReceipt = asyncHandler(async (req, res) => {
   ];
   let receipt = [];
   let updates = { id: req.params.id };
-  console.log("upppdatesss", updates);
   if (SQL_ENABLED) {
     // build query based on updateable fields
     sqlUpdate = `UPDATE Receipts SET`;
