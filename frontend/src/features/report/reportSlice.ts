@@ -34,7 +34,7 @@ export const genReport = createAsyncThunk<
   }
 });
 
-export const receiptSlice = createSlice({
+export const reportSlice = createSlice({
   name: "reports",
   initialState,
   reducers: {
@@ -56,13 +56,14 @@ export const receiptSlice = createSlice({
       .addCase(genReport.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.isSuccess = false;
-        state.isError = true;
+        state.isSuccess = true;
+        state.isError = false;
         state.message = "";
         state.reportReceiptsArr = action.payload;
       })
       .addCase(genReport.rejected, (state, action) => {
         state.isLoading = false;
+        state.isSuccess = false;
         state.isError = true;
         state.message =
           action.payload ??
@@ -71,5 +72,5 @@ export const receiptSlice = createSlice({
   },
 });
 
-export const { reset } = receiptSlice.actions;
-export default receiptSlice.reducer;
+export const { reset } = reportSlice.actions;
+export default reportSlice.reducer;

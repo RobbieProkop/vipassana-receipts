@@ -2,9 +2,13 @@ import { useState } from "react";
 import generateReport from "../helpers/generateReport";
 import { toast } from "react-toastify";
 import generateExcel from "../helpers/generateExcel";
-import { ReceiptType, ReportsProps } from "../features/states";
+import { ReportsProps } from "../features/states";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../app/store";
+import { genReport } from "../features/report/reportSlice";
 
 const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
+  const dispatch = useDispatch<AppDispatch>();
   // const [donor, setDonor] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [startDate, setStartDate] = useState("");
@@ -16,12 +20,12 @@ const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  const filteredReceipts = receipts.filter((receipt: ReceiptType) => {
-    const date = new Date(receipt.created_at.split("T")[0]);
-    return date <= end && date >= start;
-  });
+  // const filteredReceipts = receipts.filter((receipt: ReceiptType) => {
+  //   const date = new Date(receipt.created_at.split("T")[0]);
+  //   return date <= end && date >= start;
+  // });
 
-  const createExcel = () => {
+  const createExcel = async () => {
     if (!startDate) {
       return toast.error("Please select a start date");
     }
@@ -29,18 +33,21 @@ const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
       return toast.error("Please select an end date");
     }
 
+    const filteredReceipts = await dispatch(genReport({ startDate, endDate }));
     generateExcel(filteredReceipts, startDate, endDate);
     setShowForm(!showForm);
   };
 
-  const createReport = () => {
+  const createReport = async () => {
     if (!startDate) {
       return toast.error("Please select a start date");
     }
     if (!endDate) {
       return toast.error("Please select an end date");
     }
-    generateReport(filteredReceipts, startDate, endDate);
+    const filteredReceipts = await dispatch(genReport({ startDate, endDate }));
+
+    generateReport(filteredReceipts.payload, startDate, endDate);
     setShowForm(!showForm);
   };
   return (

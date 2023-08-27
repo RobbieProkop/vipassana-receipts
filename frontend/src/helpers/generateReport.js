@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
-const generateReport = (receipts, start, end) => {
+
+const generateReport = async (receipts, start, end) => {
   let totalDonations = 0;
   let visaTotal = 0;
   let mcTotal = 0;
@@ -8,11 +9,13 @@ const generateReport = (receipts, start, end) => {
   let chequeTotal = 0;
   let inKind = 0;
 
+  console.log("receipts", receipts);
   receipts.forEach((receipt) => {
+    console.log("res", receipt);
     if (receipt.type === "VOID") return;
     switch (receipt.type) {
       case "Visa":
-        visaTotal += receipt.number;
+        visaTotal += Numeber(receipt.number);
         break;
       case "MasterCard":
         mcTotal += receipt.number;
