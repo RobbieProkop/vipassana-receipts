@@ -274,8 +274,8 @@ const genReport = asyncHandler(async (req, res) => {
       raw: true,
       type: QueryTypes.SELECT,
       replacements: {
-        startDate: req.params.startDate,
-        endDate: req.params.endDate,
+        startDate: req.query.startDate,
+        endDate: req.query.endDate,
       },
     }
   );
