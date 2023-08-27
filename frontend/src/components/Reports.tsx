@@ -6,11 +6,13 @@ import { ReportsProps } from "../features/states";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { genReport } from "../features/report/reportSlice";
+import Spinner from "./Spinner";
 
 const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
   const dispatch = useDispatch<AppDispatch>();
   // const [donor, setDonor] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -45,11 +47,15 @@ const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
     if (!endDate) {
       return toast.error("Please select an end date");
     }
+    setShowLoading(true);
     const filteredReceipts = await dispatch(genReport({ startDate, endDate }));
 
     generateReport(filteredReceipts.payload, startDate, endDate);
     setShowForm(!showForm);
+    setShowLoading(false);
   };
+
+  if (showLoading) return <Spinner />;
   return (
     <>
       {!showForm && (

@@ -9,34 +9,32 @@ const generateReport = async (receipts, start, end) => {
   let chequeTotal = 0;
   let inKind = 0;
 
-  console.log("receipts", receipts);
   receipts.forEach((receipt) => {
-    console.log("res", receipt);
     if (receipt.type === "VOID") return;
     switch (receipt.type) {
       case "Visa":
-        visaTotal += Numeber(receipt.number);
+        visaTotal += Number(receipt.number);
         break;
       case "MasterCard":
-        mcTotal += receipt.number;
+        mcTotal += Number(receipt.number);
         break;
       case "Debit":
-        debitTotal += receipt.number;
+        debitTotal += Number(receipt.number);
         break;
       case "Cash":
-        cashTotal += receipt.number;
+        cashTotal += Number(receipt.number);
         break;
       case "Cheque":
-        chequeTotal += receipt.number;
+        chequeTotal += Number(receipt.number);
         break;
       case "In-Kind":
-        inKind += receipt.number;
+        inKind += Number(receipt.number);
         break;
       default:
         break;
     }
 
-    totalDonations += receipt.number;
+    totalDonations += Number(receipt.number);
   });
 
   const centerText = (text) => {

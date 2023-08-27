@@ -34,28 +34,28 @@ const generateExcel = (receipts, start, end) => {
     if (receipt.type === "VOID") return;
     switch (receipt.type) {
       case "Visa":
-        visaTotal += receipt.number;
+        visaTotal += Number(receipt.number);
         break;
       case "MasterCard":
-        mcTotal += receipt.number;
+        mcTotal += Number(receipt.number);
         break;
       case "Debit":
-        debitTotal += receipt.number;
+        debitTotal += Number(receipt.number);
         break;
       case "Cash":
-        cashTotal += receipt.number;
+        cashTotal += Number(receipt.number);
         break;
       case "Cheque":
-        chequeTotal += receipt.number;
+        chequeTotal += Number(receipt.number);
         break;
       case "In-Kind":
-        inKind += receipt.number;
+        inKind += Number(receipt.number);
         break;
       default:
         break;
     }
 
-    total += receipt.number;
+    total += Number(receipt.number);
   });
   const workbook = new XLSX.utils.book_new();
   const worksheet = XLSX.utils.json_to_sheet(filteredData);
