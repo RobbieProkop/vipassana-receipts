@@ -76,7 +76,7 @@ export const createReceipt = createAsyncThunk<
 // Edit a receipt
 export const editReceipt = createAsyncThunk<
   // CHECK THE RETURN TYPE!
-  ReceiptType, //Return type
+  ReceiptType[], //Return type
   CreateReceiptType, // Thunk Argument
   { rejectValue: string; state: RootState } // ThunkAPIConfig
 >("receipts/edit", async (receiptData, thunkAPI) => {
@@ -179,9 +179,6 @@ export const receiptSlice = createSlice({
         }
         state.isSuccess = true;
         state.isError = false;
-        const newArray = [...state.receiptsArr, action.payload];
-
-        state.receiptsArr = newArray;
         toast.success("Receipt Added Successfully");
       })
       .addCase(createReceipt.rejected, (state, action) => {
@@ -197,24 +194,24 @@ export const receiptSlice = createSlice({
       .addCase(editReceipt.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        if (!action.payload.receipt_number) {
+        if (!action.payload[0].receipt_number) {
           console.log("action payload", action.payload);
           toast.error("Could not update receipt");
           return console.log("could not update post");
         }
-        if (action.payload.message) {
+        if (action.payload[0].message) {
           state.isSuccess = false;
           state.isError = true;
-          toast.error(action.payload.message);
+          toast.error(action.payload[0].message);
           return;
         }
         state.isSuccess = true;
         state.isError = false;
-        const { receipt_number } = action.payload;
+        const { receipt_number } = action.payload[0];
         const receipts = state.receiptsArr.filter(
           (receipt) => receipt.receipt_number !== receipt_number
         );
-        state.receiptsArr = [...receipts, action.payload];
+        state.receiptsArr = [...receipts, action.payload[0]];
         toast.success("Receipt Edited Successfully");
       })
       .addCase(editReceipt.rejected, (state, action) => {

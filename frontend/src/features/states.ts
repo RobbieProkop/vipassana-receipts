@@ -27,6 +27,7 @@ export interface ReceiptType {
 export interface CreateReceiptType {
   _id?: string;
   receiptNumber?: number;
+  receipt_number?: number;
   place: string;
   full_name: string;
   email: string;

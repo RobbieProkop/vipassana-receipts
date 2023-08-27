@@ -1,4 +1,4 @@
-import { ReactEventHandler, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ const ReceiptForm = () => {
   );
 
   // used to increament the receipts number
+  // This is used for UI purposes only. The receipt number is generated on the backend.
   const [receiptNumber, setReceiptNumber] = useState(
     receipt.length && receipt[0].receipt_number
       ? receipt[0].receipt_number + 1

@@ -37,9 +37,6 @@ const ReceiptForm = () => {
   }, [user, navigate, isError, message, dispatch]);
   if (!id) return <h2>Receipt not found</h2>;
 
-  // let receipt = receiptsArr.find(
-  //   (receipt) => receipt.receipt_number.toString() === id
-  // );
   const receipts: ReceiptType[] = receiptsArr.filter((receipt: ReceiptType) => {
     return receipt.receipt_number?.toString() === id;
   });
@@ -48,12 +45,11 @@ const ReceiptForm = () => {
 
   const receipt = receipts[0];
 
-  const [receiptNumber, setReceiptNumber] = useState(
-    receipt && receipt.receiptNumber ? receipt.receiptNumber : 0
+  const [receipt_number, setReceiptNumber] = useState(
+    receipt && receipt.receipt_number ? receipt.receipt_number : 0
   );
 
   const [receiptData, setReceiptData] = useState({
-    // receiptNumber: receipt && receipt.receiptNumber ? receipt.receiptNumber : 0,
     place: receipt && receipt.place ? receipt.place : "",
     full_name:
       receipt && receipt.firstName && receipt.lastName
@@ -109,7 +105,7 @@ const ReceiptForm = () => {
         await dispatch(
           editReceipt({
             // _id: id,
-            receiptNumber,
+            receipt_number,
             place,
             full_name,
             email,
