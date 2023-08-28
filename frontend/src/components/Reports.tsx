@@ -19,8 +19,8 @@ const Reports = ({ receipts, donor, setDonor }: ReportsProps) => {
   const onClick = () => {
     setShowForm(!showForm);
   };
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+  // const start = new Date(startDate);
+  // const end = new Date(endDate);
 
   // const filteredReceipts = receipts.filter((receipt: ReceiptType) => {
   //   const date = new Date(receipt.created_at.split("T")[0]);
