@@ -257,6 +257,7 @@ const ReceiptForm = () => {
                 <option value="Amex">American Express</option>
                 <option value="Debit">Debit</option>
                 <option value="Cash">Cash</option>
+                <option value="E-Transfer">E-Transfer</option>
                 <option value="Cheque">Cheque</option>
                 <option value="Void">Void</option>
                 <option value="In-Kind">In-Kind</option>
